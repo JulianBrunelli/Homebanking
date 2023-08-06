@@ -1,0 +1,386 @@
+:root {
+    --primary-color: #086E83;
+    --second-color: #EEEDE7;
+}
+
+[v-cloak] {
+    display: none;
+}
+
+body {
+    font-family: 'PT Sans Narrow', sans-serif;
+    background-color: var(--second-color);
+}
+
+main {
+    width: 100vw;
+    min-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+}
+
+header {
+    width: 100%;
+    min-height: 12vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--primary-color);
+}
+
+header img {
+    height: 10vh;
+    margin-left: 1rem;
+    object-fit: cover;
+}
+
+footer {
+    min-height: 40vh;
+    background-color: var(--primary-color);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+}
+
+/* NAVBAR */
+
+.navbar {
+    border-radius: 6px;
+    background-color: transparent;
+    padding: 0;
+}
+
+.navbar>.container-fluid {
+    justify-content: space-around;
+}
+
+.nav-item {
+    text-align: center;
+    color: var(--second-color);
+}
+
+.btn-nav {
+    display: inline-block;
+    width: 70%;
+    font-size: 14px;
+    color: white;
+    border: 3px solid #837868;
+    border-radius: 6px;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    text-decoration: none;
+    overflow: hidden;
+    z-index: 1;
+    font-family: inherit;
+}
+
+.btn-nav::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #837868;
+    transform: translateX(-100%);
+    transition: all .3s;
+    z-index: -1;
+}
+
+.btn-nav:hover::before {
+    transform: translateX(0);
+}
+
+/* NAVBAR */
+
+/* SOCIAL */
+.bi-bank2 {
+    color: white;
+    font-size: 2.5rem;
+}
+
+.social {
+    color: white;
+    margin-left: 1rem;
+    padding: 4px;
+    border-radius: 8px;
+
+}
+
+.container-social {
+    min-width: 10vw;
+}
+
+.bi-facebook:hover {
+    color: rgb(37, 37, 226);
+    background-color: beige;
+}
+
+.bi-whatsapp:hover {
+    color: rgb(9, 139, 9);
+    background-color: beige;
+}
+
+.bi-instagram:hover {
+    color: rgb(216, 22, 129);
+    background-color: beige;
+}
+
+/* SOCIAL */
+
+.table {
+    width: 100%;
+    margin-top: 2rem;
+}
+
+fieldset {
+    border: 2px solid var(--primary-color);
+    border-radius: 8px;
+    padding: 5px;
+}
+
+.table-container {
+    width: 80%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+}
+
+td,
+th {
+    width: 32%;
+    text-align: center;
+}
+
+h1,
+h2 {
+    margin-top: 2rem;
+}
+
+.input-form {
+    width: 70vw;
+    padding: 1rem;
+}
+
+input {
+    padding: 5px;
+    border-radius: 8px;
+}
+
+label {
+    margin-left: 1rem;
+}
+
+.button-form {
+    background: #fff;
+    border: none;
+    padding: 8px 18px;
+    display: inline-block;
+    font-size: 15px;
+    font-weight: 600;
+    width: 120px;
+    text-transform: uppercase;
+    cursor: pointer;
+    transform: skew(-21deg);
+}
+
+span {
+    display: inline-block;
+    transform: skew(21deg);
+}
+
+.button-form::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    left: 0;
+    background: var(--primary-color);
+    opacity: 0;
+    z-index: -1;
+    transition: all 0.5s;
+}
+
+.button-form:hover {
+    color: #fff;
+}
+
+.button-form:hover::before {
+    left: 0;
+    right: 0;
+    opacity: 1;
+}
+
+.investHome {
+    width: 100vw;
+    border: 2px solid #044d5a;
+    margin-bottom: 2rem;
+}
+
+.investHome img {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+
+/* BUTTON APP */
+
+.button-app-container {
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
+.custom-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 253, 253, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+}
+
+.btn-1 {
+    background: black;
+    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
+    border: none;
+}
+
+.btn-1:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btn-1:hover {
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
+        -4px -4px 6px 0 rgba(116, 125, 136, .5),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+        inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/* BUTTON APP */
+
+.container-moreInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.moreInfo {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+    font-weight: 400;
+}
+
+@media only screen and (min-width: 500px) and (max-width: 767px) {
+    .input-form {
+        width: 50vw;
+        padding: 1rem;
+    }
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+    header img {
+        background-color: transparent;
+        height: 12vh;
+    }
+
+    nav {
+        display: flex;
+        align-items: center;
+    }
+
+    .navbar {
+        width: 80%;
+        background-color: transparent;
+    }
+
+    .container-navbar ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .container-navbar a {
+        width: 10vw;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .container-navbar button {
+        padding: 8px;
+        margin-left: 1rem;
+    }
+
+    .input-form {
+        width: 40vw;
+        padding: 1rem;
+    }
+
+    .investHome img {
+        width: 50%;
+        height: 30vh;
+    }
+}
+
+@media only screen and (min-width: 1024px) {
+
+    .navbar {
+        width: 100%;
+        background-color: transparent;
+        display: flex;
+        align-items: center;
+    }
+
+    .container-navbar ul {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 2rem;
+    }
+
+    .container-navbar a {
+        width: 10vw;
+        text-align: center;
+        font-size: 1.2rem;
+        font-weight: 600;
+    }
+
+    .container-navbar button {
+        padding: 8px;
+        margin-left: 1rem;
+    }
+
+    .input-form {
+        width: 30vw;
+        padding: 1rem;
+    }
+
+    .investHome img {
+        width: 50%;
+        height: 30vh;
+    }
+}

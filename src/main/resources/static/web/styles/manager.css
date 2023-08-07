@@ -145,7 +145,7 @@ fieldset {
 }
 
 .table-container {
-    width: 80%;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -293,10 +293,18 @@ span {
     font-weight: 400;
 }
 
+.json-manager {
+    width: 80%;
+}
+
 @media only screen and (min-width: 500px) and (max-width: 767px) {
     .input-form {
         width: 50vw;
         padding: 1rem;
+    }
+
+    .table-container {
+        width: 80%;
     }
 }
 
@@ -344,6 +352,10 @@ span {
         width: 50%;
         height: 30vh;
     }
+
+    .table-container {
+        width: 80%;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -382,5 +394,9 @@ span {
     .investHome img {
         width: 50%;
         height: 30vh;
+    }
+
+    .table-container {
+        width: 80%;
     }
 }

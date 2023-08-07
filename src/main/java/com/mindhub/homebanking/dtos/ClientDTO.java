@@ -16,7 +16,6 @@ public class ClientDTO{
     public ClientDTO() {
     }
     public ClientDTO(Client client) {
-        this.id = client.getId();
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.email = client.getEmail();
@@ -25,10 +24,6 @@ public class ClientDTO{
 
     public long getId() {
         return id;
-    }
-
-    public void setId(long id) {
-        this.id = id;
     }
 
     public String getFirstName() {

@@ -170,7 +170,7 @@ h4 {
 
 .subtitle {
     transform: translateY(120px);
-    color: rgb(134, 110, 221);
+    color: rgb(155, 23, 189);
     text-align: center;
     width: 100%;
 }
@@ -519,13 +519,38 @@ footer {
 
 /* FOOTER */
 
+/* TABLE */
+.table-container {
+    width: 98%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid black;
+    border-radius: 10px;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
+    background-color: rgb(171, 255, 227);
+}
+
+.table-details {
+    width: 100%;
+}
+
+td,
+th {
+    text-align: center;
+    font-size: 1.2rem;
+    color: black;
+}
+
+/* TABLE */
+
 @media only screen and (min-width: 500px) and (max-width: 767px) {
     .container {
         position: relative;
         width: 60%;
         height: 30vh;
         transition: 200ms;
-        margin-bottom: 4rem;
     }
 
     .container:active {
@@ -589,6 +614,13 @@ footer {
         padding: 8px;
         margin-left: 1rem;
     }
+
+    /* TABLE */
+    .table-container {
+        width: 60%;
+    }
+
+    /* TABLE */
 }
 
 @media only screen and (min-width: 1024px) {
@@ -633,4 +665,11 @@ footer {
         padding: 8px;
         margin-left: 1rem;
     }
+
+    /* TABLE */
+    .table-container {
+        width: 60%;
+    }
+
+    /* TABLE */
 }

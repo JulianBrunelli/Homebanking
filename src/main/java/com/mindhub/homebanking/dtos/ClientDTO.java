@@ -6,7 +6,7 @@ import com.mindhub.homebanking.models.Client;
 import java.util.HashSet;
 import java.util.Set;
 
-public class ClientDTO{
+public class ClientDTO {
     private long id;
     private String firstName;
     private String lastName;
@@ -16,10 +16,14 @@ public class ClientDTO{
     public ClientDTO() {
     }
     public ClientDTO(Client client) {
+        this.id= client.getId();
         this.firstName = client.getFirstName();
         this.lastName = client.getLastName();
         this.email = client.getEmail();
         this.accounts = client.getAccounts();
+    }
+
+    public ClientDTO(Account account) {
     }
 
     public long getId() {

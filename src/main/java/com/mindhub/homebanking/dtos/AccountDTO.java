@@ -1,20 +1,33 @@
 package com.mindhub.homebanking.dtos;
 
-import java.time.LocalDateTime;
+import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.Transaction;
+
+import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 public class AccountDTO {
     private long id;
     private String number;
-    private LocalDateTime creationDate;
+    private LocalDate creationDate;
     private double balance;
+    private Set<TransactionDTO> transactions = new HashSet<>();
 
     public AccountDTO(){
     }
-    public AccountDTO(long id, String number, LocalDateTime creationDate, double balance) {
-        this.number = number;
-        this.creationDate = creationDate;
-        this.balance = balance;
+    public AccountDTO(Account account) {
+        this.id = account.getId();
+        this.number = account.getNumber();
+        this.creationDate = account.getCreationDate();
+        this.balance = account.getBalance();
+        this.transactions = new HashSet<>();
+        for (Transaction transaction : account.getTransaction()) {
+            this.transactions.add(new TransactionDTO(transaction));
+        }
+        
     }
+
     public long getId() {
         return id;
     }
@@ -24,10 +37,10 @@ public class AccountDTO {
     public void setNumber(String number) {
         this.number = number;
     }
-    public LocalDateTime getCreationDate() {
+    public LocalDate getCreationDate() {
         return creationDate;
     }
-    public void setCreationDate(LocalDateTime creationDate) {
+    public void setCreationDate(LocalDate creationDate) {
         this.creationDate = creationDate;
     }
     public double getBalance() {
@@ -35,6 +48,12 @@ public class AccountDTO {
     }
     public void setBalance(double balance) {
         this.balance = balance;
+    }
+    public Set<TransactionDTO> getTransactions() {
+        return transactions;
+    }
+    public void setTransactions(Set<TransactionDTO> transactions) {
+        this.transactions = transactions;
     }
 }
 

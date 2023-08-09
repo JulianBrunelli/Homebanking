@@ -8,6 +8,7 @@ createApp({
             lastName: "",
             email: "",
             json: null,
+            loader: true,
         };
     },
     created() {
@@ -19,6 +20,7 @@ createApp({
                 .then(response => {
                     this.clients = response.data._embedded.clients
                     this.json = JSON.stringify(response.data, null, 1);
+                    this.loader = false
                 })
                 .catch((error) => console.error(error.message));
         },

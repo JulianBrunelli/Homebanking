@@ -3,9 +3,9 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            idParams: null,
             accounts: [],
             transactions: [],
+            loader: true,
         };
     },
     created() {
@@ -13,13 +13,15 @@ createApp({
     },
     methods: {
         loadData() {
-            axios.get("http://localhost:8080/api/accounts/1")
+            const parameter = location.search
+            const params = new URLSearchParams(parameter)
+            const idParams = params.get("id")
+            axios.get(`http://localhost:8080/api/accounts/${idParams}`)
                 .then(response => {
                     this.accounts = response.data
-                    const parameter = location.search
-                    const params = new URLSearchParams(parameter)
-                    this.idParams = params.get("id")
-                    this.transactions = this.accounts.transactions.sort((a, b) => b.id - a.id)
+                    this.transactions = this.accounts.transactions.sort((a, b) => b.date - a.date)
+                    console.log(this.transactions);
+                    this.loader = false
                 })
                 .catch((error) => console.error(error.message));
         },

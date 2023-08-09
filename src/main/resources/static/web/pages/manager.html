@@ -16,11 +16,27 @@
 </head>
 
 <body id="app" v-cloak>
-    <header>
+    <div id="wifi-loader" v-show="loader">
+        <svg class="circle-outer" viewBox="0 0 86 86">
+            <circle class="back" cx="43" cy="43" r="40"></circle>
+            <circle class="front" cx="43" cy="43" r="40"></circle>
+            <circle class="new" cx="43" cy="43" r="40"></circle>
+        </svg>
+        <svg class="circle-middle" viewBox="0 0 60 60">
+            <circle class="back" cx="30" cy="30" r="27"></circle>
+            <circle class="front" cx="30" cy="30" r="27"></circle>
+        </svg>
+        <svg class="circle-inner" viewBox="0 0 34 34">
+            <circle class="back" cx="17" cy="17" r="14"></circle>
+            <circle class="front" cx="17" cy="17" r="14"></circle>
+        </svg>
+        <div class="text" data-text="Loading"></div>
+    </div>
+    <header class="z-3">
         <a href="./manager.html">
             <img src="../images/bank.icon.png" alt="bni.icon">
         </a>
-        <nav class="navbar bg-transparent navbar-expand-md z-3 me-2 mt-2">
+        <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
@@ -30,20 +46,19 @@
                 <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
                     <ul class="navbar-nav w-100">
                         <li class="nav-item">
-                            <a class="nav-link active text-light" aria-current="page"
-                                href="./accounts.html">Accounts</a>
+                            <a class="nav-link" aria-current="page" href="./accounts.html">Accounts</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">Cards</a>
+                            <a class="nav-link" href="#">Cards</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">Loans</a>
+                            <a class="nav-link" href="#">Loans</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-light" href="#">Transactions</a>
+                            <a class="nav-link" href="#">Transactions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="btn-nav" href="#">Log out</a>
+                            <a class="nav-link nav-link-logout" href="#">Log out</a>
                         </li>
                     </ul>
                 </div>

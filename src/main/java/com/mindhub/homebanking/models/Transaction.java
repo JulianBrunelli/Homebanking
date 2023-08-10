@@ -35,7 +35,6 @@ public class Transaction {
         return id;
     }
 
-    @JsonIgnore
     public Account getAccount() {
         return account;
     }

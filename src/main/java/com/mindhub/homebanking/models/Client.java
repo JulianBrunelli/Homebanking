@@ -1,5 +1,6 @@
 package com.mindhub.homebanking.models;
 
+import com.mindhub.homebanking.dtos.AccountDTO;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -78,5 +79,6 @@ public class Client {
                 ", id=" + id +
                 '}';
     }
+
 }
 

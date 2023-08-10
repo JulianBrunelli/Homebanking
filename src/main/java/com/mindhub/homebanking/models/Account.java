@@ -36,8 +36,7 @@ public class Account {
     public long getId() {
         return id;
     }
-
-    @JsonIgnore
+    
     public Client getClient() {
         return client;
     }

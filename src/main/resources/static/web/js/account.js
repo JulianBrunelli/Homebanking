@@ -6,6 +6,8 @@ createApp({
             accounts: [],
             transactions: [],
             loader: true,
+            date: "",
+            time: "",
         };
     },
     created() {
@@ -20,7 +22,8 @@ createApp({
                 .then(response => {
                     this.accounts = response.data
                     this.transactions = this.accounts.transactions.sort((a, b) => b.date - a.date)
-                    console.log(this.transactions);
+                    this.date = this.transactions.map(transaction => transaction.date.slice(0, 10).replace(/-/g, '/'))
+                    this.time = this.transactions.map(transiction => transiction.date.slice(14, -7))
                     this.loader = false
                 })
                 .catch((error) => console.error(error.message));

@@ -1,9 +1,6 @@
 package com.mindhub.homebanking;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.models.TransactionType;
+import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.repositories.TransactionRepository;
@@ -14,6 +11,8 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @SpringBootApplication
@@ -21,8 +20,10 @@ public class HomebankingApplication {
 
 	LocalDate localDate = LocalDate.now();
 	LocalDate localDateOneDay = LocalDate.now().plusDays(1);
-
 	LocalDateTime localDateTime = LocalDateTime.now();
+	List<Integer> mortgageLoan = List.of(12,24,36,48,60);
+	List<Integer> carLoan = List.of(6,12,24,36);
+	List<Integer> personalLoan = List.of(6,12,24);
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class);
@@ -77,6 +78,10 @@ public class HomebankingApplication {
 			repositoryClient.save(new Client("Kim", "Bauer", "KimBeuer@gmail.com"));
 			repositoryClient.save(new Client("David", "Palmer", "DavidPalmer@gmail.com"));
 			repositoryClient.save(new Client("Michelle", "Dessler","MichelleDessler@gmail.com"));
+
+			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan);
+			Loan carLoan = new Loan("Car", 300000, this.carLoan);
+			Loan personalLoan = new Loan("Personal", 100000, this.personalLoan);
 		};
 	}
 }

@@ -117,12 +117,12 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for="transaction of transactions">
+                    <template v-for="(transaction, index) of transactions">
                         <tr>
                             <td :class="transaction.type == 'DEBIT' ? 'text-danger fw-bold' : 'text-success fw-bold'">
                                 {{transaction.type}}</td>
                             <td>{{transaction.amount}}</td>
-                            <td>{{transaction.date}}</td>
+                            <td>{{date[index]}} {{time[index]}}</td>
                             <td>{{transaction.description}}</td>
                         </tr>
                     </template>

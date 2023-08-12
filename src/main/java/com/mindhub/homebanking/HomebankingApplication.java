@@ -1,9 +1,7 @@
 package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
-import com.mindhub.homebanking.repositories.TransactionRepository;
+import com.mindhub.homebanking.repositories.*;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -29,8 +27,17 @@ public class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository repositoryAccount, TransactionRepository repositoryTransaction) {
+	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository repositoryAccount, TransactionRepository repositoryTransaction, LoanRepository repositoryLoan, ClientLoanRepository repositoryClientLoan) {
 		return (args) -> {
+
+			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan);
+			Loan carLoan = new Loan("Car", 300000, this.carLoan);
+			Loan personalLoan = new Loan("Personal", 100000, this.personalLoan);
+
+			repositoryLoan.save(mortgageLoan);
+			repositoryLoan.save(carLoan);
+			repositoryLoan.save(personalLoan);
+
 			Client melbaMorel = new Client("Melba", "Morel", "Melba@mindhub.com");
 
 			Account firstAccount = new Account("VIN001", this.localDate, 5000);
@@ -38,6 +45,9 @@ public class HomebankingApplication {
 
 			Transaction firstTransaction = new Transaction(7000, "Supplies",this.localDateTime, TransactionType.CREDIT);
 			Transaction secondTransaction = new Transaction(-8000, "Supplies",this.localDateTime, TransactionType.DEBIT);
+
+			ClientLoan melbaMortageLoan = new ClientLoan(400000, 60);
+			ClientLoan melbaPersonalLoan = new ClientLoan(50000, 12);
 
 			repositoryClient.save(melbaMorel);
 
@@ -53,6 +63,18 @@ public class HomebankingApplication {
 			repositoryTransaction.save(firstTransaction);
 			repositoryTransaction.save(secondTransaction);
 
+			melbaMorel.addClientLoan(melbaMortageLoan);
+			melbaMorel.addClientLoan(melbaPersonalLoan);
+
+			repositoryClientLoan.save(melbaMortageLoan);
+			repositoryClientLoan.save(melbaPersonalLoan);
+
+			mortgageLoan.addClientLoan(melbaMortageLoan);
+			personalLoan.addClientLoan(melbaPersonalLoan);
+
+			repositoryClientLoan.save(melbaMortageLoan);
+			repositoryClientLoan.save(melbaPersonalLoan);
+
 			Client chloeOBrian = new Client("Chloe", "O'Brian","ChloeOBrian@gmail.com");
 
 			Account thirdAccount = new Account("VIN003", this.localDate, 8000);
@@ -60,6 +82,9 @@ public class HomebankingApplication {
 
 			Transaction thirdTransaction = new Transaction(5000, "Supplies",this.localDateTime, TransactionType.CREDIT);
 			Transaction fourthTransaction = new Transaction(-10000, "Supplies",this.localDateTime, TransactionType.DEBIT);
+
+			ClientLoan chloePersonalLoan = new ClientLoan(100000, 24);
+			ClientLoan chloeCarlLoan = new ClientLoan(200000, 36);
 
 			repositoryClient.save(chloeOBrian);
 
@@ -75,13 +100,21 @@ public class HomebankingApplication {
 			repositoryTransaction.save(thirdTransaction);
 			repositoryTransaction.save(fourthTransaction);
 
+			chloeOBrian.addClientLoan(chloePersonalLoan);
+			chloeOBrian.addClientLoan(chloeCarlLoan);
+
+			repositoryClientLoan.save(chloePersonalLoan);
+			repositoryClientLoan.save(chloeCarlLoan);
+
+			personalLoan.addClientLoan(chloePersonalLoan);
+			carLoan.addClientLoan(chloeCarlLoan);
+
+			repositoryClientLoan.save(chloePersonalLoan);
+			repositoryClientLoan.save(chloeCarlLoan);
+
 			repositoryClient.save(new Client("Kim", "Bauer", "KimBeuer@gmail.com"));
 			repositoryClient.save(new Client("David", "Palmer", "DavidPalmer@gmail.com"));
 			repositoryClient.save(new Client("Michelle", "Dessler","MichelleDessler@gmail.com"));
-
-			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan);
-			Loan carLoan = new Loan("Car", 300000, this.carLoan);
-			Loan personalLoan = new Loan("Personal", 100000, this.personalLoan);
 		};
 	}
 }

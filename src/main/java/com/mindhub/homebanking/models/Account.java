@@ -13,7 +13,7 @@ public class Account {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
 
-    private long id;
+    public long id;
     private String number;
     private LocalDate creationDate;
     private double balance;

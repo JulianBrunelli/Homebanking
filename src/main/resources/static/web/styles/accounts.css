@@ -710,6 +710,14 @@ h4 {
 
 /* CARDS */
 
+/* LOANS */
+.container-loans {
+    min-height: 40vh;
+    width: 100%;
+}
+
+/* LOANS */
+
 /* FOOTER */
 
 footer {

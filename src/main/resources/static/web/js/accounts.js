@@ -4,6 +4,7 @@ createApp({
     data() {
         return {
             clientsAccounts: [],
+            loans: [],
             json: null,
             loader: true,
         };
@@ -16,6 +17,7 @@ createApp({
             axios.get("http://localhost:8080/api/clients/1")
                 .then(response => {
                     this.clientsAccounts = response.data.accounts.sort((a, b) => a.id - b.id)
+                    this.loans = response.data.loans
                     this.json = JSON.stringify(response.data, null, 1);
                     this.loader = false
                 })

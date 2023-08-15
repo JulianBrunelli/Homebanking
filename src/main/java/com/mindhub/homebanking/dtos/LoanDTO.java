@@ -32,32 +32,17 @@ public class LoanDTO {
         return name;
     }
 
-    public void setName(String name) {
-        this.name = name;
-    }
-
     public double getMaxAmount() {
         return maxAmount;
-    }
-
-    public void setMaxAmount(double maxAmount) {
-        this.maxAmount = maxAmount;
     }
 
     public List<Integer> getPayments() {
         return payments;
     }
 
-    public void setPayments(List<Integer> payments) {
-        this.payments = payments;
-    }
-
     public Set<ClientLoan> getClientLoans() {
         return clientLoans;
     }
 
-    public void setClientLoans(Set<ClientLoan> clientLoans) {
-        this.clientLoans = clientLoans;
-    }
 }
 

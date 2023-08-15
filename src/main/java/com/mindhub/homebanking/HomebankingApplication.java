@@ -9,9 +9,7 @@ import org.springframework.context.annotation.Bean;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
-
 
 @SpringBootApplication
 public class HomebankingApplication {

@@ -1,23 +1,23 @@
 package com.mindhub.homebanking.dtos;
 
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Loan;
+import com.mindhub.homebanking.models.ClientLoan;
+
 
 public class ClientLoanDTO {
     private long id;
     private double amount;
     private Integer payments;
-    private Client client;
-    private Loan loan;
+    private long loanId;
+    private String loanName;
 
     public ClientLoanDTO() {
     }
-    public ClientLoanDTO(long id, double amount, Integer payments, Client client, Loan loan) {
-        this.id = id;
-        this.amount = amount;
-        this.payments = payments;
-        this.client = client;
-        this.loan = loan;
+    public ClientLoanDTO(ClientLoan clientLoan) {
+        this.id = clientLoan.getId();
+        this.amount = clientLoan.getAmount();
+        this.payments = clientLoan.getPayments();
+        this.loanId = clientLoan.getLoan().getId();
+        this.loanName = clientLoan.getLoan().getName();
     }
 
     public long getId() {
@@ -28,31 +28,15 @@ public class ClientLoanDTO {
         return amount;
     }
 
-    public void setAmount(double amount) {
-        this.amount = amount;
-    }
-
     public Integer getPayments() {
         return payments;
     }
 
-    public void setPayments(Integer payments) {
-        this.payments = payments;
+    public long getLoanId() {
+        return loanId;
     }
 
-    public Client getClient() {
-        return client;
-    }
-
-    public void setClient(Client client) {
-        this.client = client;
-    }
-
-    public Loan getLoan() {
-        return loan;
-    }
-
-    public void setLoan(Loan loan) {
-        this.loan = loan;
+    public String getLoanName() {
+        return loanName;
     }
 }

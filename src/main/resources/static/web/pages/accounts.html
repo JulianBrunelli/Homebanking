@@ -113,6 +113,32 @@
                 </div>
             </template>
         </div>
+        <section class="container-loans d-flex flex-column justify-content-center align-items-center">
+            <h2 class="mb-3 fw-bold">Loans</h2>
+            <div data-aos="zoom-out-up" v-if="loans.length > 0" class="table-container">
+                <table class="table-details">
+                    <thead>
+                        <tr>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Payments</th>
+                            <th scope="col">Name loans</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template v-for="loan of loans">
+                            <tr>
+                                <td>{{loan.amount.toLocaleString()}}</td>
+                                <td>{{loan.payments}}</td>
+                                <td>{{loan.loanName}}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <template v-else>
+                <h2>You currently have no loans</h2>
+            </template>
+        </section>
     </main>
     <footer>
         <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">

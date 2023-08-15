@@ -33,6 +33,17 @@ public class Account {
         this.balance = balance;
     }
 
+    public Set<Transaction> getTransaction() {
+        return transactions;
+    }
+    public void setTransaction(Set<Transaction> transaction) {
+        this.transactions = transaction;
+    }
+    public void addTransaction(Transaction transaction){
+        transaction.setAccount(this);
+        this.transactions.add(transaction);
+    }
+
     public long getId() {
         return id;
     }
@@ -69,18 +80,7 @@ public class Account {
         this.balance = balance;
     }
 
-    public Set<Transaction> getTransaction() {
-        return transactions;
-    }
 
-    public void setTransaction(Set<Transaction> transaction) {
-        this.transactions = transaction;
-    }
-
-    public void addTransaction(Transaction transaction){
-    transaction.setAccount(this);
-    this.transactions.add(transaction);
-    }
 
     @Override
     public String toString() {

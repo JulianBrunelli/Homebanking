@@ -15,6 +15,7 @@ import java.util.List;
 public class HomebankingApplication {
 
 	LocalDate localDate = LocalDate.now();
+	LocalDate localDateExpires = LocalDate.now().plusYears(5);
 	LocalDate localDateOneDay = LocalDate.now().plusDays(1);
 	LocalDateTime localDateTime = LocalDateTime.now();
 	List<Integer> mortgageLoan = List.of(12,24,36,48,60);
@@ -25,7 +26,8 @@ public class HomebankingApplication {
 		SpringApplication.run(HomebankingApplication.class);
 	}
 	@Bean
-	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository repositoryAccount, TransactionRepository repositoryTransaction, LoanRepository repositoryLoan, ClientLoanRepository repositoryClientLoan) {
+	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository repositoryAccount, TransactionRepository repositoryTransaction,
+									  LoanRepository repositoryLoan, ClientLoanRepository repositoryClientLoan, CardRepository repositoryCard) {
 		return (args) -> {
 
 			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan);
@@ -46,6 +48,11 @@ public class HomebankingApplication {
 
 			ClientLoan melbaMortageLoan = new ClientLoan(400000, 60);
 			ClientLoan melbaPersonalLoan = new ClientLoan(50000, 12);
+
+			Card melbaMorelFirstCard = new Card("Melba Morel", CardType.DEBIT, CardColor.GOLD,
+					"4325-5667-4253-9896", 444, this.localDate, this.localDateExpires);
+			Card melbaMorelSecondCard = new Card("Melba Morel", CardType.CREDIT, CardColor.TITANIUM,
+					"4000-4546-5734-2351", 324, this.localDate, this.localDateExpires);
 
 			repositoryClient.save(melbaMorel);
 
@@ -72,6 +79,12 @@ public class HomebankingApplication {
 
 			repositoryClientLoan.save(melbaMortageLoan);
 			repositoryClientLoan.save(melbaPersonalLoan);
+
+			melbaMorel.addCard(melbaMorelFirstCard);
+			melbaMorel.addCard(melbaMorelSecondCard);
+
+			repositoryCard.save(melbaMorelFirstCard);
+			repositoryCard.save(melbaMorelSecondCard);
 
 			Client chloeOBrian = new Client("Chloe", "O'Brian","ChloeOBrian@gmail.com");
 

@@ -97,6 +97,11 @@ public class HomebankingApplication {
 			ClientLoan chloePersonalLoan = new ClientLoan(100000, 24);
 			ClientLoan chloeCarlLoan = new ClientLoan(200000, 36);
 
+			Card chloeOBrianFirstCard = new Card("Chloe O Brian", CardType.DEBIT, CardColor.GOLD,
+					"4004-8646-4663-2424", 123, this.localDate, this.localDateExpires);
+			Card chloeOBrianSecondCard = new Card("Chloe O Brian", CardType.CREDIT, CardColor.SILVER,
+					"4006-4244-5179-2266", 424, this.localDate, this.localDateExpires);
+
 			repositoryClient.save(chloeOBrian);
 
 			chloeOBrian.addAccount(thirdAccount);
@@ -122,6 +127,14 @@ public class HomebankingApplication {
 
 			repositoryClientLoan.save(chloePersonalLoan);
 			repositoryClientLoan.save(chloeCarlLoan);
+
+			chloeOBrian.addCard(chloeOBrianFirstCard);
+			chloeOBrian.addCard(chloeOBrianSecondCard);
+
+			repositoryCard.save(chloeOBrianFirstCard);
+			repositoryCard.save(chloeOBrianSecondCard);
+
+			System.out.println(chloeOBrian);
 
 			repositoryClient.save(new Client("Kim", "Bauer", "KimBeuer@gmail.com"));
 			repositoryClient.save(new Client("David", "Palmer", "DavidPalmer@gmail.com"));

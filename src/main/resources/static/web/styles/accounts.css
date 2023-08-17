@@ -44,11 +44,6 @@ header img {
     transition: 1.5s;
 }
 
-header img:hover {
-    transform: translateX(25%);
-    transition: 1s;
-}
-
 h4 {
     font-size: 1rem;
     font-weight: 500;
@@ -90,6 +85,10 @@ h4 {
     text-decoration: none;
     overflow: hidden;
     z-index: 1;
+}
+
+.active {
+    color: rgb(247, 216, 160) !important;
 }
 
 .nav-link:hover {
@@ -353,6 +352,10 @@ h4 {
 .bi-instagram:hover {
     color: rgb(216, 22, 129);
     background-color: beige;
+}
+
+a {
+    text-decoration: none;
 }
 
 /* SOCIAL */
@@ -831,8 +834,8 @@ th {
     .container-navbar a {
         width: 10vw;
         text-align: center;
-        font-size: 1.2rem;
-        font-weight: 600;
+        font-size: 1rem;
+        font-weight: 500;
     }
 
     .container-navbar button {
@@ -883,7 +886,7 @@ th {
         width: 10vw;
         text-align: center;
         font-size: 1.2rem;
-        font-weight: 600;
+        font-weight: 500;
     }
 
     .container-navbar button {

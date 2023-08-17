@@ -134,8 +134,6 @@ public class HomebankingApplication {
 			repositoryCard.save(chloeOBrianFirstCard);
 			repositoryCard.save(chloeOBrianSecondCard);
 
-			System.out.println(chloeOBrian);
-
 			repositoryClient.save(new Client("Kim", "Bauer", "KimBeuer@gmail.com"));
 			repositoryClient.save(new Client("David", "Palmer", "DavidPalmer@gmail.com"));
 			repositoryClient.save(new Client("Michelle", "Dessler","MichelleDessler@gmail.com"));

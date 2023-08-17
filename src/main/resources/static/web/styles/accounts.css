@@ -724,13 +724,72 @@ a {
 /* FOOTER */
 
 footer {
-    min-height: 15vh;
+    min-height: 40vh;
     background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
     align-items: center;
-
 }
+
+
+.investHome {
+    width: 100vw;
+    border: 2px solid #044d5a;
+    margin-bottom: 2rem;
+}
+
+.investHome img {
+    width: 100%;
+    height: 30vh;
+    object-fit: cover;
+}
+
+/* BUTTON APP */
+
+.button-app-container {
+    margin-bottom: 3rem;
+    width: 100%;
+}
+
+.custom-btn {
+    min-width: 130px;
+    height: 40px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 10px 25px;
+    font-size: 14px;
+    font-family: 'Lato', sans-serif;
+    font-weight: 500;
+    background: transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+    display: inline-block;
+    box-shadow: inset 2px 2px 2px 0px rgba(255, 253, 253, 0.5),
+        7px 7px 20px 0px rgba(0, 0, 0, .1),
+        4px 4px 5px 0px rgba(0, 0, 0, .1);
+    outline: none;
+}
+
+.btn-1 {
+    background: black;
+    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
+    border: none;
+}
+
+.btn-1:before {
+    height: 0%;
+    width: 2px;
+}
+
+.btn-1:hover {
+    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
+        -4px -4px 6px 0 rgba(116, 125, 136, .5),
+        inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
+        inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
+}
+
+/* BUTTON APP */
 
 .container-moreInfo {
     display: flex;
@@ -773,6 +832,35 @@ th {
 
 /* TABLE */
 
+/* CONTAINER PHONE */
+.container-accounts-phone {
+    width: 90%;
+    min-height: 50vh;
+}
+
+.phone-img {
+    border-radius: 15px;
+    width: 95%;
+    height: 40vh;
+    margin-bottom: 2rem;
+}
+
+.text-rgb {
+    background: linear-gradient(rgb(39, 212, 255), rgb(13, 68, 218));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.container-accounts-text {
+    width: 90%;
+}
+
+.container-accounts-text p {
+    font-size: 20px;
+    text-align: center;
+}
+
+/* CONTAINER PHONE */
 @media only screen and (min-width: 500px) and (max-width: 767px) {
     .container {
         position: relative;
@@ -843,12 +931,14 @@ th {
         margin-left: 1rem;
     }
 
-    /* TABLE */
+    .investHome img {
+        width: 50%;
+        height: 30vh;
+    }
+
     .table-container {
         width: 60%;
     }
-
-    /* TABLE */
 }
 
 @media only screen and (min-width: 1024px) {
@@ -894,10 +984,37 @@ th {
         margin-left: 1rem;
     }
 
-    /* TABLE */
     .table-container {
         width: 60%;
     }
 
-    /* TABLE */
+    .investHome img {
+        width: 50%;
+        height: 30vh;
+    }
+
+    .phone-img {
+        width: 45vw;
+        height: 50vh;
+    }
+
+    .container-accounts-phone {
+        align-items: start;
+    }
+
+    .container-accounts-text {
+        height: 55vh;
+    }
+
+    .img-carousel {
+        width: 100%;
+        height: 50vh;
+        object-fit: cover;
+        margin-top: 1rem;
+        border-radius: 15px;
+    }
+
+    #carouselExampleFade {
+        width: 90%;
+    }
 }

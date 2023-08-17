@@ -20,6 +20,9 @@ createApp({
                 .then(response => {
                     this.cardsDebit = response.data.cards.filter(card => card.type == 'DEBIT')
                     this.cardsCredit = response.data.cards.filter(card => card.type == 'CREDIT')
+                    this.fromDate = response.data.cards.map(card => card.fromDate.slice(2, 7))
+                    this.thruDate = response.data.cards.map(card => card.thruDate.slice(2, 7))
+                    console.log(this.fromDate);
                     this.json = JSON.stringify(response.data, null, 1);
                     this.loader = false
                 })

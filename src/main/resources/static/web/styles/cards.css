@@ -356,6 +356,8 @@ h4 {
 .backGold {
     background-color: #d4b503;
     color: black;
+    background-image: url(../images/buho-removebg-preview.png);
+
 }
 
 .frontSilver,

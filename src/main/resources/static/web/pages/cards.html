@@ -69,7 +69,7 @@
         <section class="w-100">
             <h2 class="text-center mt-5 mb-5">Your Debit Cards</h2>
             <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
-                <template v-for="card of cardsDebit">
+                <template v-for="(card, index) of cardsDebit">
                     <div class="container-card">
                         <div class="card">
                             <div class="card-inner">
@@ -78,6 +78,7 @@
                                     <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
                                     <div class="row">
                                         <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
+                                        <p class="fw-bold w-50 text-center">{{card.color}}</p>
                                         <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
                                     </div>
                                     <div class="card-no mt-2">
@@ -88,14 +89,12 @@
                                         <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID TILL</p>
                                     </div>
                                     <div class="row name">
-                                        <p class="m-0 w-50 fw-medium">{{card.cardHolder}}</p>
+                                        <p class="m-0 w-50 fw-semibold">{{card.cardHolder}}</p>
                                         <div class="d-flex w-50 gap-3">
-                                            <p class="m-0 w-50 d-flex justify-content-end fw-medium">
-                                                {{card.fromDate.replace(/-/g,
-                                                '/')}}</p>
-                                            <p class="m-0 w-50 d-flex justify-content-start fw-medium">
-                                                {{card.thruDate.replace(/-/g,
-                                                '/')}}</p>
+                                            <p class="m-0 w-50 d-flex justify-content-end fw-semibold">
+                                                {{fromDate[index]}}</p>
+                                            <p class="m-0 w-50 d-flex justify-content-start fw-semibold">
+                                                {{thruDate[index]}}</p>
                                         </div>
                                     </div>
                                 </div>
@@ -129,6 +128,7 @@
                                     <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
                                     <div class="row">
                                         <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
+                                        <p class="fw-bold w-50 text-center">{{card.color}}</p>
                                         <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
                                     </div>
                                     <div class="card-no mt-2">

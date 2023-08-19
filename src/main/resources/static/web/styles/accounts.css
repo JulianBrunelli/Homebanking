@@ -318,6 +318,21 @@ h4 {
 
 /* LOADER */
 
+/* CAROUSEL */
+
+.img-carousel {
+    width: 100%;
+    height: 50vh;
+    object-fit: cover;
+    margin-top: 1rem;
+    border-radius: 15px;
+}
+
+#carouselExampleFade {
+    width: 90%;
+}
+
+/* CAROUSEL */
 
 /* SOCIAL */
 .bi-bank2 {
@@ -362,353 +377,135 @@ a {
 
 /* CARDS */
 
-/*works janky on mobile :<*/
-.container {
+.cards-container-accounts {
+    margin-top: 7rem;
+    margin-bottom: 7rem;
+    gap: 6rem;
+    min-height: 20rem;
+}
+
+.card {
+    width: 90%;
+    height: 100%;
     position: relative;
-    width: 254px;
-    height: 190px;
-    transition: 200ms;
-    margin-bottom: 4rem;
+    padding: 9px;
+    background-color: var(--text-color);
+    border-radius: 35px;
+    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
 }
 
-.container:active {
-    width: 245px;
-    height: 180px;
-}
-
-#card {
+.card-overlay {
     position: absolute;
     inset: 0;
-    z-index: 0;
+    background: repeating-conic-gradient(var(--back-color) 0.0000001%, var(--text-color) 0.000104%) 60% 60%/600% 600%;
+    filter: opacity(10%) contrast(105%);
+}
+
+.card-inner {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    border-radius: 20px;
-    transition: 700ms;
-    background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%);
-}
-
-.subtitle {
-    transform: translateY(120px);
-    color: rgb(155, 23, 189);
-    text-align: center;
-    width: 100%;
-}
-
-.title {
-    opacity: 0;
-    transition-duration: 300ms;
-    transition-timing-function: ease-in-out-out;
-    transition-delay: 100ms;
-    position: absolute;
-    font-size: 16px;
-    font-weight: 300;
-    font-family: Arial, Helvetica, sans-serif;
-    text-align: center;
-    color: black;
-}
-
-.tracker:hover~#card .title {
-    opacity: 1;
-}
-
-#prompt {
-    top: 3.5rem;
-    z-index: 20;
-    font-size: 20px;
-    font-weight: 300;
-    font-family: Arial, Helvetica, sans-serif;
-    transition: 300ms ease-in-out-out;
-    position: absolute;
-    max-width: 100%;
-    color: rgb(3, 3, 3);
-}
-
-.tracker {
-    position: absolute;
-    z-index: 2;
+    overflow: hidden;
     width: 100%;
     height: 100%;
+    background-color: var(--primary-color);
+    border-radius: 30px;
+    /* Content style */
+    font-size: 30px;
+    font-weight: 900;
+    color: white;
+    text-align: center;
+    font-family: monospace;
 }
 
-.tracker:hover {
+button {
+    position: relative;
+    display: inline-block;
     cursor: pointer;
+    outline: none;
+    border: 0;
+    vertical-align: middle;
+    text-decoration: none;
+    background: transparent;
+    padding: 0;
+    font-size: inherit;
+    font-family: inherit;
+    margin-top: 1rem;
 }
 
-.tracker:hover~#card #prompt {
-    opacity: 0;
+button.learn-more {
+    width: 12rem;
+    height: auto;
 }
 
-.tracker:hover~#card {
-    transition: 300ms;
-    filter: brightness(1.1);
+button.learn-more .circle {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: relative;
+    display: block;
+    margin: 0;
+    width: 3rem;
+    height: 3rem;
+    background: #282936;
+    border-radius: 1.625rem;
 }
 
-.container:hover #card::before {
-    transition: 200ms;
-    content: '';
-    opacity: 80%;
-}
-
-.canvas {
-    perspective: 800px;
-    inset: 0;
-    z-index: 2;
+button.learn-more .circle .icon {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
-    grid-template-rows: 1fr 1fr 1fr 1fr 1fr;
-    gap: 0px 0px;
-    grid-template-areas: "tr-1 tr-2 tr-3 tr-4 tr-5"
-        "tr-6 tr-7 tr-8 tr-9 tr-10"
-        "tr-11 tr-12 tr-13 tr-14 tr-15"
-        "tr-16 tr-17 tr-18 tr-19 tr-20"
-        "tr-21 tr-22 tr-23 tr-24 tr-25";
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    background: #fff;
 }
 
-#card::before {
-    content: '';
-    background: linear-gradient(43deg, rgb(65, 88, 208) 0%, rgb(200, 80, 192) 46%, rgb(255, 204, 112) 100%);
-    filter: blur(2rem);
-    opacity: 30%;
+button.learn-more .circle .icon.arrow {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    left: 0.625rem;
+    width: 1.125rem;
+    height: 0.125rem;
+    background: none;
+}
+
+button.learn-more .circle .icon.arrow::before {
+    position: absolute;
+    content: "";
+    top: -0.29rem;
+    right: 0.0625rem;
+    width: 0.625rem;
+    height: 0.625rem;
+    border-top: 0.125rem solid #fff;
+    border-right: 0.125rem solid #fff;
+    transform: rotate(45deg);
+}
+
+button.learn-more .button-text {
+    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    padding: 0.75rem 0;
+    margin: 0 0 0 1.85rem;
+    color: #282936;
+    font-weight: 700;
+    line-height: 1.6;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+button:hover .circle {
     width: 100%;
-    height: 100%;
-    position: absolute;
-    z-index: -1;
-    transition: 200ms;
 }
 
-.tr-1 {
-    grid-area: tr-1;
+button:hover .circle .icon.arrow {
+    background: #fff;
+    transform: translate(1rem, 0);
 }
 
-.tr-2 {
-    grid-area: tr-2;
-}
-
-.tr-3 {
-    grid-area: tr-3;
-}
-
-.tr-4 {
-    grid-area: tr-4;
-}
-
-.tr-5 {
-    grid-area: tr-5;
-}
-
-.tr-6 {
-    grid-area: tr-6;
-}
-
-.tr-7 {
-    grid-area: tr-7;
-}
-
-.tr-8 {
-    grid-area: tr-8;
-}
-
-.tr-9 {
-    grid-area: tr-9;
-}
-
-.tr-10 {
-    grid-area: tr-10;
-}
-
-.tr-11 {
-    grid-area: tr-11;
-}
-
-.tr-12 {
-    grid-area: tr-12;
-}
-
-.tr-13 {
-    grid-area: tr-13;
-}
-
-.tr-14 {
-    grid-area: tr-14;
-}
-
-.tr-15 {
-    grid-area: tr-15;
-}
-
-.tr-16 {
-    grid-area: tr-16;
-}
-
-.tr-17 {
-    grid-area: tr-17;
-}
-
-.tr-18 {
-    grid-area: tr-18;
-}
-
-.tr-19 {
-    grid-area: tr-19;
-}
-
-.tr-20 {
-    grid-area: tr-20;
-}
-
-.tr-21 {
-    grid-area: tr-21;
-}
-
-.tr-22 {
-    grid-area: tr-22;
-}
-
-.tr-23 {
-    grid-area: tr-23;
-}
-
-.tr-24 {
-    grid-area: tr-24;
-}
-
-.tr-25 {
-    grid-area: tr-25;
-}
-
-.tr-1:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(20deg) rotateY(-10deg) rotateZ(0deg);
-}
-
-.tr-2:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(20deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-3:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(20deg) rotateY(0deg) rotateZ(0deg);
-}
-
-.tr-4:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(20deg) rotateY(5deg) rotateZ(0deg);
-}
-
-.tr-5:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(20deg) rotateY(10deg) rotateZ(0deg);
-}
-
-.tr-6:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(10deg) rotateY(-10deg) rotateZ(0deg);
-}
-
-.tr-7:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(10deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-8:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(10deg) rotateY(0deg) rotateZ(0deg);
-}
-
-.tr-9:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(10deg) rotateY(5deg) rotateZ(0deg);
-}
-
-.tr-10:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(10deg) rotateY(10deg) rotateZ(0deg);
-}
-
-.tr-11:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(0deg) rotateY(-10deg) rotateZ(0deg);
-}
-
-.tr-12:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(0deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-13:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(0deg) rotateY(0deg) rotateZ(0deg);
-}
-
-.tr-14:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(0deg) rotateY(5deg) rotateZ(0deg);
-}
-
-.tr-15:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(0deg) rotateY(10deg) rotateZ(0deg);
-}
-
-.tr-16:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-10deg) rotateY(-10deg) rotateZ(0deg);
-}
-
-.tr-17:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-10deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-18:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-10deg) rotateY(0deg) rotateZ(0deg);
-}
-
-.tr-19:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-10deg) rotateY(5deg) rotateZ(0deg);
-}
-
-.tr-20:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-10deg) rotateY(10deg) rotateZ(0deg);
-}
-
-.tr-21:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-20deg) rotateY(-10deg) rotateZ(0deg);
-}
-
-.tr-22:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-20deg) rotateY(-5deg) rotateZ(0deg);
-}
-
-.tr-23:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-20deg) rotateY(0deg) rotateZ(0deg);
-}
-
-.tr-24:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-20deg) rotateY(5deg) rotateZ(0deg);
-}
-
-.tr-25:hover~#card {
-    transition: 125ms ease-in-out;
-    transform: rotateX(-20deg) rotateY(10deg) rotateZ(0deg);
-}
-
-.noselect {
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -moz-user-select: none;
-    -ms-user-select: none;
-    user-select: none;
+button:hover .button-text {
+    color: #fff;
 }
 
 /* CARDS */
@@ -717,6 +514,8 @@ a {
 .container-loans {
     min-height: 40vh;
     width: 100%;
+    margin-top: 2rem;
+    margin-bottom: 2rem;
 }
 
 /* LOANS */
@@ -724,7 +523,7 @@ a {
 /* FOOTER */
 
 footer {
-    min-height: 40vh;
+    min-height: 10vh;
     background-color: var(--primary-color);
     display: flex;
     flex-direction: column;
@@ -816,7 +615,7 @@ footer {
     border-radius: 10px;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    background-color: rgb(171, 255, 227);
+    background-color: var(--background);
 }
 
 .table-details {
@@ -836,6 +635,7 @@ th {
 .container-accounts-phone {
     width: 90%;
     min-height: 50vh;
+    margin-bottom: 6rem;
 }
 
 .phone-img {
@@ -937,7 +737,7 @@ th {
     }
 
     .table-container {
-        width: 60%;
+        width: 70%;
     }
 }
 
@@ -985,7 +785,7 @@ th {
     }
 
     .table-container {
-        width: 60%;
+        width: 70%;
     }
 
     .investHome img {
@@ -1006,15 +806,7 @@ th {
         height: 55vh;
     }
 
-    .img-carousel {
-        width: 100%;
-        height: 50vh;
-        object-fit: cover;
-        margin-top: 1rem;
-        border-radius: 15px;
-    }
-
-    #carouselExampleFade {
-        width: 90%;
+    .card {
+        width: 98%;
     }
 }

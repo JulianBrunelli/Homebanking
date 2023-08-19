@@ -65,71 +65,46 @@
             </div>
         </nav>
     </header>
-    <main class="d-flex flex-column justify-content-center">
-        <h1 class="text-center d-none d-md-block mb-5">Account</h1>
-        <div data-aos="zoom-out-up" class="container noselect">
-            <div class="canvas">
-                <div class="tracker tr-1"></div>
-                <div class="tracker tr-2"></div>
-                <div class="tracker tr-3"></div>
-                <div class="tracker tr-4"></div>
-                <div class="tracker tr-5"></div>
-                <div class="tracker tr-6"></div>
-                <div class="tracker tr-7"></div>
-                <div class="tracker tr-8"></div>
-                <div class="tracker tr-9"></div>
-                <div class="tracker tr-10"></div>
-                <div class="tracker tr-11"></div>
-                <div class="tracker tr-12"></div>
-                <div class="tracker tr-13"></div>
-                <div class="tracker tr-14"></div>
-                <div class="tracker tr-15"></div>
-                <div class="tracker tr-16"></div>
-                <div class="tracker tr-17"></div>
-                <div class="tracker tr-18"></div>
-                <div class="tracker tr-19"></div>
-                <div class="tracker tr-20"></div>
-                <div class="tracker tr-21"></div>
-                <div class="tracker tr-22"></div>
-                <div class="tracker tr-23"></div>
-                <div class="tracker tr-24"></div>
-                <div class="tracker tr-25"></div>
-                <div id="card">
-                    <p id="prompt">Account number {{accounts.id}} <br> &#160 &#160 &#160 &#160 &#160 &#160😃</p>
-                    <div class="title">
+    <main>
+        <h1 class="text-center d-none d-md-block mt-5">Account</h1>
+        <div class="cards-container-accounts d-flex flex-column justify-content-center align-items-center w-100">
+            <div data-aos="zoom-out-up" class="d-flex flex-column justify-content-center align-items-center">
+                <div class="card">
+                    <div class="card-overlay"></div>
+                    <div class="card-inner">
                         <p>Account number: <span class="ms-2">{{accounts.number}}</span></p>
                         <p>Mount: <span class="ms-2 ">{{accounts.balance}}</span></p>
-                        <p>Creation date <br> {{accounts.creationDate}}</p>
+                        <p>Creation date <br>{{accounts.creationDate}}</p>
                     </div>
                 </div>
             </div>
-        </div>
-        <div data-aos="zoom-out-up" v-if="transactions.length > 0" class="table-container">
-            <table class="table-details">
-                <thead>
-                    <tr>
-                        <th scope="col">Type</th>
-                        <th scope="col">Amount</th>
-                        <th scope="col">Date</th>
-                        <th scope="col">Description</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template v-for="(transaction, index) of transactions">
+            <div data-aos="zoom-out-up" v-if="transactions.length > 0" class="table-container">
+                <table class="table-details">
+                    <thead>
                         <tr>
-                            <td :class="transaction.type == 'DEBIT' ? 'text-danger fw-bold' : 'text-success fw-bold'">
-                                {{transaction.type}}</td>
-                            <td>{{transaction.amount}}</td>
-                            <td>{{date[index]}} {{time[index]}}</td>
-                            <td>{{transaction.description}}</td>
+                            <th scope="col">Type</th>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Description</th>
                         </tr>
-                    </template>
-                </tbody>
-            </table>
-        </div>
-        <template v-else>
-            <h2>Not Transactions</h2>
-        </template>
+                    </thead>
+                    <tbody>
+                        <template v-for="(transaction, index) of transactions">
+                            <tr>
+                                <td
+                                    :class="transaction.type == 'DEBIT' ? 'text-danger fw-bold' : 'text-success fw-bold'">
+                                    {{transaction.type}}</td>
+                                <td>{{transaction.amount}}</td>
+                                <td>{{date[index]}} {{time[index]}}</td>
+                                <td>{{transaction.description}}</td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+            <template v-else>
+                <h2>Not Transactions</h2>
+            </template>
     </main>
     <footer>
         <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">

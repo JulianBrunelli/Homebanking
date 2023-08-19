@@ -38,7 +38,7 @@ public class HomebankingApplication {
 			repositoryLoan.save(carLoan);
 			repositoryLoan.save(personalLoan);
 
-			Client melbaMorel = new Client("Melba", "Morel", "Melba@mindhub.com");
+			Client melbaMorel = new Client("Melba", "Morel", "Melba@mindhub.com","4343652");
 
 			Account firstAccount = new Account("VIN001", this.localDate, 5000);
 			Account secondAccount = new Account("VIN002", this.localDateOneDay, 7500);
@@ -86,7 +86,7 @@ public class HomebankingApplication {
 			repositoryCard.save(melbaMorelFirstCard);
 			repositoryCard.save(melbaMorelSecondCard);
 
-			Client chloeOBrian = new Client("Chloe", "O'Brian","ChloeOBrian@gmail.com");
+			Client chloeOBrian = new Client("Chloe", "O'Brian","ChloeOBrian@gmail.com","Hola2341");
 
 			Account thirdAccount = new Account("VIN003", this.localDate, 8000);
 			Account fourthAccount = new Account("VIN004", this.localDateOneDay, 10000);
@@ -133,10 +133,6 @@ public class HomebankingApplication {
 
 			repositoryCard.save(chloeOBrianFirstCard);
 			repositoryCard.save(chloeOBrianSecondCard);
-
-			repositoryClient.save(new Client("Kim", "Bauer", "KimBeuer@gmail.com"));
-			repositoryClient.save(new Client("David", "Palmer", "DavidPalmer@gmail.com"));
-			repositoryClient.save(new Client("Michelle", "Dessler","MichelleDessler@gmail.com"));
 		};
 	}
 }

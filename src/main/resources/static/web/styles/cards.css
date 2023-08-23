@@ -22,6 +22,11 @@ main {
     min-height: 90vh;
 }
 
+.redirect-home:hover {
+    transform: translateX(10px);
+    transition: 0.5s;
+}
+
 header {
     width: 100%;
     min-height: 12vh;

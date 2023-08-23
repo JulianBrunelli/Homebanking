@@ -2,10 +2,12 @@ package com.mindhub.homebanking;
 
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.*;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -13,7 +15,8 @@ import java.util.List;
 
 @SpringBootApplication
 public class HomebankingApplication {
-
+	@Autowired
+	PasswordEncoder passwordEncoder;
 	LocalDate localDate = LocalDate.now();
 	LocalDate localDateExpires = LocalDate.now().plusYears(5);
 	LocalDate localDateOneDay = LocalDate.now().plusDays(1);
@@ -38,7 +41,10 @@ public class HomebankingApplication {
 			repositoryLoan.save(carLoan);
 			repositoryLoan.save(personalLoan);
 
-			Client melbaMorel = new Client("Melba", "Morel", "Melba@mindhub.com","4343652");
+			Client admin = new Client("Julian","Brunelli","JulianBrunelli@outlook.com", passwordEncoder.encode("123456"));
+			repositoryClient.save(admin);
+
+			Client melbaMorel = new Client("Melba", "Morel", "Melba@mindhub.com", passwordEncoder.encode("4343652"));
 
 			Account firstAccount = new Account("VIN001", this.localDate, 5000);
 			Account secondAccount = new Account("VIN002", this.localDateOneDay, 7500);
@@ -86,7 +92,7 @@ public class HomebankingApplication {
 			repositoryCard.save(melbaMorelFirstCard);
 			repositoryCard.save(melbaMorelSecondCard);
 
-			Client chloeOBrian = new Client("Chloe", "O'Brian","ChloeOBrian@gmail.com","Hola2341");
+			Client chloeOBrian = new Client("Chloe", "O'Brian","ChloeOBrian@gmail.com",passwordEncoder.encode("Hola2341"));
 
 			Account thirdAccount = new Account("VIN003", this.localDate, 8000);
 			Account fourthAccount = new Account("VIN004", this.localDateOneDay, 10000);

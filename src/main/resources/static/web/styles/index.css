@@ -20,10 +20,6 @@ body {
 main {
     width: 100%;
     min-height: 90vh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
 }
 
 .redirect-home:hover {
@@ -47,12 +43,6 @@ header img {
     margin-left: 1rem;
     object-fit: cover;
     transition: 1.5s;
-}
-
-h4 {
-    font-size: 1rem;
-    font-weight: 500;
-    color: black;
 }
 
 .title-main {
@@ -323,22 +313,7 @@ h4 {
 
 /* LOADER */
 
-/* CAROUSEL */
-
-.img-carousel {
-    width: 100%;
-    height: 50vh;
-    object-fit: cover;
-    margin-top: 1rem;
-    border-radius: 15px;
-}
-
-#carouselExampleFade {
-    width: 90%;
-}
-
-/* CAROUSEL */
-
+/* FOOTER */
 /* SOCIAL */
 .bi-bank2 {
     color: white;
@@ -379,153 +354,6 @@ a {
 }
 
 /* SOCIAL */
-
-/* CARDS */
-
-.cards-container-accounts {
-    margin-top: 7rem;
-    margin-bottom: 7rem;
-    gap: 6rem;
-    min-height: 20rem;
-}
-
-.card {
-    width: 90%;
-    height: 100%;
-    position: relative;
-    padding: 9px;
-    background-color: var(--text-color);
-    border-radius: 35px;
-    box-shadow: rgba(50, 50, 93, 0.25) 0px 50px 100px -20px, rgba(0, 0, 0, 0.3) 0px 30px 60px -30px, rgba(10, 37, 64, 0.35) 0px -2px 6px 0px inset;
-}
-
-.card-overlay {
-    position: absolute;
-    inset: 0;
-    background: repeating-conic-gradient(var(--back-color) 0.0000001%, var(--text-color) 0.000104%) 60% 60%/600% 600%;
-    filter: opacity(10%) contrast(105%);
-}
-
-.card-inner {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    overflow: hidden;
-    width: 100%;
-    height: 100%;
-    background-color: var(--primary-color);
-    border-radius: 30px;
-    /* Content style */
-    font-size: 30px;
-    font-weight: 900;
-    color: white;
-    text-align: center;
-    font-family: monospace;
-}
-
-button {
-    position: relative;
-    display: inline-block;
-    cursor: pointer;
-    outline: none;
-    border: 0;
-    vertical-align: middle;
-    text-decoration: none;
-    background: transparent;
-    padding: 0;
-    font-size: inherit;
-    font-family: inherit;
-    margin-top: 1rem;
-}
-
-button.learn-more {
-    width: 12rem;
-    height: auto;
-}
-
-button.learn-more .circle {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: relative;
-    display: block;
-    margin: 0;
-    width: 3rem;
-    height: 3rem;
-    background: #282936;
-    border-radius: 1.625rem;
-}
-
-button.learn-more .circle .icon {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: absolute;
-    top: 0;
-    bottom: 0;
-    margin: auto;
-    background: #fff;
-}
-
-button.learn-more .circle .icon.arrow {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    left: 0.625rem;
-    width: 1.125rem;
-    height: 0.125rem;
-    background: none;
-}
-
-button.learn-more .circle .icon.arrow::before {
-    position: absolute;
-    content: "";
-    top: -0.29rem;
-    right: 0.0625rem;
-    width: 0.625rem;
-    height: 0.625rem;
-    border-top: 0.125rem solid #fff;
-    border-right: 0.125rem solid #fff;
-    transform: rotate(45deg);
-}
-
-button.learn-more .button-text {
-    transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    padding: 0.75rem 0;
-    margin: 0 0 0 1.85rem;
-    color: #282936;
-    font-weight: 700;
-    line-height: 1.6;
-    text-align: center;
-    text-transform: uppercase;
-}
-
-button:hover .circle {
-    width: 100%;
-}
-
-button:hover .circle .icon.arrow {
-    background: #fff;
-    transform: translate(1rem, 0);
-}
-
-button:hover .button-text {
-    color: #fff;
-}
-
-/* CARDS */
-
-/* LOANS */
-.container-loans {
-    min-height: 40vh;
-    width: 100%;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-}
-
-/* LOANS */
-
-/* FOOTER */
 
 footer {
     min-height: 10vh;
@@ -610,63 +438,6 @@ footer {
 
 /* FOOTER */
 
-/* TABLE */
-.table-container {
-    width: 98%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid black;
-    border-radius: 10px;
-    margin-top: 2rem;
-    margin-bottom: 2rem;
-    background-color: var(--background);
-}
-
-.table-details {
-    width: 100%;
-}
-
-td,
-th {
-    text-align: center;
-    font-size: 1.2rem;
-    color: black;
-}
-
-/* TABLE */
-
-/* CONTAINER PHONE */
-.container-accounts-phone {
-    width: 90%;
-    min-height: 50vh;
-    margin-bottom: 6rem;
-}
-
-.phone-img {
-    border-radius: 15px;
-    width: 95%;
-    height: 40vh;
-    margin-bottom: 2rem;
-}
-
-.text-rgb {
-    background: linear-gradient(rgb(39, 212, 255), rgb(13, 68, 218));
-    -webkit-background-clip: text;
-    color: transparent;
-}
-
-.container-accounts-text {
-    width: 90%;
-}
-
-.container-accounts-text p {
-    font-size: 20px;
-    text-align: center;
-}
-
-/* CONTAINER PHONE */
-
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
 
     header img {
@@ -704,29 +475,9 @@ th {
         width: 50%;
         height: 30vh;
     }
-
-    .table-container {
-        width: 70%;
-    }
 }
 
 @media only screen and (min-width: 1024px) {
-    .container {
-        width: 40%;
-        height: 30vh;
-        margin-bottom: 4rem;
-    }
-
-    .container:active {
-        width: 245px;
-        height: 180px;
-    }
-
-    .subtitle {
-        transform: translateY(140px);
-        font-size: 1.5rem;
-    }
-
     .navbar {
         width: 100%;
         background-color: transparent;
@@ -753,10 +504,6 @@ th {
         margin-left: 1rem;
     }
 
-    .table-container {
-        width: 70%;
-    }
-
     .investHome img {
         width: 50%;
         height: 30vh;
@@ -773,9 +520,5 @@ th {
 
     .container-accounts-text {
         height: 55vh;
-    }
-
-    .card {
-        width: 98%;
     }
 }

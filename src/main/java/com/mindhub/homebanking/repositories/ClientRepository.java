@@ -8,5 +8,5 @@ import java.util.Set;
 
 @RepositoryRestResource
 public interface ClientRepository extends JpaRepository<Client, Long> {
-        Set<Client> findByEmail(Client client);
+        Client findByEmail(String email);
 }

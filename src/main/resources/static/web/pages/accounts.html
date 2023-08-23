@@ -34,7 +34,7 @@
         <div class="text" data-text="Loading"></div>
     </div>
     <header class="z-3">
-        <a href="./index.html">
+        <a href="#">
             <img class="redirect-home" src="../images/bank.icon.png" alt="bni.icon">
         </a>
         <h1 class="text-light d-md-none">Your Accounts</h1>
@@ -60,7 +60,7 @@
                             <a class="nav-link" href="#">Transactions</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link nav-link-logout" href="#">Log out</a>
+                            <a class="nav-link nav-link-logout" @click="signOut">Log out</a>
                         </li>
                     </ul>
                 </div>
@@ -74,7 +74,7 @@
                     <img src="../images/man-call.jpg" class="d-block w-100 img-carousel" alt="friends-smile">
                 </div>
                 <div class="carousel-item">
-                    <img src="../images/car.jpg" class="d-block w-100 img-carousel" alt="dream">
+                    <img src="../images/car.jpg" class="d-block w-100 img-carousel img-car" alt="dream">
                 </div>
                 <div class="carousel-item">
                     <img src="../images/friends-shump.jpg" class="d-block w-100 img-carousel" alt="finance">
@@ -91,7 +91,7 @@
                 <span class="visually-hidden">Next</span>
             </button>
         </div>
-        <h1 class="title-main d-none d-md-block mb-5 mt-5 fw-bold">Your Accounts</h1>
+        <h2 class="title-main d-none d-md-block mt-5 fw-bold">Your Accounts</h2>
         <div class="cards-container-accounts d-flex flex-column flex-lg-row w-100">
             <template v-if="clientsAccounts.length > 0" v-for="account of clientsAccounts">
                 <div data-aos="zoom-out-up" class="w-100 d-flex flex-column justify-content-center align-items-center">
@@ -111,6 +111,9 @@
                             <span class="button-text">Learn More</span>
                         </button>
                     </a>
+            </template>
+            <template v-else>
+                <h2 class="text-center w-100">You have no accounts</h2>
             </template>
         </div>
         <section class="container-loans d-flex flex-column  align-items-center">
@@ -145,7 +148,7 @@
                 <p class="fw-medium">Open a free account and keep it free</p>
             </section>
             <section>
-                <img data-aos="zoom-out-up" class="phone-img" src="../images/celular.jpg" alt="phone">
+                <img class="phone-img" src="../images/celular.jpg" alt="phone">
                 <h2 class="text-center fw-semibold">With Bank Nordic Inc it is easier</span></h2>
             </section>
         </div>

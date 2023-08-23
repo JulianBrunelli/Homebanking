@@ -34,41 +34,37 @@
         <div class="text" data-text="Loading"></div>
     </div>
     <header class="z-3">
-        <a href="#">
-            <img class="redirect-home" src="../images/bank.icon.png" alt="bni.icon">
-        </a>
-        <h1 class="text-light d-md-none">Home</h1>
-        <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
-                    <ul class="navbar-nav w-100">
-                        <li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="./accounts.html">Accounts</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./cards.html">Cards</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Loans</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#">Transactions</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-logout" href="#">Log out</a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
+        <img class="redirect-home" src="../images/bank.icon.png" alt="bni.icon">
     </header>
     <main>
-        <h1 class="title-main d-none d-md-block mb-5 mt-5 fw-bold">Home</h1>
+        <img class="img-bank" src="../images/AestheticTwitterHeader.png" alt="LogoBankNordicInc">
+        <div class="container-form" v-show="form">
+            <div class="main">
+                <input type="checkbox" id="chk" aria-hidden="true">
+                <div class="login">
+                    <form class="form">
+                        <label for="chk" aria-hidden="true">Login</label>
+                        <input class="input" type="email" v-model="email" name="email" placeholder="Email" required="">
+                        <input class="input" type="password" v-model="password" name="pswd" placeholder="Password"
+                            required="">
+                        <button type="submit" @click="checkLogIn">Log in</button>
+                    </form>
+                </div>
+                <div class="register">
+                    <form class="form">
+                        <label for="chk" aria-hidden="true">Sign up</label>
+                        <input class="input" type="text" v-model="firstName" name="txt" placeholder="First Name"
+                            required="">
+                        <input class="input" type="text" v-model="lastName" name="txt" placeholder="Last Name"
+                            required="">
+                        <input class="input" type="email" v-model="email" name="email" placeholder="Email" required="">
+                        <input class="input" type="password" v-model="password" name="pswd" placeholder="Password"
+                            required="">
+                        <button type="submit" @click="checkSingUp">Register</button>
+                    </form>
+                </div>
+            </div>
+        </div>
     </main>
     <footer>
         <div class="investHome text-center d-flex flex-column flex-md-row justify-content-between">

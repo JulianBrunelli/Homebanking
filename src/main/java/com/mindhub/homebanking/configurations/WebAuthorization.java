@@ -20,10 +20,9 @@ public class WebAuthorization {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/api/clients","/api/login","/api/logout").permitAll()
-                .antMatchers("/web/pages/index.html").permitAll()
-                .antMatchers("/rest/**", "/h2-console/**","/web/admin/manager.html/**","/api/clients").hasAuthority("ADMIN")
+                .antMatchers("/web/pages/index.html","/web/styles/**","/web/js/**","/web/images/**").permitAll()
+                .antMatchers("/rest/**", "/h2-console","/admin/manager.html","/api/clients").hasAuthority("ADMIN")
                 .antMatchers("/web/**").hasAuthority("CLIENT");
-
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
@@ -31,29 +30,18 @@ public class WebAuthorization {
         http.logout().logoutUrl("/api/logout");
 
         http.csrf().disable();
-
         http.headers().frameOptions().disable();
-
         http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));
-
         http.formLogin().failureHandler((req, res, exc) -> res.sendError(HttpServletResponse.SC_UNAUTHORIZED));
-
         http.logout().logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
-
         return http.build();
     }
 
     private void clearAuthenticationAttributes(HttpServletRequest request) {
-
         HttpSession session = request.getSession(false);
-
         if (session != null) {
-
             session.removeAttribute(WebAttributes.AUTHENTICATION_EXCEPTION);
-
         }
-
     }
 }

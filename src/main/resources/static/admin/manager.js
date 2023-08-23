@@ -37,9 +37,16 @@ createApp({
                 .then(response => {
                     this.clients.push(response.data)
                     this.firstName = "",
-                    this.lastName = "",
-                    this.email = "",
-                    this.loadData();
+                        this.lastName = "",
+                        this.email = "",
+                        this.loadData();
+                })
+                .catch((error) => console.error(error.message));
+        },
+        signOut() {
+            axios.post('/api/logout')
+                .then(response => {
+                    location.href = "../pages/index.html"
                 })
                 .catch((error) => console.error(error.message));
         },

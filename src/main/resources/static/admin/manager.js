@@ -46,7 +46,7 @@ createApp({
         signOut() {
             axios.post('/api/logout')
                 .then(response => {
-                    location.href = "../pages/index.html"
+                    location.href = "../web/pages/index.html"
                 })
                 .catch((error) => console.error(error.message));
         },

@@ -21,7 +21,7 @@ public class WebAuthorization {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/api/clients","/api/login","/api/logout").permitAll()
                 .antMatchers("/web/pages/index.html","/web/styles/**","/web/js/**","/web/images/**").permitAll()
-                .antMatchers("/rest/**", "/h2-console","/admin/manager.html","/api/clients").hasAuthority("ADMIN")
+                .antMatchers("/admin/manager.html","/admin/manager.css","/admin/manager.js","/rest/**","/h2-console/**","/api/clients").hasAuthority("ADMIN")
                 .antMatchers("/web/**").hasAuthority("CLIENT");
         http.formLogin()
                 .usernameParameter("email")

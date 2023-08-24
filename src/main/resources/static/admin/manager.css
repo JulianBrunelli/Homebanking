@@ -245,66 +245,16 @@ footer {
 
 /* LOADER */
 
-/* NAVBAR */
-
-.navbar {
-    border-radius: 6px;
-    background-color: transparent;
-    padding: 0;
-    position: relative;
+.btn-logOut {
+    border-radius: 10px;
+    padding: 4px 12px 4px 12px;
+    margin-right: 3rem;
+    font-weight: bold;
 }
 
-.navbar>.container-fluid {
-    justify-content: space-around;
+.btn-logOut:hover {
+    background-color: rgb(248, 152, 145);
 }
-
-.nav-item {
-    text-align: center;
-    color: var(--second-color);
-}
-
-.nav-link {
-    display: inline-block;
-    width: 70%;
-    font-size: 14px;
-    color: white;
-    cursor: pointer;
-    position: relative;
-    background-color: transparent;
-    text-decoration: none;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.nav-link:hover {
-    color: wheat;
-    filter: drop-shadow(10px 2px 5px black);
-    transform: translateY(5px);
-    transition: 0.5s;
-}
-
-.nav-link-logout:hover {
-    color: rgb(224, 54, 54);
-    filter: drop-shadow(10px 2px 5px black);
-}
-
-.nav-link::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    transition: all .3s;
-    z-index: -1;
-}
-
-.nav-link:hover::before {
-    transform: translateX(0);
-}
-
-/* NAVBAR */
 
 /* SOCIAL */
 .bi-bank2 {
@@ -522,35 +472,6 @@ span {
         height: 12vh;
     }
 
-    nav {
-        display: flex;
-        align-items: center;
-    }
-
-    .navbar {
-        width: 80%;
-        background-color: transparent;
-    }
-
-    .container-navbar ul {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-    }
-
-    .container-navbar a {
-        width: 10vw;
-        text-align: center;
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-
-    .container-navbar button {
-        padding: 8px;
-        margin-left: 1rem;
-    }
-
     .input-form {
         width: 40vw;
         padding: 1rem;
@@ -567,33 +488,6 @@ span {
 }
 
 @media only screen and (min-width: 1024px) {
-
-    .navbar {
-        width: 100%;
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-    }
-
-    .container-navbar ul {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-    }
-
-    .container-navbar a {
-        width: 10vw;
-        text-align: center;
-        font-size: 1.2rem;
-        font-weight: 600;
-    }
-
-    .container-navbar button {
-        padding: 8px;
-        margin-left: 1rem;
-    }
-
     .input-form {
         width: 30vw;
         padding: 1rem;

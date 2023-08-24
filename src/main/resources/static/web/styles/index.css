@@ -46,74 +46,18 @@ header img {
 
 }
 
-/* NAVBAR */
-
-.navbar {
-    border-radius: 6px;
-    background-color: transparent;
-    padding: 0;
-    position: relative;
-}
-
-.navbar>.container-fluid {
-    justify-content: space-around;
-}
-
-.nav-item {
-    text-align: center;
-    color: var(--second-color);
-}
-
-.nav-link {
-    display: inline-block;
-    width: 70%;
-    font-size: 14px;
-    color: white;
-    cursor: pointer;
-    position: relative;
-    background-color: transparent;
-    text-decoration: none;
-    overflow: hidden;
-    z-index: 1;
-}
-
-.active {
-    color: rgb(247, 216, 160) !important;
-}
-
-.nav-link:hover {
-    color: wheat;
-    filter: drop-shadow(10px 2px 5px black);
-    transform: translateY(5px);
-    transition: 0.5s;
-}
-
-.nav-link-logout:hover {
-    color: rgb(224, 54, 54);
-    filter: drop-shadow(10px 2px 5px black);
-}
-
-.nav-link::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: 0;
-    width: 100%;
-    height: 100%;
-    transform: translateX(-100%);
-    transition: all .3s;
-    z-index: -1;
-}
-
-.nav-link:hover::before {
-    transform: translateX(0);
-}
-
-/* NAVBAR */
 /* FORM */
 .img-bank {
     width: 100%;
     object-fit: cover;
+}
+
+.container-landing-page {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
 }
 
 .container-form {
@@ -123,6 +67,10 @@ header img {
     justify-content: center;
     margin-top: 3rem;
     margin-bottom: 3rem;
+}
+
+.container-landing-page>img {
+    width: 100%;
 }
 
 .main {
@@ -474,66 +422,6 @@ footer {
     align-items: center;
 }
 
-
-.investHome {
-    width: 100vw;
-    border: 2px solid #044d5a;
-    margin-bottom: 2rem;
-}
-
-.investHome img {
-    width: 100%;
-    height: 30vh;
-    object-fit: cover;
-}
-
-/* BUTTON APP */
-
-.button-app-container {
-    margin-bottom: 3rem;
-    width: 100%;
-}
-
-.custom-btn {
-    min-width: 130px;
-    height: 40px;
-    color: #fff;
-    border-radius: 5px;
-    padding: 10px 25px;
-    font-size: 14px;
-    font-family: 'Lato', sans-serif;
-    font-weight: 500;
-    background: transparent;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    position: relative;
-    display: inline-block;
-    box-shadow: inset 2px 2px 2px 0px rgba(255, 253, 253, 0.5),
-        7px 7px 20px 0px rgba(0, 0, 0, .1),
-        4px 4px 5px 0px rgba(0, 0, 0, .1);
-    outline: none;
-}
-
-.btn-1 {
-    background: black;
-    background: linear-gradient(0deg, rgb(0, 0, 0) 0%, rgb(0, 0, 0) 100%);
-    border: none;
-}
-
-.btn-1:before {
-    height: 0%;
-    width: 2px;
-}
-
-.btn-1:hover {
-    box-shadow: 4px 4px 6px 0 rgba(255, 255, 255, .5),
-        -4px -4px 6px 0 rgba(116, 125, 136, .5),
-        inset -4px -4px 6px 0 rgba(255, 255, 255, .2),
-        inset 4px 4px 6px 0 rgba(0, 0, 0, .4);
-}
-
-/* BUTTON APP */
-
 .container-moreInfo {
     display: flex;
     flex-direction: column;
@@ -556,80 +444,17 @@ footer {
         height: 12vh;
     }
 
-    .navbar {
+    .container-landing-page>img {
         width: 80%;
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-    }
-
-    .container-navbar ul {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-    }
-
-    .container-navbar a {
-        width: 10vw;
-        text-align: center;
-        font-size: 1rem;
-        font-weight: 500;
-    }
-
-    .container-navbar button {
-        padding: 8px;
-        margin-left: 1rem;
-    }
-
-    .investHome img {
-        width: 50%;
-        height: 30vh;
     }
 }
 
 @media only screen and (min-width: 1024px) {
-    .navbar {
-        width: 100%;
-        background-color: transparent;
-        display: flex;
-        align-items: center;
-    }
-
-    .container-navbar ul {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        gap: 2rem;
-    }
-
-    .container-navbar a {
-        width: 10vw;
-        text-align: center;
-        font-size: 1.2rem;
-        font-weight: 500;
-    }
-
-    .container-navbar button {
-        padding: 8px;
-        margin-left: 1rem;
-    }
-
-    .investHome img {
+    .container-form {
         width: 50%;
-        height: 30vh;
     }
 
-    .phone-img {
-        width: 45vw;
-        height: 50vh;
-    }
-
-    .container-accounts-phone {
-        align-items: start;
-    }
-
-    .container-accounts-text {
-        height: 55vh;
+    .container-landing-page>img {
+        width: 50%;
     }
 }

@@ -7,13 +7,9 @@ createApp({
             lastName: "",
             email: "",
             password: "",
-            loader: true,
-            form: true,
-            navNone: false,
         };
     },
     created() {
-        this.loader = false
     },
     methods: {
         checkLogIn(event) {
@@ -25,16 +21,13 @@ createApp({
             }
         },
         logIn() {
-            this.navNone = true
             axios.post('/api/login', `email=${this.email}&password=${this.password}`,
                 { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
                 .then(response => {
                     if (this.email == "julianbrunelli@outlook.com") {
                         location.href = "../../admin/manager.html"
-                        this.form = false
                     } else {
                         location.href = "./accounts.html"
-                        this.form = false
                     }
                 })
                 .catch((error) => alert("The password or username is incorrect"));

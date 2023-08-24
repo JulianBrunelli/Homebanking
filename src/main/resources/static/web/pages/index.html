@@ -38,50 +38,40 @@
     </header>
     <main>
         <img class="img-bank" src="../images/AestheticTwitterHeader.png" alt="LogoBankNordicInc">
-        <div class="container-form" v-show="form">
-            <div class="main">
-                <input type="checkbox" id="chk" aria-hidden="true">
-                <div class="login">
-                    <form class="form">
-                        <label for="chk" aria-hidden="true">Login</label>
-                        <input class="input" type="email" v-model="email" name="email" placeholder="Email" required="">
-                        <input class="input" type="password" v-model="password" name="pswd" placeholder="Password"
-                            required="">
-                        <button type="submit" @click="checkLogIn">Log in</button>
-                    </form>
-                </div>
-                <div class="register">
-                    <form class="form">
-                        <label for="chk" aria-hidden="true">Sign up</label>
-                        <input class="input" type="text" v-model="firstName" name="txt" placeholder="First Name"
-                            required="">
-                        <input class="input" type="text" v-model="lastName" name="txt" placeholder="Last Name"
-                            required="">
-                        <input class="input" type="email" v-model="email" name="email" placeholder="Email" required="">
-                        <input class="input" type="password" v-model="password" name="pswd" placeholder="Password"
-                            required="">
-                        <button type="submit" @click="checkSingUp">Register</button>
-                    </form>
+        <div class="container-landing-page flex-lg-row">
+            <img src="../images/landingPage.png" alt="">
+            <div class="container-form">
+                <div class="main">
+                    <input type="checkbox" id="chk" aria-hidden="true">
+                    <div class="login">
+                        <form class="form">
+                            <label for="chk" aria-hidden="true">Login</label>
+                            <input class="input" type="email" v-model="email" name="email" placeholder="Email"
+                                required="">
+                            <input class="input" type="password" v-model="password" name="pswd" placeholder="Password"
+                                required="">
+                            <button type="submit" @click="checkLogIn">Log in</button>
+                        </form>
+                    </div>
+                    <div class="register">
+                        <form class="form">
+                            <label for="chk" aria-hidden="true">Sign up</label>
+                            <input class="input" type="text" v-model="firstName" name="txt" placeholder="First Name"
+                                required="">
+                            <input class="input" type="text" v-model="lastName" name="txt" placeholder="Last Name"
+                                required="">
+                            <input class="input" type="email" v-model="email" name="email" placeholder="Email"
+                                required="">
+                            <input class="input" type="password" v-model="password" name="pswd" placeholder="Password"
+                                required="">
+                            <button type="submit" @click="checkSingUp">Register</button>
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
     </main>
     <footer>
-        <div class="investHome text-center d-flex flex-column flex-md-row justify-content-between">
-            <section class="w-md-50">
-                <h4 class="p-2 fw-semibold  text-light">All your bank, in your pocket</h4>
-                <p class="p-2 fw-normal text-light">Download the Bank Nordic app and don't worry about physically
-                    going
-                    to
-                    our
-                    bank</p>
-                <div class="button-app-container">
-                    <button class="custom-btn btn-1 me-3"><i class="bi bi-google-play"></i> Google Play</button>
-                    <button class="custom-btn btn-1 ms-3"><i class="bi bi-apple"></i> App Store</button>
-                </div>
-            </section>
-            <img src="../images/tecnology.png" alt="invest-from-your-home">
-        </div>
         <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
             <section class="d-flex align-items-center">
                 <i class="bi bi-bank2 me-2"></i>

@@ -22,11 +22,13 @@ public class WebAuthorization {
                 .antMatchers(HttpMethod.POST,"/api/clients","/api/login","/api/logout").permitAll()
                 .antMatchers("/web/pages/index.html","/web/styles/**","/web/js/**","/web/images/**").permitAll()
                 .antMatchers("/admin/manager.html","/admin/manager.css","/admin/manager.js","/rest/**","/h2-console/**","/api/clients").hasAuthority("ADMIN")
-                .antMatchers("/web/**").hasAuthority("CLIENT");
+                .antMatchers("/web/**").hasAuthority("CLIENT")
+                .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")
                 .passwordParameter("password")
                 .loginPage("/api/login");
+
         http.logout().logoutUrl("/api/logout");
 
         http.csrf().disable();

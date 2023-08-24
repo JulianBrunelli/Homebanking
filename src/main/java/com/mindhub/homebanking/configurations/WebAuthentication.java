@@ -1,6 +1,8 @@
 package com.mindhub.homebanking.configurations;
 
+import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
+import com.mindhub.homebanking.repositories.AccountRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -17,6 +19,8 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
     ClientRepository clientRepository;
+    @Autowired
+    AccountRepository accountRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -41,7 +45,6 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
             }
 
         });
-
     }
 }
 

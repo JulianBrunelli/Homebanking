@@ -6,7 +6,7 @@ createApp({
             clientsAccounts: [],
             loans: [],
             json: null,
-            loader: true,
+            // loader: true,
         };
     },
     created() {
@@ -19,7 +19,7 @@ createApp({
                     this.clientsAccounts = response.data.accounts.sort((a, b) => a.id - b.id)
                     this.loans = response.data.loans
                     this.json = JSON.stringify(response.data, null, 1);
-                    this.loader = false
+                    // this.loader = false
                 })
                 .catch((error) => console.error(error.message));
         },

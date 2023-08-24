@@ -36,7 +36,6 @@ createApp({
             axios.post('/api/logout')
                 .then(response => {
                     location.href = "../pages/index.html"
-                    this.form = true
                 })
                 .catch((error) => console.error(error.message));
         },

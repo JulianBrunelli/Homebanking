@@ -15,6 +15,7 @@
 body {
     font-family: 'PT Sans Narrow', sans-serif;
     background-color: var(--second-color);
+    overflow-x: hidden;
 }
 
 main {
@@ -391,7 +392,7 @@ a {
     margin-top: 2rem;
     margin-bottom: 7rem;
     gap: 6rem;
-    min-height: 20vh;
+    min-height: 50vh;
 }
 
 .card {
@@ -421,8 +422,7 @@ a {
     height: 100%;
     background-color: var(--primary-color);
     border-radius: 30px;
-    /* Content style */
-    font-size: 30px;
+    font-size: 20px;
     font-weight: 900;
     color: white;
     text-align: center;
@@ -519,6 +519,40 @@ button:hover .button-text {
 }
 
 /* CARDS */
+button {
+    border: none;
+    display: flex;
+    padding: 0.75rem 1.5rem;
+    background-color: #488aec;
+    color: #ffffff;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    font-weight: 700;
+    text-align: center;
+    text-transform: uppercase;
+    vertical-align: middle;
+    align-items: center;
+    border-radius: 0.5rem;
+    user-select: none;
+    gap: 0.75rem;
+    box-shadow: 0 4px 6px -1px #488aec31, 0 2px 4px -1px #488aec17;
+    transition: all .6s ease;
+}
+
+button:hover {
+    box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
+}
+
+button:focus,
+button:active {
+    opacity: .85;
+    box-shadow: none;
+}
+
+button svg {
+    width: 1.25rem;
+    height: 1.25rem;
+}
 
 /* LOANS */
 .container-loans {
@@ -713,25 +747,14 @@ th {
     .table-container {
         width: 70%;
     }
+
+    .card {
+        width: 50vw;
+        height: 40vh;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
-    .container {
-        width: 40%;
-        height: 30vh;
-        margin-bottom: 4rem;
-    }
-
-    .container:active {
-        width: 245px;
-        height: 180px;
-    }
-
-    .subtitle {
-        transform: translateY(140px);
-        font-size: 1.5rem;
-    }
-
     .navbar {
         width: 100%;
         background-color: transparent;

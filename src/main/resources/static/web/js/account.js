@@ -18,8 +18,9 @@ createApp({
             const parameter = location.search
             const params = new URLSearchParams(parameter)
             const idParams = params.get("id")
-            axios.get(`/api/accounts/${idParams}`)
+            axios.get(`/api/clients/current/accounts/${idParams}`)
                 .then(response => {
+                    console.log(response);
                     this.accounts = response.data
                     this.transactions = this.accounts.transactions.sort((a, b) => b.id - a.id)
                     this.date = this.transactions.map(transaction => transaction.date.slice(0, 10).replace(/-/g, '/'))

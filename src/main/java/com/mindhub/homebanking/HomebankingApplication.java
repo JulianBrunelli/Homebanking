@@ -44,10 +44,10 @@ public class HomebankingApplication {
 			Client admin = new Client("Julian","Brunelli","julianbrunelli@outlook.com", passwordEncoder.encode("123456"));
 			repositoryClient.save(admin);
 
-			Client melbaMorel = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("4343652"));
+			Client melbaMorel = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("1234"));
 
-			Account firstAccount = new Account("VIN001", this.localDate, 5000);
-			Account secondAccount = new Account("VIN002", this.localDateOneDay, 7500);
+			Account firstAccount = new Account("VIN-001", this.localDate, 5000);
+			Account secondAccount = new Account("VIN-002", this.localDateOneDay, 7500);
 
 			Transaction firstTransaction = new Transaction(7000, "Supplies",this.localDateTime, TransactionType.CREDIT);
 			Transaction secondTransaction = new Transaction(-8000, "Supplies",this.localDateTime, TransactionType.DEBIT);

@@ -32,7 +32,7 @@ public class ClientControllers {
         }while (accountRepository.findByNumber(random)!=null);
         return random;
     }
-    @RequestMapping(path = "/api/clients", method = RequestMethod.POST)
+    @PostMapping(path = "/api/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
@@ -50,7 +50,6 @@ public class ClientControllers {
         accountRepository.save(account);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-
     @RequestMapping("/api/clients/current")
     public ClientDTO getClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));

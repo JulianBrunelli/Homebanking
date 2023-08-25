@@ -30,5 +30,25 @@ createApp({
                 })
                 .catch((error) => console.error(error.message));
         },
+        addAccount() {
+            Swal.fire({
+                title: 'Do you want to save the changes?',
+                showDenyButton: true,
+                confirmButtonText: 'Save',
+                denyButtonText: `Don't save`,
+            })
+                .then((result) => {
+                    if (result.isConfirmed) {
+                        axios.post("/api/clients/current/accounts")
+                            .then(response => {
+                                Swal.fire('Saved!', '', 'success').then(response => {
+                                    location.href = '../pages/accounts.html'
+                                })
+                            })
+                    } else {
+                        Swal.fire('Changes are not saved', '', 'info')
+                    }
+                })
+        }
     },
 }).mount("#app");

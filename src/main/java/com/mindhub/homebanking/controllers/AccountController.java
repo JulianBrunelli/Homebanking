@@ -29,13 +29,11 @@ public class AccountController {
         }while (accountRepository.findByNumber(random)!=null);
         return random;
     }
-    private LocalDate localDateFrom = LocalDate.now();
-
     @RequestMapping("/api/accounts")
     public List<AccountDTO>getAccount(){
         return accountRepository.findAll().stream().map(account -> new AccountDTO(account)).collect(toList());
     }
-    @RequestMapping("/api/accounts/{id}")
+    @RequestMapping("/api/clients/current/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
         return accountRepository.findById(id).map(AccountDTO::new).orElse(null);
     }
@@ -44,7 +42,7 @@ public class AccountController {
     public ResponseEntity<Object>newAccount(Authentication authentication){
         if (clientRepository.findByEmail(authentication.getName()).getAccounts().size() <= 2){
             String accountNumber = randomNumber();
-            Account account = new Account(accountNumber, localDateFrom,0.0);
+            Account account = new Account(accountNumber, LocalDate.now(),0.0);
             clientRepository.findByEmail(authentication.getName()).addAccount(account);
             accountRepository.save(account);
             return new ResponseEntity<>("Your account was successfully created", HttpStatus.CREATED);

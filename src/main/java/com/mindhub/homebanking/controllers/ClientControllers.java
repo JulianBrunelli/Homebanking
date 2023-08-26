@@ -17,6 +17,7 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @RestController
+@RequestMapping("/api")
 public class ClientControllers {
     @Autowired
     private ClientRepository clientRepository;
@@ -32,7 +33,7 @@ public class ClientControllers {
         }while (accountRepository.findByNumber(random)!=null);
         return random;
     }
-    @PostMapping(path = "/api/clients")
+    @PostMapping(path = "/clients")
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
@@ -50,17 +51,17 @@ public class ClientControllers {
         accountRepository.save(account);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
-    @RequestMapping("/api/clients/current")
+    @RequestMapping("/clients/current")
     public ClientDTO getClient(Authentication authentication) {
         return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
     }
-    @RequestMapping("/api/clients")
+    @RequestMapping("/clients")
     public List<ClientDTO> getClients() {
         return clientRepository.findAll()
                 .stream()
                 .map(client -> new ClientDTO(client)).collect(toList());
     }
-    @RequestMapping("/api/clients/{id}")
+    @RequestMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
         return clientRepository.findById(id).map(ClientDTO::new).orElse(null);
     }

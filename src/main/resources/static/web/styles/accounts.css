@@ -393,6 +393,10 @@ a {
     margin-bottom: 7rem;
     gap: 6rem;
     min-height: 50vh;
+    background-color: rgb(155, 152, 152);
+    border-radius: 14px;
+    padding: 2rem;
+    width: 95%;
 }
 
 .card {
@@ -429,7 +433,7 @@ a {
     font-family: monospace;
 }
 
-button {
+.learn-more {
     position: relative;
     display: inline-block;
     cursor: pointer;
@@ -444,12 +448,12 @@ button {
     margin-top: 1rem;
 }
 
-button.learn-more {
+.learn-more {
     width: 12rem;
     height: auto;
 }
 
-button.learn-more .circle {
+.learn-more .circle {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: relative;
     display: block;
@@ -457,10 +461,10 @@ button.learn-more .circle {
     width: 3rem;
     height: 3rem;
     background: #282936;
-    border-radius: 1.625rem;
+    border-radius: 14px;
 }
 
-button.learn-more .circle .icon {
+.learn-more .circle .icon {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
     top: 0;
@@ -469,7 +473,7 @@ button.learn-more .circle .icon {
     background: #fff;
 }
 
-button.learn-more .circle .icon.arrow {
+.learn-more .circle .icon.arrow {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     left: 0.625rem;
     width: 1.125rem;
@@ -477,7 +481,7 @@ button.learn-more .circle .icon.arrow {
     background: none;
 }
 
-button.learn-more .circle .icon.arrow::before {
+.learn-more .circle .icon.arrow::before {
     position: absolute;
     content: "";
     top: -0.29rem;
@@ -489,7 +493,7 @@ button.learn-more .circle .icon.arrow::before {
     transform: rotate(45deg);
 }
 
-button.learn-more .button-text {
+.learn-more .button-text {
     transition: all 0.45s cubic-bezier(0.65, 0, 0.076, 1);
     position: absolute;
     top: 0;
@@ -505,21 +509,39 @@ button.learn-more .button-text {
     text-transform: uppercase;
 }
 
-button:hover .circle {
+.learn-more:hover .circle {
     width: 100%;
 }
 
-button:hover .circle .icon.arrow {
+.learn-more:hover .circle .icon.arrow {
     background: #fff;
     transform: translate(1rem, 0);
 }
 
-button:hover .button-text {
+.learn-more:hover .button-text {
     color: #fff;
 }
 
 /* CARDS */
-button {
+
+/* container-button-create */
+.container-create {
+    min-height: 30vh;
+}
+
+.image-create {
+    width: 95%;
+    border-radius: 15px;
+    height: 35vh;
+    margin-bottom: 2rem;
+}
+
+.container-create-text {
+    min-height: 20vh;
+    width: 70%;
+}
+
+.btn-create-acc {
     border: none;
     display: flex;
     padding: 0.75rem 1.5rem;
@@ -539,20 +561,22 @@ button {
     transition: all .6s ease;
 }
 
-button:hover {
+.btn-create-acc:hover {
     box-shadow: 0 10px 15px -3px #488aec4f, 0 4px 6px -2px #488aec17;
 }
 
-button:focus,
-button:active {
+.btn-create-acc:focus,
+.btn-create-acc:active {
     opacity: .85;
     box-shadow: none;
 }
 
-button svg {
+.btn-create-acc svg {
     width: 1.25rem;
     height: 1.25rem;
 }
+
+/* container-button-create */
 
 /* LOANS */
 .container-loans {
@@ -685,7 +709,7 @@ th {
 .phone-img {
     border-radius: 15px;
     width: 95%;
-    height: 40vh;
+    height: 35vh;
     margin-bottom: 2rem;
 }
 
@@ -804,6 +828,16 @@ th {
     }
 
     .card {
-        width: 98%;
+        width: 30vw;
+        height: 40vh;
+    }
+
+    .container-create {
+        width: 100%;
+    }
+
+    .image-create {
+        width: 35vw;
+        height: fit-content;
     }
 }

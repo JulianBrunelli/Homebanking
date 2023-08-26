@@ -70,13 +70,13 @@
     </header>
     <main>
         <h1 class="text-center d-none d-md-block mt-5">Account</h1>
-        <div class="cards-container-accounts d-flex flex-column justify-content-center align-items-center w-100">
-            <div data-aos="zoom-out-up" class="d-flex flex-column justify-content-center align-items-center">
+        <div class="cards-container-accounts d-flex flex-column justify-content-center align-items-center">
+            <div class="d-flex flex-column justify-content-center align-items-center">
                 <div class="card">
                     <div class="card-overlay"></div>
                     <div class="card-inner">
-                        <p>Account number: <span class="ms-2">{{accounts.number}}</span></p>
-                        <p>Mount: <span class="ms-2 ">{{accounts.balance}}</span></p>
+                        <p>Account number <br> <span class="ms-2">{{accounts.number}}</span></p>
+                        <p>Mount <br> <span class="ms-2 ">{{accounts.balance}}</span></p>
                         <p>Creation date <br>{{accounts.creationDate}}</p>
                     </div>
                 </div>
@@ -108,6 +108,7 @@
             <template v-else>
                 <h2>Not Transactions</h2>
             </template>
+        </div>
     </main>
     <footer>
         <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">

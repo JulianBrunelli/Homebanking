@@ -16,7 +16,8 @@ import java.util.List;
 import static java.util.stream.Collectors.toList;
 
 @RestController
-public class AccountController {
+@RequestMapping("/api")
+public class AccountControllers {
     @Autowired
     private AccountRepository accountRepository;
     @Autowired
@@ -29,25 +30,25 @@ public class AccountController {
         }while (accountRepository.findByNumber(random)!=null);
         return random;
     }
-    @RequestMapping("/api/accounts")
+    @RequestMapping("/accounts")
     public List<AccountDTO>getAccount(){
         return accountRepository.findAll().stream().map(account -> new AccountDTO(account)).collect(toList());
     }
-    @RequestMapping("/api/clients/current/accounts/{id}")
+    @RequestMapping("/clients/accounts/{id}")
     public AccountDTO getAccount(@PathVariable Long id){
-        return accountRepository.findById(id).map(AccountDTO::new).orElse(null);
+        return accountRepository.findById(id).map(account -> new AccountDTO(account)).orElse(null);
     }
 
-    @PostMapping( path = "/api/clients/current/accounts")
+    @PostMapping( path = "/clients/current/accounts")
     public ResponseEntity<Object>newAccount(Authentication authentication){
         if (clientRepository.findByEmail(authentication.getName()).getAccounts().size() <= 2){
             String accountNumber = randomNumber();
             Account account = new Account(accountNumber, LocalDate.now(),0.0);
             clientRepository.findByEmail(authentication.getName()).addAccount(account);
             accountRepository.save(account);
-            return new ResponseEntity<>("Your account was successfully created", HttpStatus.CREATED);
         }else{
             return new ResponseEntity<>("Failed to create account because the maximum number of accounts is 3", HttpStatus.FORBIDDEN);
         }
+        return new ResponseEntity<>("Your account was successfully created", HttpStatus.CREATED);
     }
 }

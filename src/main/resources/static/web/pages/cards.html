@@ -122,7 +122,7 @@
         <section class="w-100">
             <h2 class="text-center mt-5 mb-5">Your Credit Cards</h2>
             <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
-                <template v-else v-for="card of cardsCredit">
+                <template v-else v-for="(card, index) of cardsCredit">
                     <div class="container-card">
                         <div class="card">
                             <div class="card-inner">
@@ -145,11 +145,9 @@
                                         <p class="m-0 w-50 fw-medium">{{card.cardHolder}}</p>
                                         <div class="d-flex w-50 gap-3">
                                             <p class="m-0 w-50 d-flex justify-content-end fw-medium">
-                                                {{card.fromDate.replace(/-/g,
-                                                '/')}}</p>
+                                                {{fromDate[index]}}</p>
                                             <p class="m-0 w-50 d-flex justify-content-start fw-medium">
-                                                {{card.thruDate.replace(/-/g,
-                                                '/')}}</p>
+                                                {{thruDate[index]}}</p>
                                         </div>
                                     </div>
                                 </div>

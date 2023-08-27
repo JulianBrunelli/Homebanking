@@ -9,10 +9,10 @@ createApp({
     methods: {
         addCard() {
             Swal.fire({
-                title: 'Do you want to save the changes?',
+                title: 'Confirm card request',
                 showDenyButton: true,
-                confirmButtonText: 'Save',
-                denyButtonText: `Don't save`,
+                confirmButtonText: 'Confirm',
+                denyButtonText: 'Cancel',
             })
                 .then((result) => {
                     if (result.isConfirmed) {

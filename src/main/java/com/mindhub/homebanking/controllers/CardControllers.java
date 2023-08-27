@@ -66,7 +66,10 @@ public class CardControllers {
                         + "-" + (int) (Math.random()*1000 + 9999);
         }while (cardRepository.findByNumber(randomNumberCard)!=null);
 
-        int cvv = (int) (Math.random()*100 + 999);
+        int cvv;
+        do {
+            cvv = (int) (Math.random()*100 + 999);
+        }while (cardRepository.findByCvv(cvv)!=null);
 
         Card card = new Card( cardHolder,type,color,randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
         client.addCard(card);

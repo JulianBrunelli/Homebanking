@@ -34,21 +34,21 @@ createApp({
         },
         addAccount() {
             Swal.fire({
-                title: 'Do you want to save the changes?',
+                title: 'Are you sure you want to create an account?',
                 showDenyButton: true,
                 confirmButtonText: 'Save',
-                denyButtonText: `Don't save`,
+                denyButtonText: 'Cancel',
             })
                 .then((result) => {
                     if (result.isConfirmed) {
                         axios.post("/api/clients/current/accounts")
                             .then(response => {
-                                Swal.fire('Saved!', '', 'success').then(response => {
+                                Swal.fire('Account saved!', '', 'success').then(response => {
                                     location.href = '../pages/accounts.html'
                                 })
                             })
                     } else {
-                        Swal.fire('Changes are not saved', '', 'info')
+                        Swal.fire('Your account was not saved', '', 'info')
                     }
                 })
         }

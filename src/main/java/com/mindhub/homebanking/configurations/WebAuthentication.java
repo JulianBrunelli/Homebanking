@@ -19,8 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
     @Autowired
     ClientRepository clientRepository;
-    @Autowired
-    AccountRepository accountRepository;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -43,7 +41,6 @@ public class WebAuthentication extends GlobalAuthenticationConfigurerAdapter {
             } else {
                 throw new UsernameNotFoundException("Unknown user: " + inputName);
             }
-
         });
     }
 }

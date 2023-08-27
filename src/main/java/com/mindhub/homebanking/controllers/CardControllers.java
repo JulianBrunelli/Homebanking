@@ -1,12 +1,10 @@
 package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.CardDTO;
-import com.mindhub.homebanking.dtos.ClientDTO;
-import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Card;
 import com.mindhub.homebanking.models.CardColor;
 import com.mindhub.homebanking.models.CardType;
-import com.mindhub.homebanking.repositories.AccountRepository;
+import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.repositories.CardRepository;
 import com.mindhub.homebanking.repositories.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,14 +26,6 @@ public class CardControllers {
     @Autowired
     private CardRepository cardRepository;
 
-    private String randomNumber(){
-        String random;
-        do {
-            int number = (int) (Math.random()*1000 + 9999);
-            random = "VIN-" + number;
-        }while (cardRepository.findByNumber(random)!=null);
-        return random;
-    }
 
     @RequestMapping("/cards")
     public List<CardDTO> getCards(){
@@ -47,19 +37,41 @@ public class CardControllers {
         return cardRepository.findById(id).map(card -> new CardDTO(card)).orElse(null);
     }
 
-//    @PostMapping( path = "/clients/current/cards")
-//    public ResponseEntity<Object> newCard(
-//            Authentication authentication, @RequestParam CardType type,
-//            @RequestParam CardColor color) {
-//        if ( type == null || color == null){
-//            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
-//        }
-//        if (type == ){
-//
-//        }
-//    }
-    @RequestMapping("/clients/current")
-    public ClientDTO getClient(Authentication authentication) {
-        return new ClientDTO(clientRepository.findByEmail(authentication.getName()));
+    @PostMapping( path = "/clients/current/cards")
+    public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam CardType type, @RequestParam CardColor color) {
+
+        Client client = clientRepository.findByEmail(authentication.getName());
+        String cardHolder = client.getFirstName() + " " + client.getLastName();
+
+        List<Card> cardsType = client.getCards().stream().filter(card -> card.getType() == type).collect(toList());
+        List<Card> cardsColor = cardsType.stream().filter(card -> card.getColor() == color).collect(toList());
+
+        if ( type == null || color == null) {
+            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        }
+
+        if (cardsType.size() >=3){
+            return new ResponseEntity<>("Failed to create card because the maximum number of cards is 3 for type", HttpStatus.FORBIDDEN);
+        }
+
+        if (!cardsColor.isEmpty()){
+            return new ResponseEntity<>("Failed to create card because the maximum number of cards is 3 for color", HttpStatus.FORBIDDEN);
+        }
+
+        String randomNumberCard;
+        do {
+            randomNumberCard =  (int) (Math.random()*1000 + 9999)
+                        + "-" + (int) (Math.random()*1000 + 9999)
+                        + "-" + (int) (Math.random()*1000 + 9999)
+                        + "-" + (int) (Math.random()*1000 + 9999);
+        }while (cardRepository.findByNumber(randomNumberCard)!=null);
+
+        int cvv = (int) (Math.random()*100 + 999);
+
+        Card card = new Card( cardHolder,type,color,randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
+        client.addCard(card);
+        cardRepository.save(card);
+
+        return new ResponseEntity<>("Your card was successfully created", HttpStatus.CREATED);
     }
 }

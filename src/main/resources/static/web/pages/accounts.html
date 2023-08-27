@@ -93,7 +93,7 @@
             </button>
         </div>
         <section class="w-100 d-flex flex-column align-items-center">
-            <h2 class="title-main d-none d-md-block mt-5 fw-bold text-center">Your Accounts</h2>
+            <h2 class="title-main d-none d-md-block mt-5 fw-bold text-center">Welcome {{nameClient}}</h2>
             <div class="cards-container-accounts d-flex flex-column flex-lg-row flex-lg-wrap">
                 <template v-if="clientsAccounts.length > 0" v-for="account of clientsAccounts">
                     <div data-aos="zoom-out-up"

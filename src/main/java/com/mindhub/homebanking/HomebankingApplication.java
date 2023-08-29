@@ -55,9 +55,9 @@ public class HomebankingApplication {
 			ClientLoan melbaMortageLoan = new ClientLoan(400000, 60);
 			ClientLoan melbaPersonalLoan = new ClientLoan(50000, 12);
 
-			Card melbaMorelFirstCard = new Card("Melba Morel", CardType.DEBIT, CardColor.GOLD,
+			Card melbaMorelFirstCard = new Card(melbaMorel.getFirstName()+" "+melbaMorel.getLastName(), CardType.DEBIT, CardColor.GOLD,
 					"4325-5667-4253-9896", 444, this.localDate, this.localDateExpires);
-			Card melbaMorelSecondCard = new Card("Melba Morel", CardType.CREDIT, CardColor.TITANIUM,
+			Card melbaMorelSecondCard = new Card(melbaMorel.getFirstName()+" "+melbaMorel.getLastName(), CardType.CREDIT, CardColor.TITANIUM,
 					"4000-4546-5734-2351", 324, this.localDate, this.localDateExpires);
 
 			repositoryClient.save(melbaMorel);
@@ -103,9 +103,9 @@ public class HomebankingApplication {
 			ClientLoan chloePersonalLoan = new ClientLoan(100000, 24);
 			ClientLoan chloeCarlLoan = new ClientLoan(200000, 36);
 
-			Card chloeOBrianFirstCard = new Card("Chloe O Brian", CardType.DEBIT, CardColor.GOLD,
+			Card chloeOBrianFirstCard = new Card(chloeOBrian.getFirstName()+" "+chloeOBrian.getLastName(), CardType.DEBIT, CardColor.GOLD,
 					"4004-8646-4663-2424", 123, this.localDate, this.localDateExpires);
-			Card chloeOBrianSecondCard = new Card("Chloe O Brian", CardType.CREDIT, CardColor.SILVER,
+			Card chloeOBrianSecondCard = new Card(chloeOBrian.getFirstName()+" "+chloeOBrian.getLastName(), CardType.CREDIT, CardColor.SILVER,
 					"4006-4244-5179-2266", 424, this.localDate, this.localDateExpires);
 
 			repositoryClient.save(chloeOBrian);

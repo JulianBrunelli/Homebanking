@@ -55,22 +55,23 @@ public class CardControllers {
         }
 
         if (!cardsColor.isEmpty()){
-            return new ResponseEntity<>("Failed to create card because the maximum number of cards is 3 for color", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Failed to create card because the maximum number is 1 color for type", HttpStatus.FORBIDDEN);
         }
 
         String randomNumberCard;
         do {
-            randomNumberCard =  (int) (Math.random()*1000 + 9999)
-                        + "-" + (int) (Math.random()*1000 + 9999)
-                        + "-" + (int) (Math.random()*1000 + 9999)
-                        + "-" + (int) (Math.random()*1000 + 9999);
+            randomNumberCard =  (int) (Math.random()*400 + 999)
+                        + "-" + (int) (Math.random()*400 + 999)
+                        + "-" + (int) (Math.random()*400 + 999)
+                        + "-" + (int) (Math.random()*400 + 999);
         }while (cardRepository.findByNumber(randomNumberCard)!=null);
 
         int cvv;
         do {
-            cvv = (int) (Math.random()*100 + 999);
+            cvv = (int) (Math.random()*10 + 99);
         }while (cardRepository.findByCvv(cvv)!=null);
-
+        System.out.println(type);
+        System.out.println(color);
         Card card = new Card( cardHolder,type,color,randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
         client.addCard(card);
         cardRepository.save(card);

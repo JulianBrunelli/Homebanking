@@ -37,12 +37,22 @@ public class ClientControllers {
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
-        if (firstName.isEmpty() || lastName.isEmpty() || email.isEmpty() || password.isEmpty()) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if (firstName.isBlank()) {
+            return new ResponseEntity<>("Please provide a first name", HttpStatus.FORBIDDEN);
+        }
+        if(lastName.isBlank()){
+            return new ResponseEntity<>("Please provide a last name", HttpStatus.FORBIDDEN);
+        }
+        if(email.isBlank()){
+            return new ResponseEntity<>("Please provide a email", HttpStatus.FORBIDDEN);
+        }
+        if(password.isBlank()){
+            return new ResponseEntity<>("Please provide a password", HttpStatus.FORBIDDEN);
         }
         if (clientRepository.findByEmail(email) !=  null) {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
+
         Client newClient = new Client(firstName, lastName,email, passwordEncoder.encode(password));
         clientRepository.save(newClient);
         String number = randomNumber();
@@ -63,6 +73,6 @@ public class ClientControllers {
     }
     @RequestMapping("/clients/{id}")
     public ClientDTO getClient(@PathVariable Long id){
-        return clientRepository.findById(id).map(ClientDTO::new).orElse(null);
+        return clientRepository.findById(id).map(client -> new ClientDTO(client)).orElse(null);
     }
 }

@@ -361,13 +361,16 @@ h4 {
 .backGold {
     background-color: #d4b503;
     color: black;
+    filter: brightness(1.1);
     background-image: url(../images/buho-removebg-preview.png);
 
 }
 
 .frontSilver,
 .backSilver {
-    background-color: silver;
+    background-color: rgb(158, 157, 157);
+    filter: brightness(1.1);
+    color: black;
 }
 
 .frontTitanium,
@@ -520,7 +523,10 @@ footer {
 /* FOOTER */
 
 /* CREATE CARDS */
-
+.container-crete-cards {
+    width: 100%;
+    min-height: 100vh;
+}
 
 .container-type-color {
     width: 100%;

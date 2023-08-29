@@ -36,7 +36,7 @@ createApp({
             Swal.fire({
                 title: 'Are you sure you want to create an account?',
                 showDenyButton: true,
-                confirmButtonText: 'Save',
+                confirmButtonText: 'Create',
                 denyButtonText: 'Cancel',
             })
                 .then((result) => {

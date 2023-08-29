@@ -53,7 +53,7 @@ public class ClientControllers {
             return new ResponseEntity<>("Email already in use", HttpStatus.FORBIDDEN);
         }
 
-        Client newClient = new Client(firstName, lastName,email, passwordEncoder.encode(password));
+        Client newClient = new Client(firstName, lastName,email.toLowerCase(), passwordEncoder.encode(password));
         clientRepository.save(newClient);
         String number = randomNumber();
         Account account = new Account(number, LocalDate.now(),0.0);

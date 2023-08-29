@@ -32,10 +32,6 @@ public class CardControllers {
         return cardRepository.findAll().stream().map(card -> new CardDTO(card)).collect(toList());
     }
 
-    @RequestMapping("/clients/cards/{id}")
-    public CardDTO getCard(@PathVariable Long id){
-        return cardRepository.findById(id).map(card -> new CardDTO(card)).orElse(null);
-    }
 
     @PostMapping( path = "/clients/current/cards")
     public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam CardType type, @RequestParam CardColor color) {

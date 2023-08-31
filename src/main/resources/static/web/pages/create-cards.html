@@ -73,50 +73,52 @@
         </nav>
     </header>
     <main class="mt-5">
-        <section class="d-flex flex-column align-items-center container-crete-cards">
-            <h1 class="mb-5">Select type of card</h1>
-            <div class="container-type-color">
-                <section class="container-type">
-                    <h2 class="mb-2">Cards type</h2>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioType" id="DEBIT" value="DEBIT"
-                            v-model="cardsType">
-                        <label class="form-check-label" for="DEBIT">
-                            DEBIT
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioType" id="CREDIT" value="CREDIT"
-                            v-model="cardsType">
-                        <label class="form-check-label" for="CREDIT">
-                            CREDIT
-                        </label>
-                    </div>
-                </section>
-                <section class="container-color">
-                    <h2>Cards color</h2>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioColor" id="GOLD" value="GOLD"
-                            v-model="cardsColor">
-                        <label class="form-check-label" for="GOLD">
-                            GOLD
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioColor" id="SILVER"
-                            v-model="cardsColor" value="SILVER">
-                        <label class="form-check-label" for="SILVER">
-                            SILVER
-                        </label>
-                    </div>
-                    <div class="form-check">
-                        <input class="form-check-input" type="radio" name="flexRadioColor" id="TITANIUM"
-                            v-model="cardsColor" value="TITANIUM">
-                        <label class="form-check-label" for="TITANIUM">
-                            TITANIUM
-                        </label>
-                    </div>
-                </section>
+        <div class="container-create">
+            <section class="d-flex flex-column align-items-center container-crete-cards">
+                <h1 class="mb-5">Select type of card</h1>
+                <div class="container-type-color">
+                    <section class="container-type">
+                        <h2 class="mb-2 w-100">Cards type</h2>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioType" id="DEBIT" value="DEBIT"
+                                v-model="cardsType">
+                            <label class="form-check-label" for="DEBIT">
+                                DEBIT
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioType" id="CREDIT" value="CREDIT"
+                                v-model="cardsType">
+                            <label class="form-check-label" for="CREDIT">
+                                CREDIT
+                            </label>
+                        </div>
+                    </section>
+                    <section class="container-color">
+                        <h2 class="w-100">Cards color</h2>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioColor" id="GOLD" value="GOLD"
+                                v-model="cardsColor">
+                            <label class="form-check-label" for="GOLD">
+                                GOLD
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioColor" id="SILVER"
+                                v-model="cardsColor" value="SILVER">
+                            <label class="form-check-label" for="SILVER">
+                                SILVER
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="radio" name="flexRadioColor" id="TITANIUM"
+                                v-model="cardsColor" value="TITANIUM">
+                            <label class="form-check-label" for="TITANIUM">
+                                TITANIUM
+                            </label>
+                        </div>
+                    </section>
+                </div>
                 <button type="submit" @click="addCard" class="btn-create-acc">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                         stroke="currentColor" aria-hidden="true">
@@ -126,8 +128,8 @@
                     </svg>
                     Create card
                 </button>
-            </div>
-        </section>
+            </section>
+        </div>
     </main>
     <footer>
         <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">

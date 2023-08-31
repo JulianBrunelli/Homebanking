@@ -20,7 +20,7 @@ body {
 
 main {
     width: 100%;
-    min-height: 130vh;
+    min-height: 80vh;
 }
 
 .redirect-home:hover {
@@ -527,22 +527,38 @@ footer {
 /* FOOTER */
 
 /* CREATE CARDS */
-.container-crete-cards {
+
+.container-create {
     width: 100%;
-    min-height: 100vh;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.container-crete-cards {
+    width: 70%;
+    min-height: 80vh;
 }
 
 .container-type-color {
     width: 100%;
     height: 100%;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    flex-direction: column;
     gap: 3rem;
+    padding: 3rem;
+    background-color: #969696;
+    border-radius: 10px;
+    color: white;
 }
 
 .container-type {
+    width: 12rem;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -550,9 +566,12 @@ footer {
     border: 1px solid black;
     border-radius: 14px;
     gap: 8px;
+    background-color: var(--primary-color);
 }
 
 .container-color {
+    width: 12rem;
+    height: 30vh;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -560,10 +579,11 @@ footer {
     border: 1px solid black;
     border-radius: 14px;
     gap: 8px;
+    background-color: var(--primary-color);
 }
 
 .form-check-label {
-    font-weight: 600;
+    font-weight: 400;
     cursor: pointer;
 }
 
@@ -573,7 +593,7 @@ footer {
 
 .form-check-input:hover {
     border: 1px solid var(--background);
-    background-color: var(--primary-color);
+    background-color: rgb(17, 157, 212);
 }
 
 .form-control,
@@ -586,6 +606,8 @@ footer {
 /* container-button-create */
 
 .btn-create-acc {
+    margin-top: 2rem;
+    margin-bottom: 4rem;
     border: none;
     display: flex;
     padding: 0.75rem 1.5rem;
@@ -716,7 +738,7 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 3rem;
+    margin-top: 2rem;
 }
 
 /* container-button-create */
@@ -807,6 +829,14 @@ h2>i {
         display: flex;
         flex-direction: row;
     }
+
+    .container-crete-cards {
+        min-height: 70vh;
+    }
+
+    .container-type-color {
+        flex-direction: row;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -860,5 +890,14 @@ h2>i {
 
     .container-img-transfer img {
         height: 34rem;
+    }
+
+    .container-crete-cards {
+        min-height: 70vh;
+    }
+
+    .container-type-color {
+        flex-direction: row;
+        justify-content: space-around;
     }
 }

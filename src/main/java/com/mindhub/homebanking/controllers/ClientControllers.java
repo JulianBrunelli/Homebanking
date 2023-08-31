@@ -37,14 +37,15 @@ public class ClientControllers {
     public ResponseEntity<Object> register(
             @RequestParam String firstName, @RequestParam String lastName,
             @RequestParam String email, @RequestParam String password) {
+
         if (firstName.isBlank()) {
             return new ResponseEntity<>("Please provide a first name", HttpStatus.FORBIDDEN);
         }
         if(lastName.isBlank()){
             return new ResponseEntity<>("Please provide a last name", HttpStatus.FORBIDDEN);
         }
-        if(email.isBlank()){
-            return new ResponseEntity<>("Please provide a email", HttpStatus.FORBIDDEN);
+        if(email.isBlank() || !email.contains("@") || !email.contains(".com")){
+            return new ResponseEntity<>("Please enter an email containing an @ and .com", HttpStatus.FORBIDDEN);
         }
         if(password.isBlank()){
             return new ResponseEntity<>("Please provide a password", HttpStatus.FORBIDDEN);

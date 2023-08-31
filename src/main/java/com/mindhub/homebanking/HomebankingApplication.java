@@ -16,14 +16,14 @@ import java.util.List;
 @SpringBootApplication
 public class HomebankingApplication {
 	@Autowired
-	PasswordEncoder passwordEncoder;
-	LocalDate localDate = LocalDate.now();
-	LocalDate localDateExpires = LocalDate.now().plusYears(5);
-	LocalDate localDateOneDay = LocalDate.now().plusDays(1);
-	LocalDateTime localDateTime = LocalDateTime.now();
-	List<Integer> mortgageLoan = List.of(12,24,36,48,60);
-	List<Integer> carLoan = List.of(6,12,24,36);
-	List<Integer> personalLoan = List.of(6,12,24);
+	private PasswordEncoder passwordEncoder;
+	private LocalDate localDate = LocalDate.now();
+	private LocalDate localDateExpires = LocalDate.now().plusYears(5);
+	private LocalDate localDateOneDay = LocalDate.now().plusDays(1);
+	private LocalDateTime localDateTime = LocalDateTime.now();
+	private List<Integer> mortgageLoan = List.of(12,24,36,48,60);
+	private List<Integer> carLoan = List.of(6,12,24,36);
+	private List<Integer> personalLoan = List.of(6,12,24);
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class);
@@ -94,8 +94,8 @@ public class HomebankingApplication {
 
 			Client chloeOBrian = new Client("Chloe", "O'Brian","chloeobrian@gmail.com",passwordEncoder.encode("Hola2341"));
 
-			Account thirdAccount = new Account("VIN003", this.localDate, 8000);
-			Account fourthAccount = new Account("VIN004", this.localDateOneDay, 10000);
+			Account thirdAccount = new Account("VIN-003", this.localDate, 8000);
+			Account fourthAccount = new Account("VIN-004", this.localDateOneDay, 10000);
 
 			Transaction thirdTransaction = new Transaction(5000, "Supplies",this.localDateTime, TransactionType.CREDIT);
 			Transaction fourthTransaction = new Transaction(-10000, "Supplies",this.localDateTime, TransactionType.DEBIT);

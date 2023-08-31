@@ -34,19 +34,27 @@ public class CardControllers {
 
 
     @PostMapping( path = "/clients/current/cards")
-    public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam CardType type, @RequestParam CardColor color) {
+    public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam String type, @RequestParam String color) {
 
         Client client = clientRepository.findByEmail(authentication.getName());
         String cardHolder = client.getFirstName() + " " + client.getLastName();
 
-        List<Card> cardsType = client.getCards().stream().filter(card -> card.getType() == type).collect(toList());
-        List<Card> cardsColor = cardsType.stream().filter(card -> card.getColor() == color).collect(toList());
+        List<Card> cardsType = client.getCards().stream().filter(card -> card.getType().equals(CardType.valueOf(type))).collect(toList());
+        List<Card> cardsColor = cardsType.stream().filter(card -> card.getColor().equals(CardColor.valueOf(color))).collect(toList());
 
-        if ( type == null || color == null) {
-            return new ResponseEntity<>("Missing data", HttpStatus.FORBIDDEN);
+        if (type.isBlank() || color.isBlank()) {
+            return new ResponseEntity<>("Please select values", HttpStatus.FORBIDDEN);
         }
 
-        if (cardsType.size() >=3){
+        if (!type.equals("DEBIT") && !type.equals("CREDIT")) {
+            return new ResponseEntity<>("Please select an valid type", HttpStatus.FORBIDDEN);
+        }
+
+        if (!color.equals("GOLD") && !color.equals("SILVER") && !color.equals("TITANIUM")) {
+            return new ResponseEntity<>("Please select an valid color", HttpStatus.FORBIDDEN);
+        }
+
+        if (cardsType.size() >= 3){
             return new ResponseEntity<>("Failed to create card because the maximum number of cards is 3 for type", HttpStatus.FORBIDDEN);
         }
 
@@ -64,11 +72,9 @@ public class CardControllers {
 
         int cvv;
         do {
-            cvv = (int) (Math.random()*10 + 99);
+            cvv = (int) (Math.random()*100 + 99);
         }while (cardRepository.findByCvv(cvv)!=null);
-        System.out.println(type);
-        System.out.println(color);
-        Card card = new Card( cardHolder,type,color,randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
+        Card card = new Card( cardHolder,CardType.valueOf(type),CardColor.valueOf(color),randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
         client.addCard(card);
         cardRepository.save(card);
 

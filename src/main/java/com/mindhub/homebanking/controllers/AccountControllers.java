@@ -44,7 +44,6 @@ public class AccountControllers {
         } else {
             return new ResponseEntity<>("Account not found", HttpStatus.FORBIDDEN);
         }
-
     }
 
     @PostMapping( path = "/clients/current/accounts")

@@ -749,11 +749,11 @@ th {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2rem;
+        gap: 1rem;
     }
 
     .container-navbar a {
-        width: 10vw;
+        width: 14vw;
         text-align: center;
         font-size: 1rem;
         font-weight: 500;
@@ -791,11 +791,11 @@ th {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2rem;
+        gap: 1rem;
     }
 
     .container-navbar a {
-        width: 10vw;
+        width: 13vw;
         text-align: center;
         font-size: 1.2rem;
         font-weight: 500;

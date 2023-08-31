@@ -40,15 +40,14 @@ public class TransactionController {
         Account originAccount = client.getAccounts().stream().filter(account -> account.getNumber().equals(originAccountNumber)).findFirst().orElse(null);
         Account destinationAccount = accountRepository.findByNumber(destinationAccountNumber);
 
-
-        if (originAccount.getNumber() == destinationAccount.getNumber()){
-            return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
-        }
         if(originAccount == null){
             return new ResponseEntity<>("Origin account not found", HttpStatus.FORBIDDEN);
         }
         if(destinationAccount == null){
             return new ResponseEntity<>("Destination account not found", HttpStatus.FORBIDDEN);
+        }
+        if (originAccount.getNumber() == destinationAccount.getNumber()){
+            return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
         }
         if(amount <= 0){
             return new ResponseEntity<>("Amount must be greater than 0", HttpStatus.FORBIDDEN);
@@ -64,7 +63,7 @@ public class TransactionController {
         } else {
             originAccount.setBalance(originAccount.getBalance() - amount);
             destinationAccount.setBalance(destinationAccount.getBalance() + amount);
-            Transaction transactionDebit = new Transaction(amount, description, LocalDateTime.now(), TransactionType.DEBIT);
+            Transaction transactionDebit = new Transaction(amount * - 1, description, LocalDateTime.now(), TransactionType.DEBIT);
             Transaction transactionCredit = new Transaction(amount, description, LocalDateTime.now(), TransactionType.CREDIT);
             originAccount.addTransaction(transactionDebit);
             destinationAccount.addTransaction(transactionCredit);

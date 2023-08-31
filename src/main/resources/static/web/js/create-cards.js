@@ -24,13 +24,14 @@ createApp({
                                 Swal.fire('Saved!', '', 'success')
                                     .then(response => {
                                         location.href = '../pages/cards.html'
-                                    }).catch(error => {
-                                        Swal.fire({
-                                            icon: 'error',
-                                            title: 'Oops...',
-                                            text: error.response.data,
-                                        })
                                     })
+                            })
+                            .catch((error) => {
+                                Swal.fire({
+                                    icon: 'error',
+                                    title: 'Oops...',
+                                    text: error.response.data,
+                                })
                             })
                     } else {
                         Swal.fire('Changes are not saved', '', 'info')

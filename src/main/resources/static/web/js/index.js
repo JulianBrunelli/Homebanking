@@ -17,7 +17,11 @@ createApp({
             if (this.email && this.password) {
                 this.logIn()
             } else {
-                alert("Please fill in the fields")
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Be sure to fill in the fields correctly',
+                })
             }
         },
         logIn() {
@@ -30,7 +34,13 @@ createApp({
                         location.href = "./accounts.html"
                     }
                 })
-                .catch((error) => alert("The password or username is incorrect"));
+                .catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: 'The password or username is incorrect',
+                    })
+                })
         },
         signOut() {
             axios.post('/api/logout')
@@ -44,7 +54,15 @@ createApp({
             if (this.firstName && this.lastName && this.email && this.password) {
                 this.addClient()
             } else {
-                alert("Please fill in the fields")
+                if (this.firstName == "") {
+                    alert("Please provide a first name")
+                }
+                if (this.lastName == "") {
+                    alert("Please provide a last name")
+                }
+                if (this.password == "") {
+                    alert("Please provide a password")
+                }
             }
         },
         addClient() {
@@ -53,7 +71,7 @@ createApp({
                 .then(response => {
                     this.logIn()
                 })
-                .catch((error) => console.error(error.message));
+                .catch((error) => alert(error.response.data));
         },
     },
 }).mount("#app");

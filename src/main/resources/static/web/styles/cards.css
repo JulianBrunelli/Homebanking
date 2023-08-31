@@ -5,6 +5,7 @@
     --front-color: #4f29f0;
     --back-color: #c3c8de;
     --text-color: #414856;
+    --font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
 }
 
 [v-cloak] {
@@ -19,7 +20,7 @@ body {
 
 main {
     width: 100%;
-    min-height: 90vh;
+    min-height: 130vh;
 }
 
 .redirect-home:hover {
@@ -362,6 +363,7 @@ h4 {
     background-color: #d4b503;
     color: black;
     filter: brightness(1.1);
+    font-family: var(--font-family);
     background-image: url(../images/buho-removebg-preview.png);
 
 }
@@ -370,12 +372,14 @@ h4 {
 .backSilver {
     background-color: rgb(158, 157, 157);
     filter: brightness(1.1);
+    font-family: var(--font-family);
     color: black;
 }
 
 .frontTitanium,
 .backTitanium {
     background-color: rgb(39, 38, 38);
+    font-family: var(--font-family);
 }
 
 
@@ -560,6 +564,7 @@ footer {
 
 .form-check-label {
     font-weight: 600;
+    cursor: pointer;
 }
 
 .form-check-input {
@@ -569,6 +574,11 @@ footer {
 .form-check-input:hover {
     border: 1px solid var(--background);
     background-color: var(--primary-color);
+}
+
+.form-control,
+.form-check-input {
+    cursor: pointer;
 }
 
 /* CREATE CARDS */
@@ -701,8 +711,65 @@ footer {
     color: #fff;
 }
 
+.container-btn-transfer {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 3rem;
+}
+
 /* container-button-create */
 
+/* TRANSFER */
+
+.container-transfer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.container-form-transfer {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    background-color: #b4b4b4;
+    gap: 2rem;
+    border-radius: 15px;
+}
+
+.container-radio-transfer {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+}
+
+.form-control {
+    border-radius: 8px !important;
+}
+
+h2>i {
+    font-size: 23px;
+}
+
+.container-img-transfer {
+    width: 80%;
+    display: flex;
+    align-items: center;
+}
+
+.container-img-transfer img {
+    width: 100%;
+    border-radius: 10px;
+}
+
+.label-transfer {
+    font-size: 1.5rem;
+}
+
+/* TRANSFER */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
 
     header img {
@@ -721,11 +788,11 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2rem;
+        gap: 1rem;
     }
 
     .container-navbar a {
-        width: 10vw;
+        width: 14vw;
         text-align: center;
         font-size: 1rem;
         font-weight: 500;
@@ -734,6 +801,11 @@ footer {
     .container-navbar button {
         padding: 8px;
         margin-left: 1rem;
+    }
+
+    .container-radio-transfer {
+        display: flex;
+        flex-direction: row;
     }
 }
 
@@ -749,11 +821,11 @@ footer {
         display: flex;
         align-items: center;
         justify-content: center;
-        gap: 2rem;
+        gap: 1rem;
     }
 
     .container-navbar a {
-        width: 10vw;
+        width: 13vw;
         text-align: center;
         font-size: 1.2rem;
         font-weight: 500;
@@ -764,5 +836,29 @@ footer {
         margin-left: 1rem;
     }
 
+    .container-radio-transfer {
+        display: flex;
+        flex-direction: row;
+    }
 
+    .container-transfer {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: space-around;
+        align-items: center;
+    }
+
+    .container-form-transfer {
+        width: 40%;
+        height: 34rem;
+    }
+
+    .container-img-transfer {
+        width: 40%;
+    }
+
+    .container-img-transfer img {
+        height: 34rem;
+    }
 }

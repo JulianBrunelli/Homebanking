@@ -97,9 +97,9 @@
                     <div class="input-group mb-1 d-flex flex-column align-items-center">
                         <label class="label-transfer" for="source">Soruce account</label>
                         <select name="source" id="source" v-model="originAccount" class="form-select form-control w-75">
-                            <option value="" disabled>select an account</option>
+                            <option class="option-transfer" value="" disabled>select an account</option>
                             <template v-for="account of sourceAccount">
-                                <option :value="account.number">{{account.number}} &#160 $
+                                <option class="option-transfer" :value="account.number">{{account.number}} &#160 $
                                     {{account.balance}}</option>
                             </template>
                         </select>
@@ -116,9 +116,9 @@
                             <label class="label-transfer" for="own">Destination account</label>
                             <select name="own" id="own" v-model="destinationAccount"
                                 class="form-select form-control w-75">
-                                <option value="" disabled>select an account</option>
+                                <option class="option-transfer" value="" disabled>select an account</option>
                                 <template v-for="account of sourceAccount">
-                                    <option :value="account.number">{{account.number}}</option>
+                                    <option class="option-transfer" :value="account.number">{{account.number}}</option>
                                 </template>
                             </select>
                         </div>

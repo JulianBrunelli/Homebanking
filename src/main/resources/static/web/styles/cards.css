@@ -791,6 +791,10 @@ h2>i {
     font-size: 1.5rem;
 }
 
+.option-transfer {
+    width: 1rem;
+}
+
 /* TRANSFER */
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
 

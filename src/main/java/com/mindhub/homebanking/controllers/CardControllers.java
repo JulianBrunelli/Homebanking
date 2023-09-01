@@ -64,16 +64,14 @@ public class CardControllers {
 
         String randomNumberCard;
         do {
-            randomNumberCard =  (int) (Math.random()*400 + 999)
-                        + "-" + (int) (Math.random()*400 + 999)
-                        + "-" + (int) (Math.random()*400 + 999)
-                        + "-" + (int) (Math.random()*400 + 999);
+            randomNumberCard =  (int) (Math.random()*(400 + 999))
+                        + "-" + (int) (Math.random()*(400 + 999))
+                        + "-" + (int) (Math.random()*(400 + 999))
+                        + "-" + (int) (Math.random()*(400 + 999));
         }while (cardRepository.findByNumber(randomNumberCard)!=null);
 
-        int cvv;
-        do {
-            cvv = (int) (Math.random()*100 + 99);
-        }while (cardRepository.findByCvv(cvv)!=null);
+        int cvv = (int) (Math.random()*(100 + 999));
+
         Card card = new Card( cardHolder,CardType.valueOf(type),CardColor.valueOf(color),randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
         client.addCard(card);
         cardRepository.save(card);

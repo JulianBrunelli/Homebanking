@@ -26,7 +26,7 @@ public class AccountControllers {
     private String randomNumber(){
         String random;
         do {
-            int number = (int) (Math.random()*1000 + 9999);
+            int number = (int) (Math.random()*(10000000 + 99999999));
             random = "VIN-" + number;
         }while (accountRepository.findByNumber(random)!=null);
         return random;

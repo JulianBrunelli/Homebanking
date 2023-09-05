@@ -22,6 +22,7 @@ public class ClientLoan {
 
     public ClientLoan() {
     }
+
     public ClientLoan(double amount, Integer payments) {
         this.amount = amount;
         this.payments = payments;
@@ -30,12 +31,15 @@ public class ClientLoan {
     public long getId() {
         return id;
     }
+
     public Client getClient() {
         return client;
     }
+
     public void setClient(Client client) {
         this.client = client;
     }
+
     public Loan getLoan() {
         return loan;
     }
@@ -59,4 +63,5 @@ public class ClientLoan {
     public void setPayments(Integer payments) {
         this.payments = payments;
     }
+
 }

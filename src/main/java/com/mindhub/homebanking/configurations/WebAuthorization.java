@@ -23,8 +23,8 @@ public class WebAuthorization {
                 .antMatchers("/web/pages/index.html","/web/styles/**","/web/js/**","/web/images/**").permitAll()
                 .antMatchers("/admin/**","/rest/**","/h2-console/**","/api/clients").hasAuthority("ADMIN")
                 .antMatchers("/web/**").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.GET,"/api/clients/current/**","/api/clients/accounts/{id}","/api/clients/cards/{id}").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards", "/api/transactions").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET,"/api/clients/current/**","/api/clients/accounts/{id}","/api/clients/cards/{id}","/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards","/api/transactions","/api/loans").hasAuthority("CLIENT")
                 .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")

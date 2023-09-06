@@ -4,6 +4,7 @@ createApp({
     data() {
         return {
             accounts: [],
+            accountBalance: "",
             transactions: [],
             loader: true,
             date: "",
@@ -21,6 +22,8 @@ createApp({
             axios.get(`/api/clients/accounts/${idParams}`)
                 .then(response => {
                     this.accounts = response.data
+                    this.accountBalance = this.accounts.balance.toLocaleString()
+                    console.log(this.accountBalance);
                     this.transactions = this.accounts.transactions.sort((a, b) => b.id - a.id)
                     this.date = this.transactions.map(transaction => transaction.date.slice(0, 10).replace(/-/g, '/'))
                     this.time = this.transactions.map(transiction => transiction.date.slice(14, -7))

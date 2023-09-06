@@ -106,7 +106,7 @@
                             <div class="card-overlay"></div>
                             <div class="card-inner">
                                 <p>Account number <br> <span class="ms-2">{{account.number}}</span></p>
-                                <p>Mount <br> <span class="ms-2 ">${{account.balance}}</span></p>
+                                <p>Mount <br> <span class="ms-2">${{account.balance.toLocaleString()}}</span></p>
                                 <p>Creation date <br>{{account.creationDate.replace(/-/g, '/')}}</p>
                             </div>
                         </div>
@@ -169,6 +169,14 @@
             <template v-else>
                 <h2>You currently have no loans</h2>
             </template>
+            <a href="./loan-application.html">
+                <button class="learn-more">
+                    <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Create loan</span>
+                </button>
+            </a>
         </section>
         <div class="container-accounts-phone d-flex flex-column align-items-center flex-lg-row gap-4">
             <section class="container-accounts-text">

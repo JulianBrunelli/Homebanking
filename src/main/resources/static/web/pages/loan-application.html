@@ -13,8 +13,8 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-4bw+/aepP/YC94hEpVNVgiZdgIC5+VKNBQNGCHeKRQN+PtmoHDEXuppvnDJzQIu9" crossorigin="anonymous">
     <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/accounts.css">
-    <title>BNI | Account</title>
+    <link rel="stylesheet" href="../styles/cards.css">
+    <title>BNI | Cards</title>
 </head>
 
 <body id="app" v-cloak>
@@ -39,7 +39,7 @@
             <!-- class="redirect-home" -->
             <img src="../images/bank.icon.png" alt="bni.icon">
         </a>
-        <h1 class="text-light d-md-none">Account</h1>
+        <h1 class="text-light d-md-none">Cards</h1>
         <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
             <div class="container-fluid">
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -72,47 +72,74 @@
             </div>
         </nav>
     </header>
-    <main>
-        <h1 class="text-center d-none d-md-block mt-5">Account</h1>
-        <div class="cards-container-accounts d-flex flex-column justify-content-center align-items-center">
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <div class="card">
-                    <div class="card-overlay"></div>
-                    <div class="card-inner">
-                        <p>Account number <br> <span class="ms-2">{{accounts.number}}</span></p>
-                        <p>Mount <br> <span class="ms-2 ">{{accountBalance}}</span></p>
-                        <p>Creation date <br>{{accounts.creationDate}}</p>
+    <main class="mt-5">
+        <section class="w-100">
+            <h1 class="mb-5 mt-5 text-center">Make your loans</h1>
+            <div class="container-transfer">
+                <div class="container-form-transfer">
+                    <div class="input-group mb-1 d-flex flex-column align-items-center">
+                        <label class="label-transfer" for="loan">Loan</label>
+                        <select name="loan" id="loan" v-model="selectLoan" class="form-select form-control w-75">
+                            <option class="option-transfer" value="" disabled>select loan</option>
+                            <template v-for="loan of loans">
+                                <option class="option-transfer" :value="loan">
+                                    {{loan.name}}
+                                </option>
+                            </template>
+                        </select>
+                    </div>
+                    <div class="input-group mb-1 d-flex flex-column align-items-center">
+                        <label class="label-transfer" for="source">Soruce account</label>
+                        <select name="source" id="source" v-model="selectOriginAccount"
+                            class="form-select form-control w-75">
+                            <option class="option-transfer" value="" disabled>select an account</option>
+                            <template v-for="originAccount of originAccounts">
+                                <option class="option-transfer" :value="originAccount.number">
+                                    {{originAccount.number}}
+                                </option>
+                            </template>
+                        </select>
+                    </div>
+                    <div class="input-group mb-1 d-flex flex-column align-items-center">
+                        <label class="label-transfer" for="payments">Payments available</label>
+                        <select name="payments" id="payments" v-model="selectPayment"
+                            class="form-select form-control w-75">
+                            <option class="option-transfer" value="" disabled>select an payment</option>
+                            <template v-for="payment of selectLoan.payments">
+                                <option class="option-transfer" :value="payment">
+                                    {{payment}}
+                                </option>
+                            </template>
+                        </select>
+                    </div>
+                    <div class="input-group mb-1 d-flex flex-column align-items-center">
+                        <label class="label-transfer" for="amount"><i class="bi bi-currency-dollar"></i>Amount</label>
+                        <input type="number" name="amount" id="amount" v-model="amount" @input="porcent"
+                            class="form-control w-75" aria-label="Dollar amount (with dot and two decimal places)">
+                    </div>
+                    <div class="input-group mb-4 d-flex flex-column align-items-center">
+                        <label class="label-transfer" for="description"> <i class="bi bi-caret-right-fill"></i> Final
+                            amount <i class="bi bi-caret-left-fill"></i></label>
+                        <input type="text" v-model="finalAmount" name="description" id="description"
+                            class="form-control w-75 pe-none" disabled>
                     </div>
                 </div>
+                <div class="container-img-transfer d-none d-xl-block">
+                    <img src="../images/panas.jpg" alt="two-people-shaking-hands">
+                </div>
             </div>
-            <div data-aos="zoom-out-up" v-if="transactions.length > 0" class="table-container">
-                <table class="table-details">
-                    <thead>
-                        <tr>
-                            <th scope="col">Type</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-for="(transaction, index) of transactions">
-                            <tr>
-                                <td
-                                    :class="transaction.type == 'DEBIT' ? 'text-danger fw-bold' : 'text-success fw-bold'">
-                                    {{transaction.type}}</td>
-                                <td>{{transaction.amount.toLocaleString()}}</td>
-                                <td>{{date[index]}} {{time[index]}}</td>
-                                <td>{{transaction.description}}</td>
-                            </tr>
-                        </template>
-                    </tbody>
-                </table>
+            <div class="container-btn-transfer">
+                <button type="submit" @click="addLoan" class="btn-create-acc btn-create-transfer">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                        stroke="currentColor" aria-hidden="true">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z">
+                        </path>
+                    </svg>
+                    Create transfer
+                </button>
             </div>
-            <template v-else>
-                <h2>Not Transactions</h2>
-            </template>
-        </div>
+        </section>
     </main>
     <footer>
         <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
@@ -144,7 +171,7 @@
     <script>
         AOS.init();
     </script>
-    <script src="../js/account.js"></script>
+    <script src="../js/loan-application.js"></script>
 </body>
 
 </html>

@@ -4,9 +4,7 @@ import com.mindhub.homebanking.dtos.LoanApplicationDTO;
 import com.mindhub.homebanking.dtos.LoanDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.repositories.TransactionRepository;
-import com.mindhub.homebanking.service.AccountService;
-import com.mindhub.homebanking.service.ClientService;
-import com.mindhub.homebanking.service.LoanService;
+import com.mindhub.homebanking.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -28,7 +25,9 @@ public class LoanControllers {
     @Autowired
     private AccountService accountService;
     @Autowired
-    private TransactionRepository transactionRepository;
+    private TransactionService transactionService;
+    @Autowired
+    private ClientLoanService clientLoanService;
 
     @GetMapping("/loans")
     public List<LoanDTO> getLoansDTO() {
@@ -38,47 +37,61 @@ public class LoanControllers {
     @PostMapping("/loans")
     public ResponseEntity<Object> createLoan(@RequestBody LoanApplicationDTO loanAppDTO, Authentication authentication) {
 
-        Client clientAuth = clientService.findByEmail(authentication.getName());
+        String userName = authentication.getName();
+        Client clientAuth = clientService.findByEmail(userName);
 
         if (clientAuth == null) {
             return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
         }
 
-        LoanDTO loan = loanService.findById(loanAppDTO.getId());
+        Loan loan = loanService.findById(loanAppDTO.getId());
 
         if (loan == null) {
             return new ResponseEntity<>("Loan not found", HttpStatus.FORBIDDEN);
         }
-        if (loanAppDTO.getNumberAccountDestination().isBlank()) {
-            return new ResponseEntity<>("Account destination not found", HttpStatus.FORBIDDEN);
-        }
-        if (loanAppDTO.getNumberAccountDestination() == null) {
-            return new ResponseEntity<>("Account destination not found", HttpStatus.FORBIDDEN);
-        }
-
-        Account accountAuth = accountService.findByNumber(loanAppDTO.getNumberAccountDestination());
-
-        if (clientAuth.getAccounts().contains(accountAuth)) {
-            return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
-        }
-        if (loanAppDTO.getAmount() <= 0) {
+        if(loanAppDTO.getAmount() <= 0){
             return new ResponseEntity<>("Amount must be greater than 0", HttpStatus.FORBIDDEN);
         }
-        if (loanAppDTO.getPayments() == null || loanAppDTO.getPayments().size() <= 0) {
+        if (loanAppDTO.getPayments() == null){
             return new ResponseEntity<>("Submit a description", HttpStatus.FORBIDDEN);
         }
         if(loanAppDTO.getAmount() > loan.getMaxAmount()){
             return new ResponseEntity<>("Amount must be less than or equal to " + loan.getMaxAmount(), HttpStatus.FORBIDDEN);
         }
-        if (!loanAppDTO.getPayments().containsAll(loanAppDTO.getPayments())) {
+        if (!loan.getPayments().contains(loanAppDTO.getPayments())) {
             return new ResponseEntity<>("Submit a description", HttpStatus.FORBIDDEN);
         }
 
-        double totalAmount = loanAppDTO.getAmount() * 0.2;
-        Loan newLoan = new Loan(loan.getName(), totalAmount, loanAppDTO.getPayments());
-        Transaction newTransaction = new Transaction(loanAppDTO.getAmount(), "", LocalDateTime.now(), TransactionType.CREDIT);
-        accountAuth.addTransaction(newTransaction);
-        transactionRepository.save(newTransaction);
-        return null;
+        Account account = accountService.findByNumber(loanAppDTO.getNumberAccountDestination());
+
+        if(loanAppDTO.getNumberAccountDestination().isBlank()){
+            return new ResponseEntity<>("Destination account not found", HttpStatus.FORBIDDEN);
+        }
+        if (account == null) {
+            return new ResponseEntity<>("Destination account not found", HttpStatus.FORBIDDEN);
+        }
+        if(!clientAuth.getAccounts().contains(account)){
+            return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
+        }
+
+        if (clientLoanService.existsByClientAndLoan(clientAuth, loan)) {
+            return new ResponseEntity<>("Loan already exists", HttpStatus.FORBIDDEN);
+        }
+
+        double totalAmount = loanAppDTO.getAmount() + (loanAppDTO.getAmount() * 0.2);
+        ClientLoan clientLoan = new ClientLoan(totalAmount, loanAppDTO.getPayments());
+
+        account.setBalance(account.getBalance() + loanAppDTO.getAmount());
+        clientLoan.setClient(clientAuth);
+        clientLoan.setLoan(loan);
+        clientLoanService.save(clientLoan);
+
+        Transaction newTransaction = new Transaction(loanAppDTO.getAmount(), loan.getName(), LocalDateTime.now(), TransactionType.CREDIT);
+
+        transactionService.save(newTransaction);
+        accountService.saveAccount(account);
+        account.addTransaction(newTransaction);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 }

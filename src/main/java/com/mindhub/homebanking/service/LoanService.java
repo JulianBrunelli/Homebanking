@@ -8,7 +8,7 @@ import java.util.Optional;
 
 public interface LoanService {
     List<LoanDTO> getLoansDTO();
-    LoanDTO findById(long id);
+    Loan findById(long id);
+    void save(Loan newLoan);
 
-    void saveLoan(Loan newLoan);
 }

@@ -57,7 +57,7 @@ public class ClientControllers {
         }
 
         Client newClient = new Client(firstName, lastName,email.toLowerCase(), passwordEncoder.encode(password));
-        clientService.addClient(newClient);
+        clientService.save(newClient);
         String number = randomNumber();
         Account account = new Account(number, LocalDate.now(),0.0);
         newClient.addAccount(account);

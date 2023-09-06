@@ -23,12 +23,12 @@ public class LoanServiceImplement implements LoanService {
     }
 
     @Override
-    public LoanDTO findById(long id) {
-        return new LoanDTO(loanRepository.findById(id).orElse(null));
+    public Loan findById(long id) {
+        return loanRepository.findById(id).orElse(null);
     }
 
     @Override
-    public void saveLoan(Loan newLoan) {
+    public void save(Loan newLoan) {
         loanRepository.save(newLoan);
     }
 

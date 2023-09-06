@@ -8,7 +8,7 @@ import java.util.List;
 
 public interface ClientService {
 
-    void addClient(Client client);
+    void save(Client client);
 
     Client findByEmail(String email);
 
@@ -17,4 +17,5 @@ public interface ClientService {
     List<ClientDTO> getClientsDTO();
 
     ClientDTO findById(long id);
+
 }

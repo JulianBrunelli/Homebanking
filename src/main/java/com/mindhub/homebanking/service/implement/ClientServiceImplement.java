@@ -18,7 +18,7 @@ public class ClientServiceImplement implements ClientService {
     private ClientRepository clientRepository;
 
     @Override
-    public void addClient(Client client) {
+    public void save(Client client) {
         clientRepository.save(client);
     }
 
@@ -41,6 +41,7 @@ public class ClientServiceImplement implements ClientService {
     public ClientDTO findById(long id) {
         return new ClientDTO(clientRepository.findById(id).orElse(null));
     }
+
 
 
 }

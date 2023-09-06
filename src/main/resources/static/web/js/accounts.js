@@ -51,6 +51,6 @@ createApp({
                         Swal.fire('Your account was not saved', '', 'info')
                     }
                 })
-        }
+        },
     },
 }).mount("#app");

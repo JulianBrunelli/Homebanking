@@ -30,5 +30,4 @@ public class AccountServiceImplement implements AccountService {
     public List<AccountDTO> getAccountsDTO() {
         return accountRepository.findAll().stream().map(account -> new AccountDTO(account)).collect(toList());
     }
-
 }

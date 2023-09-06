@@ -50,34 +50,32 @@ public class LoanControllers {
             return new ResponseEntity<>("Loan not found", HttpStatus.FORBIDDEN);
         }
         if(loanAppDTO.getAmount() <= 0){
-            return new ResponseEntity<>("Amount must be greater than 0", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("You cannot enter an amount less than or equal to 0", HttpStatus.FORBIDDEN);
         }
-        if (loanAppDTO.getPayments() == null){
-            return new ResponseEntity<>("Submit a description", HttpStatus.FORBIDDEN);
+        if (loanAppDTO.getPayments() == null) {
+            return new ResponseEntity<>("The selected quota is not valid", HttpStatus.FORBIDDEN);
         }
         if(loanAppDTO.getAmount() > loan.getMaxAmount()){
             return new ResponseEntity<>("Amount must be less than or equal to " + loan.getMaxAmount(), HttpStatus.FORBIDDEN);
         }
         if (!loan.getPayments().contains(loanAppDTO.getPayments())) {
-            return new ResponseEntity<>("Submit a description", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("You cannot have two loans of the same type", HttpStatus.FORBIDDEN);
         }
 
         Account account = accountService.findByNumber(loanAppDTO.getNumberAccountDestination());
 
         if(loanAppDTO.getNumberAccountDestination().isBlank()){
-            return new ResponseEntity<>("Destination account not found", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Please enter an account number", HttpStatus.FORBIDDEN);
         }
         if (account == null) {
-            return new ResponseEntity<>("Destination account not found", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("No similar account was found in our records.", HttpStatus.FORBIDDEN);
         }
         if(!clientAuth.getAccounts().contains(account)){
-            return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("The provided account does not belong to the authenticated client", HttpStatus.FORBIDDEN);
         }
-
         if (clientLoanService.existsByClientAndLoan(clientAuth, loan)) {
-            return new ResponseEntity<>("Loan already exists", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("You cannot have two loans of the same type", HttpStatus.FORBIDDEN);
         }
-
         double totalAmount = loanAppDTO.getAmount() + (loanAppDTO.getAmount() * 0.2);
         ClientLoan clientLoan = new ClientLoan(totalAmount, loanAppDTO.getPayments());
 

@@ -41,8 +41,11 @@ public class CardControllers {
         Client client = clientService.findByEmail(authentication.getName());
         String cardHolder = client.getFirstName() + " " + client.getLastName();
 
-        if (type.isBlank() || color.isBlank()) {
-            return new ResponseEntity<>("Please select values", HttpStatus.FORBIDDEN);
+        if (type.isBlank()) {
+            return new ResponseEntity<>("Please select a type", HttpStatus.FORBIDDEN);
+        }
+        if(color.isBlank()){
+            return new ResponseEntity<>("Please select a color", HttpStatus.FORBIDDEN);
         }
         if (!type.equals("DEBIT") && !type.equals("CREDIT")) {
             return new ResponseEntity<>("Please select an valid type", HttpStatus.FORBIDDEN);
@@ -56,11 +59,11 @@ public class CardControllers {
 
 
         if (cardsType.size() >= 3){
-            return new ResponseEntity<>("Failed to create card because the maximum number of cards is 3 for type", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Failed to create card because you can only have 3 cards per type", HttpStatus.FORBIDDEN);
         }
 
         if (!cardsColor.isEmpty()){
-            return new ResponseEntity<>("Failed to create card because the maximum number is 1 color for type", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Could not create card because you can only have 1 color per type", HttpStatus.FORBIDDEN);
         }
 
         String randomNumberCard;

@@ -58,10 +58,10 @@ public class TransactionController {
             return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
         }
         if(amount <= 0){
-            return new ResponseEntity<>("Amount must be greater than 0", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Please enter an amount greater than 0", HttpStatus.FORBIDDEN);
         }
         if(description.isBlank()){
-            return new ResponseEntity<>("Submit a description", HttpStatus.FORBIDDEN);
+            return new ResponseEntity<>("Please enter a description", HttpStatus.FORBIDDEN);
         }
         if (originAccount.getBalance() < amount){
             return new ResponseEntity<>("Not enough money in the account", HttpStatus.FORBIDDEN);

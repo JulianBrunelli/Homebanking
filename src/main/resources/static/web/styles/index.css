@@ -1,5 +1,7 @@
 :root {
     --primary-color: #086E83;
+    --log-color: #0A4D68;
+    --btn-log: #0392a8;
     --second-color: #EEEDE7;
     --background: #62abff;
     --front-color: #4f29f0;
@@ -31,13 +33,9 @@ header {
     background-color: var(--primary-color);
     position: sticky;
     top: 0px;
-}
-
-header img {
-    height: 10vh;
-    margin-left: 1rem;
-    object-fit: cover;
-    transition: 1.5s;
+    background-image: url(../images/header-bank-nordic-blue.png);
+    background-size: 90%;
+    background-position: 50% 47%;
 }
 
 .title-main {
@@ -46,12 +44,40 @@ header img {
 
 }
 
-/* FORM */
-.img-bank {
+.container-main-landing {
     width: 100%;
-    object-fit: cover;
 }
 
+.svg-landing {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 2rem;
+}
+
+.svg-landing img {
+    width: 80%;
+    margin-bottom: 2rem;
+}
+
+.text-rgb {
+    font-size: 3rem;
+    font-weight: 600;
+    background: linear-gradient(rgb(20, 173, 211), rgb(6, 59, 202));
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
+.text-trusted-bank {
+    font-size: 2.3rem;
+    margin-bottom: 2rem;
+    font-weight: 500;
+}
+
+
+/* FORM */
 .container-landing-page {
     display: flex;
     flex-direction: column;
@@ -65,19 +91,15 @@ header img {
     height: 30rem;
     display: flex;
     justify-content: center;
-    margin-top: 3rem;
-    margin-bottom: 3rem;
+    margin-top: 7rem;
+    margin-bottom: 5rem;
 }
 
-.container-landing-page>img {
-    width: 100%;
-}
-
-.main {
+.main-login {
     position: relative;
     display: flex;
     flex-direction: column;
-    background-color: var(--primary-color);
+    background-color: var(--log-color);
     width: 23rem;
     max-height: 30rem;
     overflow: hidden;
@@ -137,7 +159,7 @@ label {
 }
 
 .register label {
-    color: var(--background);
+    color: var(--primary-color);
     transform: scale(.6);
 }
 
@@ -161,7 +183,7 @@ label {
     height: 40px;
     margin: 12px auto 10%;
     color: #fff;
-    background: var(--primary-color);
+    background: var(--btn-log);
     font-size: 1rem;
     font-weight: bold;
     border: none;
@@ -444,8 +466,8 @@ footer {
         height: 12vh;
     }
 
-    .container-landing-page>img {
-        width: 80%;
+    .svg-landing img {
+        width: 35rem;
     }
 }
 
@@ -454,7 +476,29 @@ footer {
         width: 50%;
     }
 
-    .container-landing-page>img {
-        width: 50%;
+    .svg-landing img {
+        width: 30rem;
+    }
+
+    .svg-landing {
+        width: 40%;
+        margin-bottom: 3rem;
+    }
+
+    .container-main-landing {
+        display: flex;
+        align-items: center;
+        margin-left: 5rem;
+    }
+
+    .container-landing-page {
+        width: 60%;
+        justify-content: center;
+        align-items: center;
+
+    }
+
+    .text-trusted-bank {
+        margin-bottom: 5rem;
     }
 }

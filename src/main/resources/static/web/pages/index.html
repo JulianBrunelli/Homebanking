@@ -35,32 +35,39 @@
         <div class="text" data-text="Loading"></div>
     </div>
     <header class="z-3">
-        <img class="redirect-home" src="../images/bank.icon.png" alt="bni.icon">
     </header>
-    <main>
-        <img class="img-bank" src="../images/AestheticTwitterHeader.png" alt="LogoBankNordicInc">
-        <div class="container-landing-page flex-lg-row">
-            <img src="../images/landingPage.png" alt="">
-            <div class="container-form">
-                <div class="main">
-                    <input type="checkbox" id="chk" aria-hidden="true">
-                    <div class="login">
-                        <form class="form">
-                            <label for="chk" aria-hidden="true">Login</label>
-                            <input class="input" type="email" v-model="email" name="email" placeholder="Email">
-                            <input class="input" type="password" v-model="password" name="pswd" placeholder="Password">
-                            <button type="button" @click="checkLogIn">Log in</button>
-                        </form>
-                    </div>
-                    <div class="register">
-                        <form class="form">
-                            <label for="chk" aria-hidden="true">Sign up</label>
-                            <input class="input" type="text" v-model="firstName" name="txt" placeholder="First Name">
-                            <input class="input" type="text" v-model="lastName" name="txt" placeholder="Last Name">
-                            <input class="input" type="email" v-model="email" name="email" placeholder="Email">
-                            <input class="input" type="password" v-model="password" name="pswd" placeholder="Password">
-                            <button type="button" @click="checkSingUp">Register</button>
-                        </form>
+    <main class="d-flex justify-content-center align-items-center">
+        <div class="container-main-landing">
+            <div class="svg-landing">
+                <h1><span class="text-rgb"> Welcome</span></h1>
+                <h2 class="text-trusted-bank">to your trusted bank</h2>
+                <img src="../images/undraw_mobile_login_re_9ntv.svg" alt="svg-landing-page">
+            </div>
+            <div class="container-landing-page">
+                <div class="container-form">
+                    <div class="main-login">
+                        <input type="checkbox" id="chk" aria-hidden="true">
+                        <div class="login">
+                            <form class="form">
+                                <label for="chk" aria-hidden="true">Login</label>
+                                <input class="input" type="email" v-model="email" name="email" placeholder="Email">
+                                <input class="input" type="password" v-model="password" name="pswd"
+                                    placeholder="Password">
+                                <button type="button" @click="checkLogIn">Log in</button>
+                            </form>
+                        </div>
+                        <div class="register">
+                            <form class="form">
+                                <label for="chk" aria-hidden="true">Sign up</label>
+                                <input class="input" type="text" v-model="firstName" name="txt"
+                                    placeholder="First Name">
+                                <input class="input" type="text" v-model="lastName" name="txt" placeholder="Last Name">
+                                <input class="input" type="email" v-model="email" name="email" placeholder="Email">
+                                <input class="input" type="password" v-model="password" name="pswd"
+                                    placeholder="Password">
+                                <button type="button" @click="checkSingUp">Register</button>
+                            </form>
+                        </div>
                     </div>
                 </div>
             </div>

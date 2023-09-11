@@ -400,7 +400,7 @@ a {
 }
 
 .card {
-    width: 90%;
+    width: 60vw;
     height: 100%;
     position: relative;
     padding: 9px;
@@ -581,10 +581,14 @@ a {
 
 /* LOANS */
 .container-loans {
-    min-height: 20vh;
+    min-height: 50vh;
     width: 100%;
     margin-top: 2rem;
     margin-bottom: 10rem;
+    justify-content: space-around;
+    background-image: url("../images/stacked-peaks-haikei.svg");
+    background-size: cover;
+    background-repeat: no-repeat;
 }
 
 /* LOANS */
@@ -680,8 +684,6 @@ footer {
     display: flex;
     align-items: center;
     justify-content: center;
-    border: 2px solid black;
-    border-radius: 10px;
     margin-top: 2rem;
     margin-bottom: 2rem;
     background-color: var(--background);
@@ -693,9 +695,13 @@ footer {
 
 td,
 th {
+    width: 33.3%;
     text-align: center;
     font-size: 1.2rem;
     color: black;
+    border: 1px solid black;
+    border-collapse: collapse;
+    padding: 6px;
 }
 
 /* TABLE */
@@ -727,6 +733,20 @@ th {
 .container-accounts-text p {
     font-size: 20px;
     text-align: center;
+}
+
+.no-transaction {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.svg-account {
+    width: 60vw;
+    margin-top: 1rem;
+
 }
 
 /* CONTAINER PHONE */

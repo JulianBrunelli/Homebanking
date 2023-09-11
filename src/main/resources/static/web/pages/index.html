@@ -17,93 +17,99 @@
     <title>BNI | HOME</title>
 </head>
 
-<body id="app" v-cloak>
-    <div id="wifi-loader" v-show="loader">
-        <svg class="circle-outer" viewBox="0 0 86 86">
-            <circle class="back" cx="43" cy="43" r="40"></circle>
-            <circle class="front" cx="43" cy="43" r="40"></circle>
-            <circle class="new" cx="43" cy="43" r="40"></circle>
-        </svg>
-        <svg class="circle-middle" viewBox="0 0 60 60">
-            <circle class="back" cx="30" cy="30" r="27"></circle>
-            <circle class="front" cx="30" cy="30" r="27"></circle>
-        </svg>
-        <svg class="circle-inner" viewBox="0 0 34 34">
-            <circle class="back" cx="17" cy="17" r="14"></circle>
-            <circle class="front" cx="17" cy="17" r="14"></circle>
-        </svg>
-        <div class="text" data-text="Loading"></div>
-    </div>
-    <header class="z-3">
-    </header>
-    <main class="d-flex justify-content-center align-items-center">
-        <div class="container-main-landing">
-            <div class="svg-landing">
-                <h1><span class="text-rgb"> Welcome</span></h1>
-                <h2 class="text-trusted-bank">to your trusted bank</h2>
-                <img src="../images/undraw_mobile_login_re_9ntv.svg" alt="svg-landing-page">
-            </div>
-            <div class="container-landing-page">
-                <div class="container-form">
-                    <div class="main-login">
-                        <input type="checkbox" id="chk" aria-hidden="true">
-                        <div class="login">
-                            <form class="form">
-                                <label for="chk" aria-hidden="true">Login</label>
-                                <input class="input" type="email" v-model="email" name="email" placeholder="Email">
-                                <input class="input" type="password" v-model="password" name="pswd"
-                                    placeholder="Password">
-                                <button type="button" @click="checkLogIn">Log in</button>
-                            </form>
-                        </div>
-                        <div class="register">
-                            <form class="form">
-                                <label for="chk" aria-hidden="true">Sign up</label>
-                                <input class="input" type="text" v-model="firstName" name="txt"
-                                    placeholder="First Name">
-                                <input class="input" type="text" v-model="lastName" name="txt" placeholder="Last Name">
-                                <input class="input" type="email" v-model="email" name="email" placeholder="Email">
-                                <input class="input" type="password" v-model="password" name="pswd"
-                                    placeholder="Password">
-                                <button type="button" @click="checkSingUp">Register</button>
-                            </form>
+<body>
+    <div id="app" v-cloak>
+        <div id="wifi-loader" v-show="loader">
+            <svg class="circle-outer" viewBox="0 0 86 86">
+                <circle class="back" cx="43" cy="43" r="40"></circle>
+                <circle class="front" cx="43" cy="43" r="40"></circle>
+                <circle class="new" cx="43" cy="43" r="40"></circle>
+            </svg>
+            <svg class="circle-middle" viewBox="0 0 60 60">
+                <circle class="back" cx="30" cy="30" r="27"></circle>
+                <circle class="front" cx="30" cy="30" r="27"></circle>
+            </svg>
+            <svg class="circle-inner" viewBox="0 0 34 34">
+                <circle class="back" cx="17" cy="17" r="14"></circle>
+                <circle class="front" cx="17" cy="17" r="14"></circle>
+            </svg>
+            <div class="text" data-text="Loading"></div>
+        </div>
+        <header class="z-3">
+        </header>
+        <main class="d-flex justify-content-center align-items-center">
+            <div class="container-main-landing">
+                <div class="svg-landing">
+                    <h1><span class="text-rgb"> Welcome</span></h1>
+                    <h2 class="text-trusted-bank">to your trusted bank</h2>
+                    <img src="../images/undraw_mobile_login_re_9ntv.svg" alt="svg-landing-page">
+                </div>
+                <div class="container-landing-page">
+                    <div class="container-form">
+                        <div class="main-login">
+                            <input type="checkbox" id="chk" aria-hidden="true">
+                            <div class="login">
+                                <form class="form">
+                                    <label for="chk" aria-hidden="true">Login</label>
+                                    <input class="input" type="email" v-model="email" name="email" placeholder="Email">
+                                    <input class="input" type="password" v-model="password" name="pswd"
+                                        placeholder="Password">
+                                    <button type="button" @click="checkLogIn">Log in</button>
+                                </form>
+                            </div>
+                            <div class="register">
+                                <form class="form">
+                                    <label for="chk" aria-hidden="true">Sign up</label>
+                                    <input class="input" type="text" v-model="firstName" name="txt"
+                                        placeholder="First Name">
+                                    <input class="input" type="text" v-model="lastName" name="txt"
+                                        placeholder="Last Name">
+                                    <input class="input" type="email" v-model="email" name="email" placeholder="Email">
+                                    <input class="input" type="password" v-model="password" name="pswd"
+                                        placeholder="Password">
+                                    <button type="button" @click="checkSingUp">Register</button>
+                                </form>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </main>
-    <footer>
-        <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
-            <section class="d-flex align-items-center">
-                <i class="bi bi-bank2 me-2"></i>
-                <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
-            </section>
-            <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
-                <a href="#" class="moreInfo">Privacy Policy</a>
-                <a href="#" class="moreInfo">ATMs for the blind</a>
-                <a href="#" class="moreInfo">Security</a>
-                <a href="#" class="moreInfo">Regulatory information</a>
-                <h6 class="text-light fw-normal m-0">More Info:</h6>
+        </main>
+        <footer>
+            <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
+                <section class="d-flex align-items-center">
+                    <i class="bi bi-bank2 me-2"></i>
+                    <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
+                </section>
+                <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
+                    <a href="#" class="moreInfo">Privacy Policy</a>
+                    <a href="#" class="moreInfo">ATMs for the blind</a>
+                    <a href="#" class="moreInfo">Security</a>
+                    <a href="#" class="moreInfo">Regulatory information</a>
+                    <h6 class="text-light fw-normal m-0">More Info:</h6>
+                </div>
+                <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
+                    <a href="http://www.facebook.com"><i
+                            class="bi bi-facebook social d-flex align-items-center"></i></a>
+                    <a href="https://web.whatsapp.com"><i
+                            class="bi bi-whatsapp social d-flex align-items-center"></i></a>
+                    <a href="https://www.instagram.com"><i
+                            class="bi bi-instagram social d-flex align-items-center"></i></a>
+                </div>
             </div>
-            <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
-                <a href="http://www.facebook.com"><i class="bi bi-facebook social d-flex align-items-center"></i></a>
-                <a href="https://web.whatsapp.com"><i class="bi bi-whatsapp social d-flex align-items-center"></i></a>
-                <a href="https://www.instagram.com"><i class="bi bi-instagram social d-flex align-items-center"></i></a>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script src="../js/index.js"></script>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="../js/index.js"></script>
+    </div>
 </body>
 
 </html>

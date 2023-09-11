@@ -17,161 +17,166 @@
     <title>BNI | Cards</title>
 </head>
 
-<body id="app" v-cloak>
-    <div id="wifi-loader" v-show="loader">
-        <svg class="circle-outer" viewBox="0 0 86 86">
-            <circle class="back" cx="43" cy="43" r="40"></circle>
-            <circle class="front" cx="43" cy="43" r="40"></circle>
-            <circle class="new" cx="43" cy="43" r="40"></circle>
-        </svg>
-        <svg class="circle-middle" viewBox="0 0 60 60">
-            <circle class="back" cx="30" cy="30" r="27"></circle>
-            <circle class="front" cx="30" cy="30" r="27"></circle>
-        </svg>
-        <svg class="circle-inner" viewBox="0 0 34 34">
-            <circle class="back" cx="17" cy="17" r="14"></circle>
-            <circle class="front" cx="17" cy="17" r="14"></circle>
-        </svg>
-        <div class="text" data-text="Loading"></div>
-    </div>
-    <header class="z-3">
-        <a href="#">
-            <!-- class="redirect-home" -->
-            <img src="../images/bank.icon.png" alt="bni.icon">
-        </a>
-        <h1 class="text-light d-md-none">Cards</h1>
-        <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
-                    <ul class="navbar-nav w-100">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="./accounts.html">Accounts <i
-                                    class="bi bi-person ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./cards.html">Cards <i class="bi bi-wallet2 ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./transfer.html">Transactions <i
-                                    class="bi bi-arrow-left-right ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-logout" @click="signOut">Log out <i
-                                    class="bi bi-box-arrow-right ms-1"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main class="mt-5">
-        <section class="w-100">
-            <h1 class="mb-5 mt-5 text-center">Make your loans</h1>
-            <div class="container-transfer">
-                <div class="container-form-transfer">
-                    <div class="input-group mb-1 d-flex flex-column align-items-center">
-                        <label class="label-transfer" for="loan">Loan</label>
-                        <select name="loan" id="loan" v-model="selectLoan" class="form-select form-control w-75">
-                            <option class="option-transfer" value="" disabled>select loan</option>
-                            <template v-for="loan of loans">
-                                <option class="option-transfer" :value="loan">
-                                    {{loan.name}}
-                                </option>
-                            </template>
-                        </select>
-                    </div>
-                    <div class="input-group mb-1 d-flex flex-column align-items-center">
-                        <label class="label-transfer" for="source">Soruce account</label>
-                        <select name="source" id="source" v-model="selectOriginAccount"
-                            class="form-select form-control w-75">
-                            <option class="option-transfer" value="" disabled>select an account</option>
-                            <template v-for="originAccount of originAccounts">
-                                <option class="option-transfer" :value="originAccount.number">
-                                    {{originAccount.number}}
-                                </option>
-                            </template>
-                        </select>
-                    </div>
-                    <div class="input-group mb-1 d-flex flex-column align-items-center">
-                        <label class="label-transfer" for="payments">Payments available</label>
-                        <select name="payments" id="payments" v-model="selectPayment"
-                            class="form-select form-control w-75">
-                            <option class="option-transfer" value="" disabled>select an payment</option>
-                            <template v-for="payment of selectLoan.payments">
-                                <option class="option-transfer" :value="payment">
-                                    {{payment}}
-                                </option>
-                            </template>
-                        </select>
-                    </div>
-                    <div class="input-group mb-1 d-flex flex-column align-items-center">
-                        <label class="label-transfer" for="amount"><i class="bi bi-currency-dollar"></i>Amount</label>
-                        <input type="number" name="amount" id="amount" v-model="amount" @input="porcent"
-                            class="form-control w-75" aria-label="Dollar amount (with dot and two decimal places)">
-                    </div>
-                    <div class="input-group mb-4 d-flex flex-column align-items-center">
-                        <label class="label-transfer" for="description"> <i class="bi bi-caret-right-fill"></i> Amount
-                            you must pay <i class="bi bi-caret-left-fill"></i></label>
-                        <input type="text" v-model="finalAmount" name="description" id="description"
-                            class="form-control w-75 pe-none" disabled>
-                    </div>
-                </div>
-                <div class="container-img-transfer d-none d-xl-block">
-                    <img src="../images/panas.jpg" alt="two-people-shaking-hands">
-                </div>
-            </div>
-            <div class="container-btn-transfer">
-                <button type="submit" @click="addLoan" class="btn-create-acc btn-create-transfer">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
-                        stroke="currentColor" aria-hidden="true">
-                        <path stroke-linecap="round" stroke-linejoin="round"
-                            d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z">
-                        </path>
-                    </svg>
-                    Create transfer
-                </button>
-            </div>
-        </section>
-    </main>
-    <footer>
-        <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
-            <section class="d-flex align-items-center">
-                <i class="bi bi-bank2 me-2"></i>
-                <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
-            </section>
-            <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
-                <a href="#" class="moreInfo">Privacy Policy</a>
-                <a href="#" class="moreInfo">ATMs for the blind</a>
-                <a href="#" class="moreInfo">Security</a>
-                <a href="#" class="moreInfo">Regulatory information</a>
-                <h6 class="text-light fw-normal m-0">More Info:</h6>
-            </div>
-            <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
-                <a href="http://www.facebook.com"><i class="bi bi-facebook social d-flex align-items-center"></i></a>
-                <a href="https://web.whatsapp.com"><i class="bi bi-whatsapp social d-flex align-items-center"></i></a>
-                <a href="https://www.instagram.com"><i class="bi bi-instagram social d-flex align-items-center"></i></a>
-            </div>
+<body>
+    <div id="app" v-cloak>
+        <div id="wifi-loader" v-show="loader">
+            <svg class="circle-outer" viewBox="0 0 86 86">
+                <circle class="back" cx="43" cy="43" r="40"></circle>
+                <circle class="front" cx="43" cy="43" r="40"></circle>
+                <circle class="new" cx="43" cy="43" r="40"></circle>
+            </svg>
+            <svg class="circle-middle" viewBox="0 0 60 60">
+                <circle class="back" cx="30" cy="30" r="27"></circle>
+                <circle class="front" cx="30" cy="30" r="27"></circle>
+            </svg>
+            <svg class="circle-inner" viewBox="0 0 34 34">
+                <circle class="back" cx="17" cy="17" r="14"></circle>
+                <circle class="front" cx="17" cy="17" r="14"></circle>
+            </svg>
+            <div class="text" data-text="Loading"></div>
         </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script src="../js/loan-application.js"></script>
+        <header class="z-3">
+            <a href="#">
+                <!-- class="redirect-home" -->
+                <img src="../images/bank.icon.png" alt="bni.icon">
+            </a>
+            <h1 class="text-light d-md-none">Cards</h1>
+            <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
+                        <ul class="navbar-nav w-100">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="./accounts.html">Accounts <i
+                                        class="bi bi-person ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./cards.html">Cards <i class="bi bi-wallet2 ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./transfer.html">Transactions <i
+                                        class="bi bi-arrow-left-right ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-logout" @click="signOut">Log out <i
+                                        class="bi bi-box-arrow-right ms-1"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="mt-5">
+            <section class="w-100">
+                <h1 class="mb-5 mt-5 text-center">Make your loans</h1>
+                <div class="container-transfer">
+                    <div class="container-form-transfer">
+                        <div class="input-group mb-1 d-flex flex-column align-items-center">
+                            <label class="label-transfer" for="loan">Loan</label>
+                            <select name="loan" id="loan" v-model="selectLoan" class="form-select form-control w-75">
+                                <option class="option-transfer" value="" disabled>select loan</option>
+                                <template v-for="loan of loans">
+                                    <option class="option-transfer" :value="loan">
+                                        {{loan.name}}
+                                    </option>
+                                </template>
+                            </select>
+                        </div>
+                        <div class="input-group mb-1 d-flex flex-column align-items-center">
+                            <label class="label-transfer" for="source">Soruce account</label>
+                            <select name="source" id="source" v-model="selectOriginAccount"
+                                class="form-select form-control w-75">
+                                <option class="option-transfer" value="" disabled>select an account</option>
+                                <template v-for="originAccount of originAccounts">
+                                    <option class="option-transfer" :value="originAccount.number">
+                                        {{originAccount.number}}
+                                    </option>
+                                </template>
+                            </select>
+                        </div>
+                        <div class="input-group mb-1 d-flex flex-column align-items-center">
+                            <label class="label-transfer" for="payments">Payments available</label>
+                            <select name="payments" id="payments" v-model="selectPayment"
+                                class="form-select form-control w-75">
+                                <option class="option-transfer" value="" disabled>select an payment</option>
+                                <template v-for="payment of selectLoan.payments">
+                                    <option class="option-transfer" :value="payment">
+                                        {{payment}}
+                                    </option>
+                                </template>
+                            </select>
+                        </div>
+                        <div class="input-group mb-1 d-flex flex-column align-items-center">
+                            <label class="label-transfer" for="amount"><i
+                                    class="bi bi-currency-dollar"></i>Amount</label>
+                            <input type="number" name="amount" id="amount" v-model="amount" @input="porcent"
+                                class="form-control w-75" aria-label="Dollar amount (with dot and two decimal places)">
+                        </div>
+                        <div class="input-group mb-4 d-flex flex-column align-items-center">
+                            <label class="label-transfer" for="description"> <i class="bi bi-caret-right-fill"></i>
+                                Amount
+                                you must pay <i class="bi bi-caret-left-fill"></i></label>
+                            <input type="text" v-model="finalAmount" name="description" id="description"
+                                class="form-control w-75 pe-none" disabled>
+                        </div>
+                    </div>
+                    <div class="container-img-transfer d-none d-xl-block">
+                        <img :src="selectImage" alt="loan-mortage">
+                    </div>
+                    {{makeover}}
+                </div>
+                <div class="container-btn-transfer">
+                    <button type="submit" @click="addLoan" class="btn-create-acc btn-create-transfer">
+                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
+                            stroke="currentColor" aria-hidden="true">
+                            <path stroke-linecap="round" stroke-linejoin="round"
+                                d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z">
+                            </path>
+                        </svg>
+                        Create transfer
+                    </button>
+                </div>
+            </section>
+        </main>
+        <footer>
+            <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
+                <section class="d-flex align-items-center">
+                    <i class="bi bi-bank2 me-2"></i>
+                    <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
+                </section>
+                <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
+                    <a href="#" class="moreInfo">Privacy Policy</a>
+                    <a href="#" class="moreInfo">ATMs for the blind</a>
+                    <a href="#" class="moreInfo">Security</a>
+                    <a href="#" class="moreInfo">Regulatory information</a>
+                    <h6 class="text-light fw-normal m-0">More Info:</h6>
+                </div>
+                <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
+                    <a href="http://www.facebook.com"><i
+                            class="bi bi-facebook social d-flex align-items-center"></i></a>
+                    <a href="https://web.whatsapp.com"><i
+                            class="bi bi-whatsapp social d-flex align-items-center"></i></a>
+                    <a href="https://www.instagram.com"><i
+                            class="bi bi-instagram social d-flex align-items-center"></i></a>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="../js/loan-application.js"></script>
+    </div>
 </body>
 
 </html>

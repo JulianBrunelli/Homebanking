@@ -17,134 +17,139 @@
     <title>BNI | Account</title>
 </head>
 
-<body id="app" v-cloak>
-    <div id="wifi-loader" v-show="loader">
-        <svg class="circle-outer" viewBox="0 0 86 86">
-            <circle class="back" cx="43" cy="43" r="40"></circle>
-            <circle class="front" cx="43" cy="43" r="40"></circle>
-            <circle class="new" cx="43" cy="43" r="40"></circle>
-        </svg>
-        <svg class="circle-middle" viewBox="0 0 60 60">
-            <circle class="back" cx="30" cy="30" r="27"></circle>
-            <circle class="front" cx="30" cy="30" r="27"></circle>
-        </svg>
-        <svg class="circle-inner" viewBox="0 0 34 34">
-            <circle class="back" cx="17" cy="17" r="14"></circle>
-            <circle class="front" cx="17" cy="17" r="14"></circle>
-        </svg>
-        <div class="text" data-text="Loading"></div>
-    </div>
-    <header class="z-3">
-        <a href="#">
-            <!-- class="redirect-home" -->
-            <img src="../images/bank.icon.png" alt="bni.icon">
-        </a>
-        <h1 class="text-light d-md-none">Account</h1>
-        <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
-                    <ul class="navbar-nav w-100">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="./accounts.html">Accounts <i
-                                    class="bi bi-person ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./cards.html">Cards <i class="bi bi-wallet2 ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./transfer.html">Transactions <i
-                                    class="bi bi-arrow-left-right ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-logout" @click="signOut">Log out <i
-                                    class="bi bi-box-arrow-right ms-1"></i></a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
-        </nav>
-    </header>
-    <main>
-        <h1 class="text-center d-none d-md-block mt-5">Account</h1>
-        <div class="cards-container-accounts d-flex flex-column justify-content-center align-items-center">
-            <div class="d-flex flex-column justify-content-center align-items-center">
-                <div class="card">
-                    <div class="card-overlay"></div>
-                    <div class="card-inner">
-                        <p>Account number <br> <span class="ms-2">{{accounts.number}}</span></p>
-                        <p>Mount <br> <span class="ms-2 ">{{accountBalance}}</span></p>
-                        <p>Creation date <br>{{accounts.creationDate}}</p>
+<body>
+    <div id="app" v-cloak>
+        <div id="wifi-loader" v-show="loader">
+            <svg class="circle-outer" viewBox="0 0 86 86">
+                <circle class="back" cx="43" cy="43" r="40"></circle>
+                <circle class="front" cx="43" cy="43" r="40"></circle>
+                <circle class="new" cx="43" cy="43" r="40"></circle>
+            </svg>
+            <svg class="circle-middle" viewBox="0 0 60 60">
+                <circle class="back" cx="30" cy="30" r="27"></circle>
+                <circle class="front" cx="30" cy="30" r="27"></circle>
+            </svg>
+            <svg class="circle-inner" viewBox="0 0 34 34">
+                <circle class="back" cx="17" cy="17" r="14"></circle>
+                <circle class="front" cx="17" cy="17" r="14"></circle>
+            </svg>
+            <div class="text" data-text="Loading"></div>
+        </div>
+        <header class="z-3">
+            <a href="#">
+                <!-- class="redirect-home" -->
+                <img src="../images/bank.icon.png" alt="bni.icon">
+            </a>
+            <h1 class="text-light d-md-none">Account</h1>
+            <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
+                        <ul class="navbar-nav w-100">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="./accounts.html">Accounts <i
+                                        class="bi bi-person ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./cards.html">Cards <i class="bi bi-wallet2 ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./transfer.html">Transactions <i
+                                        class="bi bi-arrow-left-right ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-logout" @click="signOut">Log out <i
+                                        class="bi bi-box-arrow-right ms-1"></i></a>
+                            </li>
+                        </ul>
                     </div>
                 </div>
-            </div>
-            <div data-aos="zoom-out-up" v-if="transactions.length > 0" class="table-container">
-                <table class="table-details">
-                    <thead>
-                        <tr>
-                            <th scope="col">Type</th>
-                            <th scope="col">Amount</th>
-                            <th scope="col">Date</th>
-                            <th scope="col">Description</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <template v-for="(transaction, index) of transactions">
+            </nav>
+        </header>
+        <main>
+            <h1 class="text-center d-none d-md-block mt-5">Account</h1>
+            <div class="cards-container-accounts d-flex flex-column justify-content-center align-items-center">
+                <div class="d-flex flex-column justify-content-center align-items-center">
+                    <div class="card">
+                        <div class="card-overlay"></div>
+                        <div class="card-inner">
+                            <p>Account number <br> <span class="ms-2">{{accounts.number}}</span></p>
+                            <p>Mount <br> <span class="ms-2 ">{{accountBalance}}</span></p>
+                            <p>Creation date <br>{{accounts.creationDate}}</p>
+                        </div>
+                    </div>
+                </div>
+                <div data-aos="zoom-out-up" v-if="transactions.length > 0" class="table-container">
+                    <table class="table-details">
+                        <thead>
                             <tr>
-                                <td
-                                    :class="transaction.type == 'DEBIT' ? 'text-danger fw-bold' : 'text-success fw-bold'">
-                                    {{transaction.type}}</td>
-                                <td>{{transaction.amount.toLocaleString()}}</td>
-                                <td>{{date[index]}} {{time[index]}}</td>
-                                <td>{{transaction.description}}</td>
+                                <th scope="col">Type</th>
+                                <th scope="col">Amount</th>
+                                <th scope="col">Date</th>
+                                <th scope="col">Description</th>
                             </tr>
-                        </template>
-                    </tbody>
-                </table>
+                        </thead>
+                        <tbody>
+                            <template v-for="(transaction, index) of transactions">
+                                <tr>
+                                    <td
+                                        :class="transaction.type == 'DEBIT' ? 'text-danger fw-bold' : 'text-success fw-bold'">
+                                        {{transaction.type}}</td>
+                                    <td>{{transaction.amount.toLocaleString()}}</td>
+                                    <td>{{date[index]}} {{time[index]}}</td>
+                                    <td>{{transaction.description}}</td>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+                <template v-else>
+                    <div class="no-transaction">
+                        <h2>You have no transactions</h2>
+                        <img class="svg-account" src="../images/no-data-pana.svg" alt="no-data">
+                    </div>
+                </template>
             </div>
-            <template v-else>
-                <h2>Not Transactions</h2>
-            </template>
-        </div>
-    </main>
-    <footer>
-        <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
-            <section class="d-flex align-items-center">
-                <i class="bi bi-bank2 me-2"></i>
-                <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
-            </section>
-            <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
-                <a href="#" class="moreInfo">Privacy Policy</a>
-                <a href="#" class="moreInfo">ATMs for the blind</a>
-                <a href="#" class="moreInfo">Security</a>
-                <a href="#" class="moreInfo">Regulatory information</a>
-                <h6 class="text-light fw-normal m-0">More Info:</h6>
+        </main>
+        <footer>
+            <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
+                <section class="d-flex align-items-center">
+                    <i class="bi bi-bank2 me-2"></i>
+                    <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
+                </section>
+                <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
+                    <a href="#" class="moreInfo">Privacy Policy</a>
+                    <a href="#" class="moreInfo">ATMs for the blind</a>
+                    <a href="#" class="moreInfo">Security</a>
+                    <a href="#" class="moreInfo">Regulatory information</a>
+                    <h6 class="text-light fw-normal m-0">More Info:</h6>
+                </div>
+                <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
+                    <a href="http://www.facebook.com"><i
+                            class="bi bi-facebook social d-flex align-items-center"></i></a>
+                    <a href="https://web.whatsapp.com"><i
+                            class="bi bi-whatsapp social d-flex align-items-center"></i></a>
+                    <a href="https://www.instagram.com"><i
+                            class="bi bi-instagram social d-flex align-items-center"></i></a>
+                </div>
             </div>
-            <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
-                <a href="http://www.facebook.com"><i class="bi bi-facebook social d-flex align-items-center"></i></a>
-                <a href="https://web.whatsapp.com"><i class="bi bi-whatsapp social d-flex align-items-center"></i></a>
-                <a href="https://www.instagram.com"><i class="bi bi-instagram social d-flex align-items-center"></i></a>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script src="../js/account.js"></script>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="../js/account.js"></script>
+    </div>
 </body>
 
 </html>

@@ -5,6 +5,7 @@ createApp({
         return {
             loans: [],
             selectLoan: "",
+            selectImage: "../images/panas.jpg",
             originAccounts: [],
             selectOriginAccount: "",
             selectPayment: "",
@@ -21,13 +22,13 @@ createApp({
             axios.get('/api/loans')
                 .then(response => {
                     this.loans = response.data
-                }).catch(error => console.log(error))
+                }).catch(error => console.error(error))
         },
         loadData() {
             axios.get('/api/clients/current')
                 .then(response => {
                     this.originAccounts = response.data.accounts
-                }).catch(error => console.log(error))
+                }).catch(error => console.error(error))
         },
         porcent() {
             this.finalAmount = this.amount + (this.amount * 0.2)
@@ -47,7 +48,6 @@ createApp({
                             "payments": this.selectPayment,
                             "numberAccountDestination": this.selectOriginAccount
                         }
-                        console.log(this.originAccounts);
                         axios.post("/api/loans", object)
                             .then(response => {
                                 Swal.fire('Saved!', '', 'success')
@@ -75,4 +75,20 @@ createApp({
                 .catch((error) => console.error(error.message));
         },
     },
+    computed: {
+        makeover() {
+            switch (this.selectLoan.name) {
+                case 'Mortgage':
+                    this.selectImage = "../images/loan-mortage.jpg"
+                    break;
+                case 'Car':
+                    this.selectImage = "../images/loan-car.jpg"
+                    break;
+                case 'Companies':
+                    this.selectImage = "../images/loan-companies.jpg"
+                    break;
+                default: this.selectImage = "../images/panas.jpg"
+            }
+        },
+    }
 }).mount("#app");

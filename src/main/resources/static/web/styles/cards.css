@@ -15,7 +15,6 @@
 
 body {
     font-family: 'PT Sans Narrow', sans-serif;
-    background-color: var(--second-color);
 }
 
 main {
@@ -321,6 +320,25 @@ h4 {
 /* LOADER */
 
 /* CARD */
+.no-cards-debit {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.section-cards {
+    background-color: #dbdbdb;
+}
+
+.no-cards-debit p {
+    font-size: 1.6rem;
+}
+
+.svg-card {
+    width: 50vw;
+}
 
 .container-card {
     width: 20rem;

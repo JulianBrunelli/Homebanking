@@ -17,202 +17,216 @@
     <title>BNI | Cards</title>
 </head>
 
-<body id="app" v-cloak>
-    <div id="wifi-loader" v-show="loader">
-        <svg class="circle-outer" viewBox="0 0 86 86">
-            <circle class="back" cx="43" cy="43" r="40"></circle>
-            <circle class="front" cx="43" cy="43" r="40"></circle>
-            <circle class="new" cx="43" cy="43" r="40"></circle>
-        </svg>
-        <svg class="circle-middle" viewBox="0 0 60 60">
-            <circle class="back" cx="30" cy="30" r="27"></circle>
-            <circle class="front" cx="30" cy="30" r="27"></circle>
-        </svg>
-        <svg class="circle-inner" viewBox="0 0 34 34">
-            <circle class="back" cx="17" cy="17" r="14"></circle>
-            <circle class="front" cx="17" cy="17" r="14"></circle>
-        </svg>
-        <div class="text" data-text="Loading"></div>
-    </div>
-    <header class="z-3">
-        <a href="#">
-            <!-- class="redirect-home" -->
-            <img src="../images/bank.icon.png" alt="bni.icon">
-        </a>
-        <h1 class="text-light d-md-none">Cards</h1>
-        <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
-            <div class="container-fluid">
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                    data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
-                    aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+<body>
+    <div id="app" v-cloak>
+        <div id="wifi-loader" v-show="loader">
+            <svg class="circle-outer" viewBox="0 0 86 86">
+                <circle class="back" cx="43" cy="43" r="40"></circle>
+                <circle class="front" cx="43" cy="43" r="40"></circle>
+                <circle class="new" cx="43" cy="43" r="40"></circle>
+            </svg>
+            <svg class="circle-middle" viewBox="0 0 60 60">
+                <circle class="back" cx="30" cy="30" r="27"></circle>
+                <circle class="front" cx="30" cy="30" r="27"></circle>
+            </svg>
+            <svg class="circle-inner" viewBox="0 0 34 34">
+                <circle class="back" cx="17" cy="17" r="14"></circle>
+                <circle class="front" cx="17" cy="17" r="14"></circle>
+            </svg>
+            <div class="text" data-text="Loading"></div>
+        </div>
+        <header class="z-3">
+            <a href="#">
+                <!-- class="redirect-home" -->
+                <img src="../images/bank.icon.png" alt="bni.icon">
+            </a>
+            <h1 class="text-light d-md-none">Cards</h1>
+            <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
+                <div class="container-fluid">
+                    <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false"
+                        aria-label="Toggle navigation">
+                        <span class="navbar-toggler-icon"></span>
+                    </button>
+                    <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
+                        <ul class="navbar-nav w-100">
+                            <li class="nav-item">
+                                <a class="nav-link" aria-current="page" href="./accounts.html">Accounts <i
+                                        class="bi bi-person ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link active" href="#">Cards <i class="bi bi-wallet2 ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="./transfer.html">Transactions <i
+                                        class="bi bi-arrow-left-right ms-1"></i></a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link nav-link-logout" @click="signOut">Log out <i
+                                        class="bi bi-box-arrow-right ms-1"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+        <main class="d-flex flex-column align-items-center section-cards">
+            <section class="w-100">
+                <h2 class="text-center mt-5 fw-bold">Your Debit Cards</h2>
+                <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
+                    <template v-if="cardsDebit.length > 0" v-for="(card, index) of cardsDebit">
+                        <div class="container-card">
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
+                                        class="front d-flex flex-column justify-content-around">
+                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                        <div class="row">
+                                            <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
+                                            <p class="fw-bold w-50 text-center">{{card.color}}</p>
+                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                        </div>
+                                        <div class="card-no mt-2">
+                                            <p>{{card.number}}</p>
+                                        </div>
+                                        <div class="row card-holder mb-2">
+                                            <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
+                                            <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID TILL</p>
+                                        </div>
+                                        <div class="row name">
+                                            <p class="m-0 w-50 fw-semibold">{{card.cardHolder}}</p>
+                                            <div class="d-flex w-50 gap-3">
+                                                <p class="m-0 w-50 d-flex justify-content-end fw-semibold">
+                                                    {{fromDate[index]}}</p>
+                                                <p class="m-0 w-50 d-flex justify-content-start fw-semibold">
+                                                    {{thruDate[index]}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
+                                        class="back d-flex flex-column justify-content-around">
+                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                        <div class="card-cvv">
+                                            <img src="../images/line-dark.png" alt="line-dark" class="line-black">
+                                            <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
+                                        </div>
+                                        <div class="row signature">
+                                            <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
+                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="no-cards-debit">
+                            <img class="svg-card" src="../images/no-data-cuate.svg" alt="no-data">
+                            <p>You currently have no debit cards</p>
+                        </div>
+                    </template>
+                </div>
+            </section>
+            <section class="w-100">
+                <h2 class="text-center mt-5 fw-bold">Your Credit Cards</h2>
+                <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
+                    <template v-if="cardsCredit.length > 0" v-for="(card, index) of cardsCredit">
+                        <div class="container-card">
+                            <div class="card">
+                                <div class="card-inner">
+                                    <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
+                                        class="front d-flex flex-column justify-content-around">
+                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                        <div class="row">
+                                            <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
+                                            <p class="fw-bold w-50 text-center">{{card.color}}</p>
+                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                        </div>
+                                        <div class="card-no mt-2">
+                                            <p>{{card.number}}</p>
+                                        </div>
+                                        <div class="row card-holder mb-2">
+                                            <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
+                                            <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID TILL</p>
+                                        </div>
+                                        <div class="row name">
+                                            <p class="m-0 w-50 fw-medium">{{card.cardHolder}}</p>
+                                            <div class="d-flex w-50 gap-3">
+                                                <p class="m-0 w-50 d-flex justify-content-end fw-medium">
+                                                    {{fromDate[index]}}</p>
+                                                <p class="m-0 w-50 d-flex justify-content-start fw-medium">
+                                                    {{thruDate[index]}}</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
+                                        class="back d-flex flex-column justify-content-around">
+                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                        <div class="card-cvv">
+                                            <img src="../images/line-dark.png" alt="line-dark" class="line-black">
+                                            <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
+                                        </div>
+                                        <div class="row signature">
+                                            <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
+                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </template>
+                    <template v-else>
+                        <div class="no-cards-debit">
+                            <img class="svg-card" src="../images/no-data-pana.svg" alt="no-data">
+                            <p>You currently have no credit cards</p>
+                        </div>
+                    </template>
+                </div>
+            </section>
+            <a href="./create-cards.html">
+                <button class="learn-more" v-if="cardsAll.length < 6">
+                    <span class="circle" aria-hidden="true">
+                        <span class="icon arrow"></span>
+                    </span>
+                    <span class="button-text">Create cards</span>
                 </button>
-                <div class="collapse navbar-collapse container-navbar" id="navbarNavDropdown">
-                    <ul class="navbar-nav w-100">
-                        <li class="nav-item">
-                            <a class="nav-link" aria-current="page" href="./accounts.html">Accounts <i
-                                    class="bi bi-person ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link active" href="#">Cards <i class="bi bi-wallet2 ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="./transfer.html">Transactions <i
-                                    class="bi bi-arrow-left-right ms-1"></i></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#"></a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link nav-link-logout" @click="signOut">Log out <i
-                                    class="bi bi-box-arrow-right ms-1"></i></a>
-                        </li>
-                    </ul>
+            </a>
+        </main>
+        <footer>
+            <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
+                <section class="d-flex align-items-center">
+                    <i class="bi bi-bank2 me-2"></i>
+                    <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
+                </section>
+                <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
+                    <a href="#" class="moreInfo">Privacy Policy</a>
+                    <a href="#" class="moreInfo">ATMs for the blind</a>
+                    <a href="#" class="moreInfo">Security</a>
+                    <a href="#" class="moreInfo">Regulatory information</a>
+                    <h6 class="text-light fw-normal m-0">More Info:</h6>
+                </div>
+                <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
+                    <a href="http://www.facebook.com"><i
+                            class="bi bi-facebook social d-flex align-items-center"></i></a>
+                    <a href="https://web.whatsapp.com"><i
+                            class="bi bi-whatsapp social d-flex align-items-center"></i></a>
+                    <a href="https://www.instagram.com"><i
+                            class="bi bi-instagram social d-flex align-items-center"></i></a>
                 </div>
             </div>
-        </nav>
-    </header>
-    <main class="d-flex flex-column align-items-center">
-        <section class="w-100">
-            <h2 class="text-center mt-5 mb-5">Your Debit Cards</h2>
-            <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
-                <template v-for="(card, index) of cardsDebit">
-                    <div class="container-card">
-                        <div class="card">
-                            <div class="card-inner">
-                                <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
-                                    class="front d-flex flex-column justify-content-around">
-                                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                    <div class="row">
-                                        <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
-                                        <p class="fw-bold w-50 text-center">{{card.color}}</p>
-                                        <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                    </div>
-                                    <div class="card-no mt-2">
-                                        <p>{{card.number}}</p>
-                                    </div>
-                                    <div class="row card-holder mb-2">
-                                        <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
-                                        <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID TILL</p>
-                                    </div>
-                                    <div class="row name">
-                                        <p class="m-0 w-50 fw-semibold">{{card.cardHolder}}</p>
-                                        <div class="d-flex w-50 gap-3">
-                                            <p class="m-0 w-50 d-flex justify-content-end fw-semibold">
-                                                {{fromDate[index]}}</p>
-                                            <p class="m-0 w-50 d-flex justify-content-start fw-semibold">
-                                                {{thruDate[index]}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
-                                    class="back d-flex flex-column justify-content-around">
-                                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                    <div class="card-cvv">
-                                        <img src="../images/line-dark.png" alt="line-dark" class="line-black">
-                                        <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
-                                    </div>
-                                    <div class="row signature">
-                                        <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
-                                        <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </section>
-        <section class="w-100">
-            <h2 class="text-center mt-5 mb-5">Your Credit Cards</h2>
-            <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
-                <template v-else v-for="(card, index) of cardsCredit">
-                    <div class="container-card">
-                        <div class="card">
-                            <div class="card-inner">
-                                <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
-                                    class="front d-flex flex-column justify-content-around">
-                                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                    <div class="row">
-                                        <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
-                                        <p class="fw-bold w-50 text-center">{{card.color}}</p>
-                                        <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                    </div>
-                                    <div class="card-no mt-2">
-                                        <p>{{card.number}}</p>
-                                    </div>
-                                    <div class="row card-holder mb-2">
-                                        <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
-                                        <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID TILL</p>
-                                    </div>
-                                    <div class="row name">
-                                        <p class="m-0 w-50 fw-medium">{{card.cardHolder}}</p>
-                                        <div class="d-flex w-50 gap-3">
-                                            <p class="m-0 w-50 d-flex justify-content-end fw-medium">
-                                                {{fromDate[index]}}</p>
-                                            <p class="m-0 w-50 d-flex justify-content-start fw-medium">
-                                                {{thruDate[index]}}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
-                                    class="back d-flex flex-column justify-content-around">
-                                    <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                    <div class="card-cvv">
-                                        <img src="../images/line-dark.png" alt="line-dark" class="line-black">
-                                        <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
-                                    </div>
-                                    <div class="row signature">
-                                        <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
-                                        <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </template>
-            </div>
-        </section>
-        <a href="./create-cards.html">
-            <button class="learn-more" v-if="cardsAll.length < 6">
-                <span class="circle" aria-hidden="true">
-                    <span class="icon arrow"></span>
-                </span>
-                <span class="button-text">Create cards</span>
-            </button>
-        </a>
-    </main>
-    <footer>
-        <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
-            <section class="d-flex align-items-center">
-                <i class="bi bi-bank2 me-2"></i>
-                <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
-            </section>
-            <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
-                <a href="#" class="moreInfo">Privacy Policy</a>
-                <a href="#" class="moreInfo">ATMs for the blind</a>
-                <a href="#" class="moreInfo">Security</a>
-                <a href="#" class="moreInfo">Regulatory information</a>
-                <h6 class="text-light fw-normal m-0">More Info:</h6>
-            </div>
-            <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
-                <a href="http://www.facebook.com"><i class="bi bi-facebook social d-flex align-items-center"></i></a>
-                <a href="https://web.whatsapp.com"><i class="bi bi-whatsapp social d-flex align-items-center"></i></a>
-                <a href="https://www.instagram.com"><i class="bi bi-instagram social d-flex align-items-center"></i></a>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
-        crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
-    <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
-    <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
-    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
-    <script>
-        AOS.init();
-    </script>
-    <script src="../js/cards.js"></script>
+        </footer>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-HwwvtgBNo3bZJJLYd8oVXjrBZt8cqVSpeBNS5n7C8IVInixGAoxmnlMuBnhbgrkm"
+            crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+        <script src="//cdn.jsdelivr.net/npm/sweetalert2@10/dist/sweetalert2.min.js"></script>
+        <script src="https://unpkg.com/vue@3/dist/vue.global.js"></script>
+        <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+        <script>
+            AOS.init();
+        </script>
+        <script src="../js/cards.js"></script>
+    </div>
 </body>
 
 </html>

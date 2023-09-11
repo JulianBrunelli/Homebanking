@@ -3,8 +3,6 @@ package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.repositories.AccountRepository;
-import com.mindhub.homebanking.repositories.ClientRepository;
 import com.mindhub.homebanking.service.AccountService;
 import com.mindhub.homebanking.service.ClientService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
-import static java.util.stream.Collectors.toList;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -30,7 +27,7 @@ public class ClientControllers {
     private String randomNumber(){
         String random;
         do {
-            int number = (int) (Math.random()*1000 + 9999);
+            int number = (int) (Math.random()*(10000000 + 99999999) + 10000000);
             random = "VIN-" + number;
         }while (accountService.findByNumber(random)!=null);
         return random;

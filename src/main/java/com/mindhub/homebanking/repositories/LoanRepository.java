@@ -8,5 +8,4 @@ import java.util.Optional;
 
 @RepositoryRestResource
 public interface LoanRepository extends JpaRepository<Loan, Long> {
-    Optional<Loan> findById(Long id);
 }

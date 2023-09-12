@@ -21,5 +21,4 @@ public class ClientLoanServiceImplement implements ClientLoanService {
     public void save(ClientLoan clientLoan) {
         clientLoanRepository.save(clientLoan);
     }
-
 }

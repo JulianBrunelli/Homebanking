@@ -18,6 +18,7 @@ createApp({
     methods: {
         loadData() {
             axios.get("/api/clients/current")
+                // { headers: { 'accept': 'application/xml' } }
                 .then(response => {
                     this.cardsAll = response.data.cards
                     this.cardsDebit = response.data.cards.filter(card => card.type == 'DEBIT')

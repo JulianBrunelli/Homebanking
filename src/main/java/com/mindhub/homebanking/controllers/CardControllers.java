@@ -74,12 +74,29 @@ public class CardControllers {
 
         int cvv = getCvv();
 
-        Card card = new Card( cardHolder,CardType.valueOf(type),CardColor.valueOf(color),randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
+        Card card = new Card( cardHolder,CardType.valueOf(type),CardColor.valueOf(color),randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5),true);
         client.addCard(card);
         cardService.saveCard(card);
 
         return new ResponseEntity<>("Your card was successfully created", HttpStatus.CREATED);
     }
 
-
+    @PatchMapping("/clients/current/cards/deactivate")
+    public ResponseEntity<Object> disableCard(@RequestParam long id,Authentication authentication){
+        Client client = clientService.findByEmail(authentication.getName());
+        Card card = cardService.findById(id);
+        boolean cardClientAuth = client.getCards().contains(card);
+        if(card == null){
+            return new ResponseEntity<>("Card not found", HttpStatus.FORBIDDEN);
+        }
+        if(!cardClientAuth){
+            return new ResponseEntity<>("The letter does not belong to the authenticated client", HttpStatus.FORBIDDEN);
+        }
+        if(!card.isActive()){
+            return new ResponseEntity<>("Card already disabled", HttpStatus.FORBIDDEN);
+        }
+        card.setActive(false);
+        cardService.saveCard(card);
+        return new ResponseEntity<>(HttpStatus.OK);
+    }
 }

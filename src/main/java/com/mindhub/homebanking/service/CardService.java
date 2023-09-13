@@ -10,4 +10,6 @@ public interface CardService {
     Card findByNumber(String number);
 
     void saveCard(Card card);
+
+    Card findById(long id);
 }

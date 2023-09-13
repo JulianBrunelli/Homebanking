@@ -56,9 +56,9 @@ public class HomebankingApplication {
 //			ClientLoan melbaPersonalLoan = new ClientLoan(50000, 12);
 //
 //			Card melbaMorelFirstCard = new Card(melbaMorel.getFirstName()+" "+melbaMorel.getLastName(), CardType.DEBIT, CardColor.GOLD,
-//					"4325-5667-4253-9896", 444, this.localDate, this.localDateExpires);
+//					"4325-5667-4253-9896", 444, this.localDate, this.localDateExpires, true);
 //			Card melbaMorelSecondCard = new Card(melbaMorel.getFirstName()+" "+melbaMorel.getLastName(), CardType.CREDIT, CardColor.TITANIUM,
-//					"4000-4546-5734-2351", 324, this.localDate, this.localDateExpires);
+//					"4000-4546-5734-2351", 324, this.localDate, this.localDateExpires, true);
 //
 //			repositoryClient.save(melbaMorel);
 //
@@ -104,9 +104,9 @@ public class HomebankingApplication {
 //			ClientLoan chloeCarlLoan = new ClientLoan(200000, 36);
 //
 //			Card chloeOBrianFirstCard = new Card(chloeOBrian.getFirstName()+" "+chloeOBrian.getLastName(), CardType.DEBIT, CardColor.GOLD,
-//					"4004-8646-4663-2424", 123, this.localDate, this.localDateExpires);
+//					"4004-8646-4663-2424", 123, this.localDate, this.localDateExpires, true);
 //			Card chloeOBrianSecondCard = new Card(chloeOBrian.getFirstName()+" "+chloeOBrian.getLastName(), CardType.CREDIT, CardColor.SILVER,
-//					"4006-4244-5179-2266", 424, this.localDate, this.localDateExpires);
+//					"4006-4244-5179-2266", 424, this.localDate, this.localDateExpires, true);
 //
 //			repositoryClient.save(chloeOBrian);
 //

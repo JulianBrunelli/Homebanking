@@ -18,7 +18,7 @@
 </head>
 
 <body>
-    <div id="app" v-cloak>
+    <div id="app" v-cloak class="body-cards">
         <div id="wifi-loader" v-show="loader">
             <svg class="circle-outer" viewBox="0 0 86 86">
                 <circle class="back" cx="43" cy="43" r="40"></circle>
@@ -70,127 +70,143 @@
                 </div>
             </nav>
         </header>
-        <main class="d-flex flex-column align-items-center section-cards">
-            <section class="w-100">
-                <h2 class="text-center mt-5 fw-bold">Your Debit Cards</h2>
-                <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
-                    <template v-if="cardsDebit.length > 0" v-for="(card, index) of cardsDebit">
-                        <div class="container-card">
-                            <div class="card">
-                                <div class="card-inner">
-                                    <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
-                                        class="front d-flex flex-column justify-content-around">
-                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                        <div class="row">
-                                            <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
-                                            <p class="fw-bold w-50 text-center">{{card.color}}</p>
-                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                        </div>
-                                        <div class="card-no mt-2">
-                                            <p>{{card.number}}</p>
-                                        </div>
-                                        <div class="row card-holder mb-2">
-                                            <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
-                                            <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID TILL</p>
-                                        </div>
-                                        <div class="row name">
-                                            <p class="m-0 w-50 fw-semibold">{{card.cardHolder}}</p>
-                                            <div class="d-flex w-50 gap-3">
-                                                <p class="m-0 w-50 d-flex justify-content-end fw-semibold">
-                                                    {{fromDate[index]}}</p>
-                                                <p class="m-0 w-50 d-flex justify-content-start fw-semibold">
-                                                    {{thruDate[index]}}</p>
+        <main>
+            <div class="banner-cards d-md-none d-lg-block">
+                <img class="d-md-none img-banner" src="../images/banner-mid.png" alt="banner-mid">
+                <img class="d-none d-lg-block img-banner" src="../images/banner.png" alt="banner">
+            </div>
+            <div class="d-flex flex-column align-items-center section-cards">
+                <div class="container-sections-cards">
+                    <section class="w-100">
+                        <h2 class="text-center mt-5 mb-5 fw-bold">Your Debit Cards</h2>
+                        <div class="w-100 d-flex flex-column align-items-center justify-content-around gap-5">
+                            <template v-if="cardsDebit.length > 0" v-for="(card, index) of cardsDebit">
+                                <div class="container-card">
+                                    <div class="card">
+                                        <div class="card-inner">
+                                            <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
+                                                class="front d-flex flex-column justify-content-around">
+                                                <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                                <div class="row">
+                                                    <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
+                                                    <p class="fw-bold w-50 text-center">{{card.color}}</p>
+                                                    <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                                </div>
+                                                <div class="card-no mt-2">
+                                                    <p>{{card.number}}</p>
+                                                </div>
+                                                <div class="row card-holder mb-2">
+                                                    <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
+                                                    <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID
+                                                        TILL
+                                                    </p>
+                                                </div>
+                                                <div class="row name">
+                                                    <p class="m-0 w-50 fw-semibold">{{card.cardHolder}}</p>
+                                                    <div class="d-flex w-50 gap-3">
+                                                        <p class="m-0 w-50 d-flex justify-content-end fw-semibold">
+                                                            {{fromDate[index]}}</p>
+                                                        <p class="m-0 w-50 d-flex justify-content-start fw-semibold">
+                                                            {{thruDate[index]}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
+                                                class="back d-flex flex-column justify-content-around">
+                                                <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                                <div class="card-cvv">
+                                                    <img src="../images/line-dark.png" alt="line-dark"
+                                                        class="line-black">
+                                                    <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
+                                                </div>
+                                                <div class="row signature">
+                                                    <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
+                                                    <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
-                                        class="back d-flex flex-column justify-content-around">
-                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                        <div class="card-cvv">
-                                            <img src="../images/line-dark.png" alt="line-dark" class="line-black">
-                                            <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
-                                        </div>
-                                        <div class="row signature">
-                                            <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
-                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
+                            </template>
+                            <template v-else>
+                                <div class="no-cards-debit">
+                                    <img class="svg-card" src="../images/no-data-cuate.svg" alt="no-data">
+                                    <p>You currently have no debit cards</p>
+                                </div>
+                            </template>
                         </div>
-                    </template>
-                    <template v-else>
-                        <div class="no-cards-debit">
-                            <img class="svg-card" src="../images/no-data-cuate.svg" alt="no-data">
-                            <p>You currently have no debit cards</p>
-                        </div>
-                    </template>
-                </div>
-            </section>
-            <section class="w-100">
-                <h2 class="text-center mt-5 fw-bold">Your Credit Cards</h2>
-                <div class="w-100 d-flex flex-column align-items-center justify-content-around flex-lg-row">
-                    <template v-if="cardsCredit.length > 0" v-for="(card, index) of cardsCredit">
-                        <div class="container-card">
-                            <div class="card">
-                                <div class="card-inner">
-                                    <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
-                                        class="front d-flex flex-column justify-content-around">
-                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                        <div class="row">
-                                            <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
-                                            <p class="fw-bold w-50 text-center">{{card.color}}</p>
-                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                        </div>
-                                        <div class="card-no mt-2">
-                                            <p>{{card.number}}</p>
-                                        </div>
-                                        <div class="row card-holder mb-2">
-                                            <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
-                                            <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID TILL</p>
-                                        </div>
-                                        <div class="row name">
-                                            <p class="m-0 w-50 fw-medium">{{card.cardHolder}}</p>
-                                            <div class="d-flex w-50 gap-3">
-                                                <p class="m-0 w-50 d-flex justify-content-end fw-medium">
-                                                    {{fromDate[index]}}</p>
-                                                <p class="m-0 w-50 d-flex justify-content-start fw-medium">
-                                                    {{thruDate[index]}}</p>
+                    </section>
+                    <section class="w-100">
+                        <h2 class="text-center mt-5 mb-5 fw-bold">Your Credit Cards</h2>
+                        <div class="w-100 d-flex flex-column align-items-center justify-content-around gap-5">
+                            <template v-if="cardsCredit.length > 0" v-for="(card, index) of cardsCredit">
+                                <div class="container-card">
+                                    <div class="card">
+                                        <div class="card-inner">
+                                            <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
+                                                class="front d-flex flex-column justify-content-around">
+                                                <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                                <div class="row">
+                                                    <img src="https://i.ibb.co/G9pDnYJ/chip.png" class="w-25">
+                                                    <p class="fw-bold w-50 text-center">{{card.color}}</p>
+                                                    <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                                </div>
+                                                <div class="card-no mt-2">
+                                                    <p>{{card.number}}</p>
+                                                </div>
+                                                <div class="row card-holder mb-2">
+                                                    <p class="w-50 m-0 fw-semibold">CARD HOLDER</p>
+                                                    <p class="w-50 d-flex justify-content-center m-0 fw-semibold">VALID
+                                                        TILL
+                                                    </p>
+                                                </div>
+                                                <div class="row name">
+                                                    <p class="m-0 w-50 fw-medium">{{card.cardHolder}}</p>
+                                                    <div class="d-flex w-50 gap-3">
+                                                        <p class="m-0 w-50 d-flex justify-content-end fw-medium">
+                                                            {{fromDate[index]}}</p>
+                                                        <p class="m-0 w-50 d-flex justify-content-start fw-medium">
+                                                            {{thruDate[index]}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
+                                                class="back d-flex flex-column justify-content-around">
+                                                <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
+                                                <div class="card-cvv">
+                                                    <img src="../images/line-dark.png" alt="line-dark"
+                                                        class="line-black">
+                                                    <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
+                                                </div>
+                                                <div class="row signature">
+                                                    <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
+                                                    <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
-                                    <div :class="{'backGold':card.color == 'GOLD', 'backSilver':card.color == 'SILVER', 'backTitanium':card.color == 'TITANIUM'}"
-                                        class="back d-flex flex-column justify-content-around">
-                                        <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
-                                        <div class="card-cvv">
-                                            <img src="../images/line-dark.png" alt="line-dark" class="line-black">
-                                            <p class="mb-0 d-flex justify-content-end">{{card.cvv}}</p>
-                                        </div>
-                                        <div class="row signature">
-                                            <p class="m-0 w-75">CUSTOMER SIGNATURE</p>
-                                            <img src="https://i.ibb.co/WHZ3nRJ/visa.png" class="w-25">
-                                        </div>
-                                    </div>
                                 </div>
-                            </div>
+                            </template>
+                            <template v-else>
+                                <div class="no-cards-debit">
+                                    <img class="svg-card" src="../images/no-data-pana.svg" alt="no-data">
+                                    <p>You currently have no credit cards</p>
+                                </div>
+                            </template>
                         </div>
-                    </template>
-                    <template v-else>
-                        <div class="no-cards-debit">
-                            <img class="svg-card" src="../images/no-data-pana.svg" alt="no-data">
-                            <p>You currently have no credit cards</p>
-                        </div>
-                    </template>
+                    </section>
                 </div>
-            </section>
-            <a href="./create-cards.html">
-                <button class="learn-more" v-if="cardsAll.length < 6">
-                    <span class="circle" aria-hidden="true">
-                        <span class="icon arrow"></span>
-                    </span>
-                    <span class="button-text">Create cards</span>
-                </button>
-            </a>
+                <div class="w-100 d-flex justify-content-center mt-5">
+                    <a href="./create-cards.html">
+                        <button class="learn-more" v-if="cardsAll.length < 6">
+                            <span class="circle" aria-hidden="true">
+                                <span class="icon arrow"></span>
+                            </span>
+                            <span class="button-text">Create cards</span>
+                        </button>
+                    </a>
+                </div>
+            </div>
         </main>
         <footer>
             <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">

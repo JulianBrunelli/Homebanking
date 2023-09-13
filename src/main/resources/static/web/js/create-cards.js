@@ -19,8 +19,10 @@ createApp({
             })
                 .then((result) => {
                     if (result.isConfirmed) {
+                        console.log("hola");
                         axios.post("/api/clients/current/cards", `type=${this.cardsType}&color=${this.cardsColor}`)
                             .then(response => {
+                                console.log("chau");
                                 Swal.fire('Saved!', '', 'success')
                                     .then(response => {
                                         location.href = '../pages/cards.html'

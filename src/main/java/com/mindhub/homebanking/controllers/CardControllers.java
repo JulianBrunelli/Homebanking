@@ -7,10 +7,10 @@ import com.mindhub.homebanking.models.CardType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.service.CardService;
 import com.mindhub.homebanking.service.ClientService;
-import com.mindhub.homebanking.utils.CardUtils;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
+
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
@@ -29,14 +29,12 @@ public class CardControllers {
     private ClientService clientService;
     @Autowired
     private CardService cardService;
-    private String cardNumber = getCardNumber();
-    private int cvv = getCvv();
+    private final int cvv = getCvv();
 
     @GetMapping("/cards")
     public List<CardDTO> getCards(){
         return cardService.getCardsDTO();
     }
-
 
     @PostMapping("/clients/current/cards")
     public ResponseEntity<Object> newCard(Authentication authentication, @RequestParam String type, @RequestParam String color) {
@@ -71,7 +69,7 @@ public class CardControllers {
 
         String randomNumberCard = "";
         do {
-            randomNumberCard = cardNumber;
+            randomNumberCard = getCardNumber();
         }while (cardService.findByNumber(randomNumberCard)!=null);
 
         int cvv = getCvv();

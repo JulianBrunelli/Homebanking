@@ -40,7 +40,7 @@
                 <!-- class="redirect-home" -->
                 <img src="../images/bank.icon.png" alt="bni.icon">
             </a>
-            <h1 class="text-light d-md-none">Account</h1>
+            <h1 class="text-light d-md-none fw-bold">Account</h1>
             <nav class="navbar bg-transparent navbar-expand-md me-2 mt-2">
                 <div class="container-fluid">
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
@@ -71,7 +71,7 @@
             </nav>
         </header>
         <main>
-            <h1 class="text-center d-none d-md-block mt-5">Account</h1>
+            <h1 class="text-center d-none d-md-block mt-5 fw-bold">Movements</h1>
             <div class="cards-container-accounts d-flex flex-column justify-content-center align-items-center">
                 <div class="d-flex flex-column justify-content-center align-items-center">
                     <div class="card">
@@ -83,7 +83,7 @@
                         </div>
                     </div>
                 </div>
-                <div data-aos="zoom-out-up" v-if="transactions.length > 0" class="table-container">
+                <div data-aos="zoom-out-down" v-if="transactions.length > 0" class="table-container">
                     <table class="table-details">
                         <thead>
                             <tr>
@@ -109,7 +109,7 @@
                 </div>
                 <template v-else>
                     <div class="no-transaction">
-                        <h2>You have no transactions</h2>
+                        <h2 class="fw-bold">You have no transactions</h2>
                         <img class="svg-account" src="../images/no-data-pana.svg" alt="no-data">
                     </div>
                 </template>

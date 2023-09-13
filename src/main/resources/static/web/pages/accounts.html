@@ -95,7 +95,7 @@
                 </button>
             </div>
             <section class="w-100 d-flex flex-column align-items-center">
-                <h2 class="title-main d-none d-md-block mt-5 fw-bold text-center">Welcome {{nameClient}}</h2>
+                <h2 class="title-main d-none d-md-block mt-5 fw-semibold text-center">Welcome {{nameClient}}</h2>
                 <div class="cards-container-accounts d-flex flex-column flex-lg-row flex-lg-wrap">
                     <template v-if="clientsAccounts.length > 0" v-for="account of clientsAccounts">
                         <div data-aos="zoom-out-up"
@@ -124,7 +124,8 @@
                 </div>
             </section>
             <div class="container-create d-flex flex-column align-items-center flex-lg-row-reverse gap-4 mb-5">
-                <section class="container-create-text w-100 d-flex flex-column align-items-center">
+                <section data-aos="zoom-out-left"
+                    class="container-create-text w-100 d-flex flex-column align-items-center">
                     <h2 class="text-center fw-bold">Creat your <br><span class="text-rgb">accounts</span></h2>
                     <p class="fw-medium">Open a free account and keep it free</p>
                     <button v-if="clientsAccounts.length < 3" type="submit" @click="addAccount" class="btn-create-acc">
@@ -137,9 +138,9 @@
                         Create Account
                     </button>
                 </section>
-                <section class="w-100 d-flex flex-column align-items-center ">
+                <section data-aos="zoom-out-right" class="w-100 d-flex flex-column align-items-center ">
                     <img class="image-create" src="../images/planta-dinero.jpg" alt="">
-                    <h2 class="text-center fw-semibold">Grow your income</span></h2>
+                    <h2 class="text-center fw-semibold">Grow your income</h2>
                 </section>
             </div>
             <section class="container-loans d-flex flex-column align-items-center">
@@ -177,11 +178,11 @@
                 </a>
             </section>
             <div class="container-accounts-phone d-flex flex-column align-items-center flex-lg-row gap-4">
-                <section class="container-accounts-text">
+                <section data-aos="zoom-out-right" class="container-accounts-text">
                     <h2 class="text-center fw-bold">Your free bank <br><span class="text-rgb">account</span></h2>
                     <p class="fw-medium">Take advantage of our benefits by downloading the application</p>
                 </section>
-                <section>
+                <section data-aos="zoom-out-left">
                     <img class="phone-img" src="../images/celular.jpg" alt="phone">
                     <h2 class="text-center fw-semibold">With Bank Nordic Inc it is easier</span></h2>
                 </section>

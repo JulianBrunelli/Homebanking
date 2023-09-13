@@ -7,6 +7,7 @@ import com.mindhub.homebanking.models.CardType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.service.CardService;
 import com.mindhub.homebanking.service.ClientService;
+import com.mindhub.homebanking.utils.CardUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -17,6 +18,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.mindhub.homebanking.utils.CardUtils.getCardNumber;
+import static com.mindhub.homebanking.utils.CardUtils.getCvv;
 import static java.util.stream.Collectors.toList;
 
 @RestController
@@ -26,9 +29,10 @@ public class CardControllers {
     private ClientService clientService;
     @Autowired
     private CardService cardService;
+    private String cardNumber = getCardNumber();
+    private int cvv = getCvv();
 
-
-    @GetMapping(value = "/cards", produces = {MediaType.APPLICATION_XML_VALUE,MediaType.APPLICATION_JSON_VALUE})
+    @GetMapping("/cards")
     public List<CardDTO> getCards(){
         return cardService.getCardsDTO();
     }
@@ -65,15 +69,12 @@ public class CardControllers {
             return new ResponseEntity<>("Could not create card because you can only have 1 color per type", HttpStatus.FORBIDDEN);
         }
 
-        String randomNumberCard;
+        String randomNumberCard = "";
         do {
-            randomNumberCard =  (int) (Math.random()*(9000 - 4000) + 4000)
-                        + "-" + (int) (Math.random()*(9000 - 4000) + 4000)
-                        + "-" + (int) (Math.random()*(9000 - 4000) + 4000)
-                        + "-" + (int) (Math.random()*(9000 - 4000) + 4000);
+            randomNumberCard = cardNumber;
         }while (cardService.findByNumber(randomNumberCard)!=null);
 
-        int cvv = (int) (Math.random()*(999 - 100) + 100);
+        int cvv = getCvv();
 
         Card card = new Card( cardHolder,CardType.valueOf(type),CardColor.valueOf(color),randomNumberCard,cvv,LocalDate.now(),LocalDate.now().plusYears(5));
         client.addCard(card);
@@ -81,4 +82,6 @@ public class CardControllers {
 
         return new ResponseEntity<>("Your card was successfully created", HttpStatus.CREATED);
     }
+
+
 }

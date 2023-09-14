@@ -21,13 +21,14 @@ createApp({
                 // { headers: { 'accept': 'application/xml' } }
                 .then(response => {
                     this.cardsAll = response.data.cards
-                    this.cardsDebit = response.data.cards.filter(card => card.type == 'DEBIT').filter(card => card.active)
-                    this.cardsCredit = response.data.cards.filter(card => card.type == 'CREDIT').filter(card => card.active)
+                    this.cardsDebit = response.data.cards.filter(card => card.type == 'DEBIT').sort((a, b) => a.id - b.id).filter(card => card.active)
+                    this.cardsCredit = response.data.cards.filter(card => card.type == 'CREDIT').sort((a, b) => a.id - b.id).filter(card => card.active)
                     this.fromDate = response.data.cards.map(card => card.fromDate.slice(2, 7).replace(/-/g, '/'))
                     this.thruDate = response.data.cards.map(card => card.thruDate.slice(2, 7).replace(/-/g, '/'))
-                    this.active = response.data.cards.filter(card => card.active)
                     this.json = JSON.stringify(response.data, null, 1);
                     this.loader = false
+                    console.log(this.fromDate);
+                    console.log(this.thruDate);
                 })
                 .catch((error) => console.error(error.message));
         },

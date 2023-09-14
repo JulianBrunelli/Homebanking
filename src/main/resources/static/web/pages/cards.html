@@ -104,9 +104,11 @@
                                                 <div class="row name">
                                                     <p class="m-0 w-50 fw-semibold">{{card.cardHolder}}</p>
                                                     <div class="d-flex w-50 gap-3">
-                                                        <p class="m-0 w-50 d-flex justify-content-end fw-semibold">
+                                                        <p :class="card.thruDate >= card.fromDate  ? 'expired' : 'text-light fw-bold'"
+                                                            class="m-0 w-50 d-flex justify-content-end fw-semibold">
                                                             {{fromDate[index]}}</p>
-                                                        <p class="m-0 w-50 d-flex justify-content-start fw-semibold">
+                                                        <p :class="card.thruDate >= card.fromDate ? 'expired' : 'text-light fw-bold'"
+                                                            class="m-0 w-50 d-flex justify-content-start fw-semibold">
                                                             {{thruDate[index]}}</p>
                                                     </div>
                                                 </div>
@@ -150,7 +152,7 @@
                                 <div class="container-card">
                                     <div class="card">
                                         <div class="card-inner">
-                                            <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM'}"
+                                            <div :class="{'frontGold':card.color == 'GOLD', 'frontSilver':card.color == 'SILVER', 'frontTitanium':card.color == 'TITANIUM', 'expired':card.thruDate >= card.fromDate}"
                                                 class="front d-flex flex-column justify-content-around">
                                                 <img src="https://i.ibb.co/PYss3yv/map.png" class="map-img">
                                                 <div class="row">
@@ -170,9 +172,11 @@
                                                 <div class="row name">
                                                     <p class="m-0 w-50 fw-medium">{{card.cardHolder}}</p>
                                                     <div class="d-flex w-50 gap-3">
-                                                        <p class="m-0 w-50 d-flex justify-content-end fw-medium">
+                                                        <p :class="card.thruDate >= card.fromDate  ? 'expired' : 'text-light fw-bold'"
+                                                            class="m-0 w-50 d-flex justify-content-end fw-medium">
                                                             {{fromDate[index]}}</p>
-                                                        <p class="m-0 w-50 d-flex justify-content-start fw-medium">
+                                                        <p :class="card.thruDate >= card.fromDate  ? 'expired' : 'text-light fw-bold'"
+                                                            class="m-0 w-50 d-flex justify-content-start fw-medium">
                                                             {{thruDate[index]}}</p>
                                                     </div>
                                                 </div>

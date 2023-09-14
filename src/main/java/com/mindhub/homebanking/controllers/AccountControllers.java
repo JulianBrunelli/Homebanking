@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 
+import static com.mindhub.homebanking.utils.CardUtils.getAccountNumber;
+
 @RestController
 @RequestMapping(path = "/api")
 public class AccountControllers {
@@ -24,11 +26,11 @@ public class AccountControllers {
     private String randomNumber(){
         String random;
         do {
-            int number = (int) (Math.random()*(10000000 + 99999999) + 10000000);
-            random = "VIN-" + number;
+            random = getAccountNumber();
         }while (accountService.findByNumber(random)!=null);
         return random;
     }
+
     @GetMapping("/accounts")
     public List<AccountDTO>getAccount(){
         return accountService.getAccountsDTO();

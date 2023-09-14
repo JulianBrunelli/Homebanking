@@ -51,7 +51,7 @@ public class TransactionController {
         if(destinationAccount == null){
             return new ResponseEntity<>("Destination account not found", HttpStatus.FORBIDDEN);
         }
-        if (originAccount.getNumber() == destinationAccount.getNumber()){
+        if (originAccount.getNumber().equals(destinationAccount.getNumber())){
             return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
         }
         if(amount <= 0){
@@ -60,13 +60,17 @@ public class TransactionController {
         if(description.isBlank()){
             return new ResponseEntity<>("Please enter a description", HttpStatus.FORBIDDEN);
         }
+        if(description.length() > 15){
+            return new ResponseEntity<>("Description can't be longer than 15 characters", HttpStatus.FORBIDDEN);
+
+        }
         if (originAccount.getBalance() < amount){
             return new ResponseEntity<>("Not enough money in the account", HttpStatus.FORBIDDEN);
         } else {
             originAccount.setBalance(originAccount.getBalance() - amount);
             destinationAccount.setBalance(destinationAccount.getBalance() + amount);
-            Transaction transactionDebit = new Transaction(amount * - 1, description + " " + destinationAccount.getNumber(), LocalDateTime.now(), TransactionType.DEBIT);
-            Transaction transactionCredit = new Transaction(amount, description + " " + originAccount.getNumber(), LocalDateTime.now(), TransactionType.CREDIT);
+            Transaction transactionDebit = new Transaction(amount * - 1, description, LocalDateTime.now(), TransactionType.DEBIT,originAccount.getBalance());
+            Transaction transactionCredit = new Transaction(amount, description, LocalDateTime.now(), TransactionType.CREDIT,destinationAccount.getBalance());
             originAccount.addTransaction(transactionDebit);
             destinationAccount.addTransaction(transactionCredit);
             transactionService.saveTransaction(transactionDebit);

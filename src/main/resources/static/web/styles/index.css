@@ -457,6 +457,13 @@ footer {
     font-weight: 400;
 }
 
+.BNI-footer {
+    margin-top: 1rem;
+    margin-right: 3rem;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 /* FOOTER */
 
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
@@ -500,5 +507,9 @@ footer {
 
     .text-trusted-bank {
         margin-bottom: 5rem;
+    }
+
+    .BNI-footer {
+        margin-right: 5rem;
     }
 }

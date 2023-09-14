@@ -49,8 +49,8 @@ public class HomebankingApplication {
 //			Account firstAccount = new Account("VIN-001", this.localDate, 5000);
 //			Account secondAccount = new Account("VIN-002", this.localDateOneDay, 7500);
 //
-//			Transaction firstTransaction = new Transaction(7000, "Supplies",this.localDateTime, TransactionType.CREDIT);
-//			Transaction secondTransaction = new Transaction(-8000, "Supplies",this.localDateTime, TransactionType.DEBIT);
+//			Transaction firstTransaction = new Transaction(7000, "Supplies",this.localDateTime, TransactionType.CREDIT, 5000);
+//			Transaction secondTransaction = new Transaction(-8000, "Supplies",this.localDateTime, TransactionType.DEBIT, 7500);
 //
 //			ClientLoan melbaMortageLoan = new ClientLoan(400000, 60);
 //			ClientLoan melbaPersonalLoan = new ClientLoan(50000, 12);
@@ -97,8 +97,8 @@ public class HomebankingApplication {
 //			Account thirdAccount = new Account("VIN-003", this.localDate, 8000);
 //			Account fourthAccount = new Account("VIN-004", this.localDateOneDay, 10000);
 //
-//			Transaction thirdTransaction = new Transaction(5000, "Supplies",this.localDateTime, TransactionType.CREDIT);
-//			Transaction fourthTransaction = new Transaction(-10000, "Supplies",this.localDateTime, TransactionType.DEBIT);
+//			Transaction thirdTransaction = new Transaction(5000, "Supplies",this.localDateTime, TransactionType.CREDIT, 8000);
+//			Transaction fourthTransaction = new Transaction(-10000, "Supplies",this.localDateTime, TransactionType.DEBIT, 10000);
 //
 //			ClientLoan chloePersonalLoan = new ClientLoan(100000, 24);
 //			ClientLoan chloeCarlLoan = new ClientLoan(200000, 36);

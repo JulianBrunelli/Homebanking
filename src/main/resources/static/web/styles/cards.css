@@ -578,6 +578,14 @@ footer {
     font-weight: 400;
 }
 
+.BNI-footer {
+    margin-top: .5rem;
+    font-size: 1rem;
+    color: #1c1c1f;
+    font-weight: bold;
+    font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
 /* FOOTER */
 
 /* CREATE CARDS */
@@ -803,7 +811,7 @@ footer {
 
 /* container-button-disabled */
 
-.button {
+.button-disabled {
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -829,7 +837,7 @@ footer {
     fill: white;
 }
 
-.button:hover {
+.button-disabled:hover {
     width: 140px;
     border-radius: 50px;
     transition-duration: .3s;
@@ -837,13 +845,13 @@ footer {
     align-items: center;
 }
 
-.button:hover .svgIcon {
+.button-disabled:hover .svgIcon {
     width: 50px;
     transition-duration: .3s;
     transform: translateY(60%);
 }
 
-.button::before {
+.button-disabled::before {
     position: absolute;
     top: -20px;
     content: "Delete";
@@ -852,7 +860,7 @@ footer {
     font-size: 2px;
 }
 
-.button:hover::before {
+.button-disabled:hover::before {
     font-size: 13px;
     opacity: 1;
     transform: translateY(30px);
@@ -1063,5 +1071,9 @@ h2>i {
         gap: 1rem;
         row-gap: 4rem;
         flex-wrap: wrap;
+    }
+
+    .BNI-footer {
+        margin-right: 3rem;
     }
 }

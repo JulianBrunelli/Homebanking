@@ -24,6 +24,7 @@ createApp({
                     this.accounts = response.data
                     this.accountBalance = this.accounts.balance.toLocaleString()
                     this.transactions = this.accounts.transactions.sort((a, b) => b.id - a.id)
+                    console.log(this.transactions);
                     this.date = this.transactions.map(transaction => transaction.date.slice(0, 10).replace(/-/g, '/'))
                     this.time = this.transactions.map(transiction => transiction.date.slice(14, -7))
                     this.loader = false

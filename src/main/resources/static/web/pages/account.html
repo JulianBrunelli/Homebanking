@@ -78,7 +78,7 @@
                         <div class="card-overlay"></div>
                         <div class="card-inner">
                             <p>Account number <br> <span class="ms-2">{{accounts.number}}</span></p>
-                            <p>Mount <br> <span class="ms-2 ">{{accountBalance}}</span></p>
+                            <p>Mount <br> <span class="ms-2 ">${{accountBalance}}</span></p>
                             <p>Creation date <br>{{accounts.creationDate}}</p>
                         </div>
                     </div>
@@ -91,17 +91,19 @@
                                 <th scope="col">Amount</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Description</th>
+                                <th scope="col">Balance</th>
                             </tr>
                         </thead>
                         <tbody>
                             <template v-for="(transaction, index) of transactions">
                                 <tr>
-                                    <td
+                                    <td class="col-2"
                                         :class="transaction.type == 'DEBIT' ? 'text-danger fw-bold' : 'text-success fw-bold'">
                                         {{transaction.type}}</td>
-                                    <td>{{transaction.amount.toLocaleString()}}</td>
-                                    <td>{{date[index]}} {{time[index]}}</td>
-                                    <td>{{transaction.description}}</td>
+                                    <td class="col-2">${{transaction.amount.toLocaleString()}}</td>
+                                    <td class="col-2">{{date[index]}} {{time[index]}}</td>
+                                    <td class="col-2">{{transaction.description}}</td>
+                                    <td class="col-2">${{transaction.balance}}</td>
                                 </tr>
                             </template>
                         </tbody>
@@ -119,7 +121,7 @@
             <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
                 <section class="d-flex align-items-center">
                     <i class="bi bi-bank2 me-2"></i>
-                    <h4 class="mt-2 me-5 fw-normal">BANK NORDIC INC</h4>
+                    <h4 class="BNI-footer">BANK NORDIC INC</h4>
                 </section>
                 <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
                     <a href="#" class="moreInfo">Privacy Policy</a>

@@ -25,7 +25,7 @@ public class WebAuthorization {
                 .antMatchers("/web/**").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.GET,"/api/clients/current/**","/api/clients/accounts/{id}","/api/clients/cards/{id}","/api/loans").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards","/api/transactions","/api/loans").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.PATCH,"/api/clients/current/cards/deactivate").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.PATCH,"/api/clients/current/cards/deactivate","/api/clients/current/accounts/deactivate").hasAuthority("CLIENT")
                 .anyRequest().denyAll();
         http.formLogin()
                 .usernameParameter("email")

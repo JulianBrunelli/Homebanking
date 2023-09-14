@@ -85,7 +85,7 @@ public class LoanControllers {
 
         Transaction newTransaction = new Transaction(loanAppDTO.getAmount(), loan.getName(), LocalDateTime.now(), TransactionType.CREDIT, account.getBalance());
 
-        transactionService.save(newTransaction);
+        transactionService.saveTransaction(newTransaction);
         accountService.saveAccount(account);
         account.addTransaction(newTransaction);
 

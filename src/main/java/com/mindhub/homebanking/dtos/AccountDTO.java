@@ -14,6 +14,7 @@ public class AccountDTO {
     private LocalDate creationDate;
     private double balance;
     private Set<TransactionDTO> transactions = new HashSet<>();
+    private boolean isActive;
 
     public AccountDTO(){
     }
@@ -26,6 +27,7 @@ public class AccountDTO {
                 .stream()
                 .map(transaction -> new TransactionDTO(transaction))
                 .collect(toSet());
+        this.isActive = account.isActive();
     }
 
     public long getId() {
@@ -44,5 +46,8 @@ public class AccountDTO {
         return transactions;
     }
 
+    public boolean isActive() {
+        return isActive;
+    }
 }
 

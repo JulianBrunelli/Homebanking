@@ -3,8 +3,11 @@ package com.mindhub.homebanking.controllers;
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
 import com.mindhub.homebanking.models.Client;
+import com.mindhub.homebanking.models.Transaction;
+import com.mindhub.homebanking.repositories.TransactionRepository;
 import com.mindhub.homebanking.service.AccountService;
 import com.mindhub.homebanking.service.ClientService;
+import com.mindhub.homebanking.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Set;
 
 import static com.mindhub.homebanking.utils.CardUtils.getAccountNumber;
 
@@ -23,6 +27,11 @@ public class AccountControllers {
     private AccountService accountService;
     @Autowired
     private ClientService clientService;
+    @Autowired
+    private TransactionService transactionService;
+
+    @Autowired
+    private TransactionRepository transactionRepository;
     private String randomNumber(){
         String random;
         do {
@@ -50,12 +59,47 @@ public class AccountControllers {
     public ResponseEntity<Object>newAccount(Authentication authentication){
         if (clientService.findByEmail(authentication.getName()).getAccounts().size() <= 2){
             String accountNumber = randomNumber();
-            Account account = new Account(accountNumber, LocalDate.now(),0.0);
+            Account account = new Account(accountNumber, LocalDate.now(),0.0,true);
             clientService.findByEmail(authentication.getName()).addAccount(account);
             accountService.saveAccount(account);
         }else{
             return new ResponseEntity<>("Failed to create account because the maximum number of accounts is 3", HttpStatus.FORBIDDEN);
         }
         return new ResponseEntity<>("Your account was successfully created", HttpStatus.CREATED);
+    }
+
+    @PatchMapping("/clients/current/accounts/deactivate")
+    public ResponseEntity<Object>disableAccount(@RequestParam long id, Authentication authentication){
+
+        Client client = clientService.findByEmail(authentication.getName());
+        if(client == null){
+            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
+        }
+
+        Account account = accountService.findById(id);
+        if(account == null){
+            return new ResponseEntity<>("Account not found", HttpStatus.FORBIDDEN);
+        }
+        if(!client.getAccounts().contains(account)){
+            return new ResponseEntity<>("The letter does not belong to the authenticated client", HttpStatus.FORBIDDEN);
+        }
+        if(!account.isActive()){
+            return new ResponseEntity<>("Account already disabled", HttpStatus.FORBIDDEN);
+        }
+        if(client.getAccounts().size() == 1){
+            return new ResponseEntity<>("You must have at least one account", HttpStatus.FORBIDDEN);
+
+        }
+        if(account.getBalance() != 0.0){
+            return new ResponseEntity<>("The account you want to delete currently has money", HttpStatus.FORBIDDEN);
+        }
+        Set<Transaction> transactions = account.getTransaction();
+
+        transactions.forEach(transaction -> transaction.setActive(false));
+        transactionService.saveTransactions(transactions);
+        account.setActive(false);
+        accountService.saveAccount(account);
+
+        return new ResponseEntity<>("BIEN AHI BROTHER ASHEEEY",HttpStatus.OK);
     }
 }

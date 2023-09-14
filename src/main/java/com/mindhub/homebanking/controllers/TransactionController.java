@@ -1,9 +1,6 @@
 package com.mindhub.homebanking.controllers;
 
-import com.mindhub.homebanking.models.Account;
-import com.mindhub.homebanking.models.Client;
-import com.mindhub.homebanking.models.Transaction;
-import com.mindhub.homebanking.models.TransactionType;
+import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.service.AccountService;
 import com.mindhub.homebanking.service.ClientService;
 import com.mindhub.homebanking.service.TransactionService;
@@ -12,10 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 
@@ -62,7 +56,6 @@ public class TransactionController {
         }
         if(description.length() > 15){
             return new ResponseEntity<>("Description can't be longer than 15 characters", HttpStatus.FORBIDDEN);
-
         }
         if (originAccount.getBalance() < amount){
             return new ResponseEntity<>("Not enough money in the account", HttpStatus.FORBIDDEN);
@@ -78,4 +71,5 @@ public class TransactionController {
             return new ResponseEntity<>("Transaction created", HttpStatus.CREATED);
         }
     }
+
 }

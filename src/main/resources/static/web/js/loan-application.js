@@ -30,9 +30,6 @@ createApp({
                     this.originAccounts = response.data.accounts
                 }).catch(error => console.error(error))
         },
-        porcent() {
-            this.finalAmount = this.amount + (this.amount * 0.2)
-        },
         addLoan() {
             Swal.fire({
                 title: 'Confirm loan request',
@@ -66,6 +63,9 @@ createApp({
                         Swal.fire('Changes are not saved', '', 'info')
                     }
                 })
+        },
+        porcent() {
+            this.finalAmount = this.amount + (this.amount * 0.2)
         },
         signOut() {
             axios.post('/api/logout')

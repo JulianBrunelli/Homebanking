@@ -9,6 +9,7 @@ createApp({
             loader: true,
             date: "",
             time: "",
+            idParams: "",
         };
     },
     created() {
@@ -18,8 +19,8 @@ createApp({
         loadData() {
             const parameter = location.search
             const params = new URLSearchParams(parameter)
-            const idParams = params.get("id")
-            axios.get(`/api/clients/accounts/${idParams}`)
+            this.idParams = params.get("id")
+            axios.get(`/api/clients/accounts/${this.idParams}`)
                 .then(response => {
                     this.accounts = response.data
                     this.accountBalance = this.accounts.balance.toLocaleString()
@@ -30,6 +31,35 @@ createApp({
                     this.loader = false
                 })
                 .catch((error) => location.href = "https://es.memedroid.com/memes/detail/2712377/Use-it-for-interesting-things");
+        },
+        deactiveAccount() {
+            Swal.fire({
+                title: 'Are you sure you want to delete the account?',
+                showDenyButton: true,
+                confirmButtonText: 'Confirm',
+                denyButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.patch("/api/clients/current/accounts/deactivate", `id=${this.idParams}`)
+                        .then(response => {
+                            Swal.fire('Saved!', '', 'success')
+                                .then(response => {
+                                    location.href = '../pages/accounts.html'
+                                })
+                        })
+                        .catch((error) => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: error.response.data,
+                            }).then(response => {
+                                location.href = '../pages/transfer.html'
+                            })
+                        })
+                } else {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
         },
         signOut() {
             axios.post('/api/logout')

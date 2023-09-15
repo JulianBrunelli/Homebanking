@@ -33,9 +33,9 @@ public class HomebankingApplication {
 									  LoanRepository repositoryLoan, ClientLoanRepository repositoryClientLoan, CardRepository repositoryCard) {
 		return (args) -> {
 
-			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan);
-			Loan carLoan = new Loan("Car", 300000, this.carLoan);
-			Loan personalLoan = new Loan("Personal", 100000, this.personalLoan);
+			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan, 5);
+			Loan carLoan = new Loan("Car", 300000, this.carLoan,5);
+			Loan personalLoan = new Loan("Personal", 100000, this.personalLoan,5);
 
 			repositoryLoan.save(mortgageLoan);
 			repositoryLoan.save(carLoan);

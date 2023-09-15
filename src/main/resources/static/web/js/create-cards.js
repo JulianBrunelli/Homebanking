@@ -21,7 +21,7 @@ createApp({
                     if (result.isConfirmed) {
                         axios.post("/api/clients/current/cards", `type=${this.cardsType}&color=${this.cardsColor}`)
                             .then(response => {
-                                Swal.fire('Saved!', '', 'success')
+                                Swal.fire('Created card!', '', 'success')
                                     .then(response => {
                                         location.href = '../pages/cards.html'
                                     })
@@ -36,7 +36,7 @@ createApp({
                     } else {
                         Swal.fire('Changes are not saved', '', 'info')
                     }
-                })
+                }).catch((error) => console.error(error.message));
         },
         signOut() {
             axios.post('/api/logout')

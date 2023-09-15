@@ -42,7 +42,7 @@ createApp({
                 if (result.isConfirmed) {
                     axios.patch("/api/clients/current/accounts/deactivate", `id=${this.idParams}`)
                         .then(response => {
-                            Swal.fire('Saved!', '', 'success')
+                            Swal.fire('Deleted account!', '', 'success')
                                 .then(response => {
                                     location.href = '../pages/accounts.html'
                                 })
@@ -55,6 +55,7 @@ createApp({
                             }).then(response => {
                                 location.href = '../pages/transfer.html'
                             })
+                                .catch(error => console.error(error))
                         })
                 } else {
                     Swal.fire('Changes are not saved', '', 'info')

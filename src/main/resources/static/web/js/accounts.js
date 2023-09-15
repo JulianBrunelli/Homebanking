@@ -6,7 +6,6 @@ createApp({
             nameClient: "",
             clientsAccounts: [],
             loans: [],
-            json: null,
             loader: true,
         };
     },
@@ -15,13 +14,11 @@ createApp({
     },
     methods: {
         loadData() {
-            axios.get("/api/clients/current")
-                // { headers: { 'accept': 'application/xml' } }
+            axios.get("/api/clients/current")// { headers: { 'accept': 'application/xml' } }
                 .then(response => {
                     this.nameClient = response.data.firstName + " " + response.data.lastName
                     this.clientsAccounts = response.data.accounts.sort((a, b) => a.id - b.id).filter(account => account.active)
                     this.loans = response.data.loans
-                    this.json = JSON.stringify(response.data, null, 1);
                     this.loader = false
                 })
                 .catch((error) => console.error(error.message));
@@ -51,7 +48,7 @@ createApp({
                     } else {
                         Swal.fire('Your account was not saved', '', 'info')
                     }
-                })
+                }).catch((error) => error.response.data)
         },
     },
 }).mount("#app");

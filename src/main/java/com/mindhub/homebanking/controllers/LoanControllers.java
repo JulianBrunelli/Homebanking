@@ -14,6 +14,8 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import static com.mindhub.homebanking.utils.LoanUtils.calculateInterest;
+
 @RestController
 @RequestMapping(path = "/api")
 public class LoanControllers {
@@ -75,7 +77,10 @@ public class LoanControllers {
         if (clientLoanService.existsByClientAndLoan(clientAuth, loan)) {
             return new ResponseEntity<>("You cannot have two loans of the same type", HttpStatus.FORBIDDEN);
         }
-        double totalAmount = loanAppDTO.getAmount() + (loanAppDTO.getAmount() * 0.2);
+
+        double interest = calculateInterest(loan, loanAppDTO);
+
+        double totalAmount = loanAppDTO.getAmount() + (loanAppDTO.getAmount() * (interest / 100));
         ClientLoan clientLoan = new ClientLoan(totalAmount, loanAppDTO.getPayments());
 
         account.setBalance(account.getBalance() + loanAppDTO.getAmount());

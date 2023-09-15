@@ -10,7 +10,8 @@ createApp({
             selectOriginAccount: "",
             selectPayment: "",
             amount: 0,
-            finalAmount: null,
+            payments: [],
+            finalAmount: 0,
         };
     },
     created() {
@@ -31,8 +32,15 @@ createApp({
                 }).catch(error => console.error(error))
         },
         addLoan() {
+            this.payments = this.selectLoan.payments
+            this.calculoInteres()
             Swal.fire({
                 title: 'Confirm loan request',
+                html: `<p class="alertLoan">Loan:  ${this.selectLoan.name}</p>`
+                    + `<p class="alertLoan">Amount:  ${this.amount}</p>`
+                    + `<p class="alertLoan">Payments:  ${this.selectPayment}</p>`
+                    + `<p class="alertLoan">TotalAmount:  ${this.finalAmount}</p>`
+                    + `<p class="alertLoan">Origin account:  ${this.selectOriginAccount}</p>`,
                 showDenyButton: true,
                 confirmButtonText: 'Confirm',
                 denyButtonText: 'Cancel',
@@ -62,10 +70,7 @@ createApp({
                     } else {
                         Swal.fire('Changes are not saved', '', 'info')
                     }
-                })
-        },
-        porcent() {
-            this.finalAmount = this.amount + (this.amount * 0.2)
+                }).catch((error) => console.error(error))
         },
         signOut() {
             axios.post('/api/logout')
@@ -74,6 +79,32 @@ createApp({
                 })
                 .catch((error) => console.error(error.message));
         },
+        calculoInteres() {
+            if (this.selectPayment == 6) {
+                this.finalAmount = this.amount + (this.amount * 0.05)
+                return this.finalAmount;
+            }
+            else if (this.selectPayment == 12) {
+                this.finalAmount = this.amount + (this.amount * 0.1)
+                return this.finalAmount;
+            }
+            else if (this.selectPayment == 24) {
+                this.finalAmount = this.amount + (this.amount * 0.15)
+                return this.finalAmount;
+            }
+            else if (this.selectPayment == 36) {
+                this.finalAmount = this.amount + (this.amount * 0.20)
+                return this.finalAmount;
+            }
+            else if (this.selectPayment == 48) {
+                this.finalAmount = this.amount + (this.amount * 0.25)
+                return this.finalAmount;
+            }
+            else if (this.selectPayment == 60) {
+                this.finalAmount = this.amount + (this.amount * 0.30)
+                return this.finalAmount;
+            } else { return 0 };
+        }
     },
     computed: {
         makeover() {
@@ -88,6 +119,7 @@ createApp({
                     this.selectImage = "../images/loan-companies.jpg"
                     break;
                 default: this.selectImage = "../images/panas.jpg"
+                    break;
             }
         },
     }

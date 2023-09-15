@@ -42,7 +42,7 @@ createApp({
                 if (result.isConfirmed) {
                     axios.patch("/api/clients/current/cards/deactivate", `id=${id}`)
                         .then(response => {
-                            Swal.fire('Saved!', '', 'success')
+                            Swal.fire('Deleted card!', '', 'success')
                                 .then(response => {
                                     location.href = '../pages/cards.html'
                                 })
@@ -57,7 +57,7 @@ createApp({
                 } else {
                     Swal.fire('Changes are not saved', '', 'info')
                 }
-            })
+            }).catch((error) => console.error(error.message));
         },
         signOut() {
             axios.post('/api/logout')

@@ -77,6 +77,12 @@ public class AccountControllers {
         }
 
         Account account = accountService.findById(id);
+        Set<Account> accounts = client.getAccounts();
+        long accountActive = accounts.stream().filter(account1 -> account1.isActive()).count();
+
+        if(accountActive <= 1){
+            return new ResponseEntity<>("You cannot delete the only account you have.", HttpStatus.FORBIDDEN);
+        }
         if(account == null){
             return new ResponseEntity<>("Account not found", HttpStatus.FORBIDDEN);
         }
@@ -85,10 +91,6 @@ public class AccountControllers {
         }
         if(!account.isActive()){
             return new ResponseEntity<>("Account already disabled", HttpStatus.FORBIDDEN);
-        }
-        if(client.getAccounts().size() == 1){
-            return new ResponseEntity<>("You must have at least one account", HttpStatus.FORBIDDEN);
-
         }
         if(account.getBalance() != 0.0){
             return new ResponseEntity<>("The account you want to delete currently has money", HttpStatus.FORBIDDEN);
@@ -100,6 +102,6 @@ public class AccountControllers {
         account.setActive(false);
         accountService.saveAccount(account);
 
-        return new ResponseEntity<>("BIEN AHI BROTHER ASHEEEY",HttpStatus.OK);
+        return new ResponseEntity<>("Successfully deleted account",HttpStatus.OK);
     }
 }

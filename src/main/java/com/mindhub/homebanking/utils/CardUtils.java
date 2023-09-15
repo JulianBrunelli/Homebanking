@@ -1,7 +1,5 @@
 package com.mindhub.homebanking.utils;
 
-import com.mindhub.homebanking.service.CardService;
-
 public final class CardUtils {
     public static String getCardNumber() {
         return (int) (Math.random() * (9000 - 4000) + 4000)
@@ -20,4 +18,5 @@ public final class CardUtils {
         random = "VIN-" + number;
         return random;
     }
+
 }

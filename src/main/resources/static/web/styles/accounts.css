@@ -774,19 +774,19 @@ footer {
 /* TABLE */
 .table-container {
     width: 100%;
-    height: 16vh;
+    height: 30vh;
     display: flex;
     align-items: start;
     justify-content: start;
     margin-top: 2rem;
     margin-bottom: 2rem;
-    background-color: var(--background);
     overflow: auto;
     white-space: initial;
 }
 
 .table-details {
     width: 100%;
+    background-color: var(--background);
 }
 
 td,

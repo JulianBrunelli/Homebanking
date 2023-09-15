@@ -20,7 +20,7 @@ createApp({
                 Swal.fire({
                     icon: 'error',
                     title: 'Oops...',
-                    text: 'Be sure to fill in the fields correctly',
+                    text: error.response.data,
                 })
             }
         },
@@ -38,7 +38,7 @@ createApp({
                     Swal.fire({
                         icon: 'error',
                         title: 'Oops...',
-                        text: 'The password or username is incorrect',
+                        text: error.response.data,
                     })
                 })
         },
@@ -59,6 +59,9 @@ createApp({
                 }
                 if (this.lastName == "") {
                     alert("Please provide a last name")
+                }
+                if (this.email == "") {
+                    alert("Please provide an email")
                 }
                 if (this.password == "") {
                     alert("Please provide a password")

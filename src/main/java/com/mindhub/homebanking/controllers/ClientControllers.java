@@ -2,6 +2,7 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.service.AccountService;
 import com.mindhub.homebanking.service.ClientService;
@@ -56,7 +57,7 @@ public class ClientControllers {
         Client newClient = new Client(firstName, lastName,email.toLowerCase(), passwordEncoder.encode(password));
         clientService.save(newClient);
         String number = randomNumber();
-        Account account = new Account(number, LocalDate.now(),0.0,true);
+        Account account = new Account(number, LocalDate.now(),0.0,true,AccountType.CURRENT);
         newClient.addAccount(account);
         accountService.saveAccount(account);
         return new ResponseEntity<>(HttpStatus.CREATED);

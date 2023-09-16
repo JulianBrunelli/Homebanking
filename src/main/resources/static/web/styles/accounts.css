@@ -846,6 +846,42 @@ th {
 
 /* CONTAINER PHONE */
 
+/* SWEET ALERT ACCOUNTS */
+
+.form-check-label {
+    font-weight: 400;
+    cursor: pointer;
+}
+
+.form-check-input {
+    border: 1px solid black;
+}
+
+.form-check-input:hover {
+    border: 1px solid var(--background);
+    background-color: rgb(241, 245, 31);
+}
+
+.form-control,
+.form-check-input {
+    cursor: pointer;
+}
+
+.swal2-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-around;
+    gap: 1rem;
+}
+
+.swal2-popup {
+    height: 55vh;
+    gap: 1.5rem;
+}
+
+/* SWEET ALERT ACCOUNTS */
+
 @media only screen and (min-width: 768px) and (max-width: 1023px) {
 
     header img {

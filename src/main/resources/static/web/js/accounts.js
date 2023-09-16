@@ -6,6 +6,7 @@ createApp({
             nameClient: "",
             clientsAccounts: [],
             loans: [],
+            accountType: "",
             loader: true,
         };
     },
@@ -39,12 +40,35 @@ createApp({
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        axios.post("/api/clients/current/accounts")
-                            .then(response => {
-                                Swal.fire('Account saved!', '', 'success').then(response => {
-                                    location.href = '../pages/accounts.html'
-                                })
-                            })
+                        Swal.fire({
+                            title: 'Please select an account type',
+                            html: `<section class="container-type">
+                            <h2 class="mb-4 w-100">Account type</h2>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="accountType" id="SAVING"
+                                    value="SAVING">
+                                <label class="form-check-label mb-2" for="SAVING">
+                                    SAVING
+                                </label>
+                            </div>
+                            <div class="form-check">
+                                <input class="form-check-input" type="radio" name="accountType" id="CURRENT"
+                                    value="CURRENT">
+                                <label class="form-check-label" for="CURRENT">
+                                    CURRENT
+                                </label>
+                            </div>
+                        </section>`
+                        })
+                            .then((result) => {
+                                const selected = document.querySelector("input[name=accountType]:checked")
+                                axios.post("/api/clients/current/accounts", `type=${selected.value}`)
+                                    .then(response => {
+                                        Swal.fire('Account saved!', '', 'success').then(response => {
+                                            location.href = '../pages/accounts.html'
+                                        })
+                                    })
+                            }).catch((error) => error.response.data)
                     } else {
                         Swal.fire('Your account was not saved', '', 'info')
                     }

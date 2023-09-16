@@ -2,6 +2,7 @@ package com.mindhub.homebanking.controllers;
 
 import com.mindhub.homebanking.dtos.AccountDTO;
 import com.mindhub.homebanking.models.Account;
+import com.mindhub.homebanking.models.AccountType;
 import com.mindhub.homebanking.models.Client;
 import com.mindhub.homebanking.models.Transaction;
 import com.mindhub.homebanking.repositories.TransactionRepository;
@@ -46,8 +47,8 @@ public class AccountControllers {
     }
     @GetMapping("/clients/accounts/{id}")
     public ResponseEntity<Object> getAccount(@PathVariable Long id, Authentication authentication){
-        if (clientService.findByEmail(authentication.getName()).getAccounts() != null){
-            Client client = clientService.findByEmail(authentication.getName());
+        Client client = clientService.findByEmail(authentication.getName());
+        if (client.getAccounts() != null){
             Account account = client.getAccounts().stream().filter(account1 -> account1.getId() == id).findFirst().orElse(null);
             return new ResponseEntity<>(new AccountDTO(account), HttpStatus.OK);
         } else {
@@ -56,15 +57,25 @@ public class AccountControllers {
     }
 
     @PostMapping("/clients/current/accounts")
-    public ResponseEntity<Object>newAccount(Authentication authentication){
-        if (clientService.findByEmail(authentication.getName()).getAccounts().size() <= 2){
-            String accountNumber = randomNumber();
-            Account account = new Account(accountNumber, LocalDate.now(),0.0,true);
-            clientService.findByEmail(authentication.getName()).addAccount(account);
-            accountService.saveAccount(account);
-        }else{
+    public ResponseEntity<Object>newAccount(@RequestParam String type, Authentication authentication){
+        Client clientAuth = clientService.findByEmail(authentication.getName());
+        if(clientAuth == null){
+            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
+        }
+        if(type == null || type.isBlank()){
+            return new ResponseEntity<>("Type not found", HttpStatus.FORBIDDEN);
+        }
+        if( !type.equals("CURRENT") && !type.equals("SAVINGS") ){
+            return new ResponseEntity<>("Select a valid type", HttpStatus.FORBIDDEN);
+        }
+        if(clientAuth.getAccounts().size() >= 3){
             return new ResponseEntity<>("Failed to create account because the maximum number of accounts is 3", HttpStatus.FORBIDDEN);
         }
+        String accountNumber = randomNumber();
+        AccountType accountType =  AccountType.valueOf(type);
+        Account account = new Account(accountNumber, LocalDate.now(),0.0,true,accountType);
+        clientAuth.addAccount(account);
+        accountService.saveAccount(account);
         return new ResponseEntity<>("Your account was successfully created", HttpStatus.CREATED);
     }
 

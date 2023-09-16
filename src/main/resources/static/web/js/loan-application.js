@@ -36,11 +36,11 @@ createApp({
             this.calculoInteres()
             Swal.fire({
                 title: 'Confirm loan request',
-                html: `<p class="alertLoan">Loan:  ${this.selectLoan.name}</p>`
-                    + `<p class="alertLoan">Amount:  ${this.amount}</p>`
-                    + `<p class="alertLoan">Payments:  ${this.selectPayment}</p>`
-                    + `<p class="alertLoan">TotalAmount:  ${this.finalAmount}</p>`
-                    + `<p class="alertLoan">Origin account:  ${this.selectOriginAccount}</p>`,
+                html: `<p class="alertLoan">Loan:  ${this.selectLoan.name}</p>
+                    <p class="alertLoan">Amount:  ${this.amount}</p>
+                    <p class="alertLoan">Payments:  ${this.selectPayment}</p>
+                    <p class="alertLoan">Amount payable:  ${this.finalAmount}</p>
+                    <p class="alertLoan">Origin account:  ${this.selectOriginAccount}</p>`,
                 showDenyButton: true,
                 confirmButtonText: 'Confirm',
                 denyButtonText: 'Cancel',

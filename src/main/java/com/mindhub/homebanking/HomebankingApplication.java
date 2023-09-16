@@ -33,7 +33,7 @@ public class HomebankingApplication {
 									  LoanRepository repositoryLoan, ClientLoanRepository repositoryClientLoan, CardRepository repositoryCard) {
 		return (args) -> {
 
-			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan, 5);
+			Loan mortgageLoan = new Loan("Mortgage", 500000, this.mortgageLoan, 10);
 			Loan carLoan = new Loan("Car", 300000, this.carLoan,5);
 			Loan personalLoan = new Loan("Personal", 100000, this.personalLoan,5);
 
@@ -46,8 +46,8 @@ public class HomebankingApplication {
 
 			Client melbaMorel = new Client("Melba", "Morel", "melba@mindhub.com", passwordEncoder.encode("1234"));
 
-			Account firstAccount = new Account("VIN-001", this.localDate, 5000, true);
-			Account secondAccount = new Account("VIN-002", this.localDateOneDay, 7500, true);
+			Account firstAccount = new Account("VIN-001", this.localDate, 5000, true, AccountType.CURRENT);
+			Account secondAccount = new Account("VIN-002", this.localDateOneDay, 7500, true, AccountType.SAVINGS);
 
 			Transaction firstTransaction = new Transaction(7000, "Supplies",this.localDateTime, TransactionType.CREDIT, 0);
 			Transaction secondTransaction = new Transaction(-8000, "Supplies",this.localDateTime, TransactionType.DEBIT, 0);
@@ -94,8 +94,8 @@ public class HomebankingApplication {
 
 			Client chloeOBrian = new Client("Chloe", "O'Brian","chloeobrian@gmail.com",passwordEncoder.encode("Hola2341"));
 
-			Account thirdAccount = new Account("VIN-003", this.localDate, 8000, true);
-			Account fourthAccount = new Account("VIN-004", this.localDateOneDay, 10000, true);
+			Account thirdAccount = new Account("VIN-003", this.localDate, 8000, true, AccountType.CURRENT);
+			Account fourthAccount = new Account("VIN-004", this.localDateOneDay, 10000, true, AccountType.SAVINGS);
 
 			Transaction thirdTransaction = new Transaction(5000, "Supplies",this.localDateTime, TransactionType.CREDIT, 0);
 			Transaction fourthTransaction = new Transaction(-10000, "Supplies",this.localDateTime, TransactionType.DEBIT, 0);

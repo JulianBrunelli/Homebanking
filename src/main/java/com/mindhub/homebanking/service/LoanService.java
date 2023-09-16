@@ -11,4 +11,5 @@ public interface LoanService {
     Loan findById(long id);
     void save(Loan newLoan);
 
+    Loan findByName(String name);
 }

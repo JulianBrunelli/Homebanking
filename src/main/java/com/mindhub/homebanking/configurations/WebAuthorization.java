@@ -20,10 +20,12 @@ public class WebAuthorization {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception{
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST,"/api/clients","/api/login","/api/logout").permitAll()
-                .antMatchers("/web/pages/index.html","/web/styles/**","/web/js/**","/web/images/**").permitAll()
-                .antMatchers("/admin/**","/rest/**","/api/clients").hasAuthority("ADMIN")
-                .antMatchers("/web/**").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.GET,"/api/clients/current/**","/api/clients/accounts/{id}","/api/clients/cards/{id}","/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.GET,"/web/pages/index.html","/web/styles/**","/web/js/**","/web/images/**").permitAll()
+
+                .antMatchers(HttpMethod.GET,"/admin/**","/rest/**","/api/clients").hasAuthority("ADMIN")
+                .antMatchers(HttpMethod.POST,"/api/loans/create").hasAuthority("ADMIN")
+
+                .antMatchers(HttpMethod.GET,"/web/**","/api/clients/current/**","/api/clients/accounts/{id}","/api/clients/cards/{id}","/api/loans").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.POST,"/api/clients/current/accounts","/api/clients/current/cards","/api/transactions","/api/loans").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.PATCH,"/api/clients/current/cards/deactivate","/api/clients/current/accounts/deactivate").hasAuthority("CLIENT")
                 .anyRequest().denyAll();

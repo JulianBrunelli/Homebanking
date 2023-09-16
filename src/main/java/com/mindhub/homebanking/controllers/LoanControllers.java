@@ -96,4 +96,34 @@ public class LoanControllers {
 
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
+
+    @PostMapping("/loans/create")
+    public ResponseEntity<Object> createLoan(@RequestBody LoanDTO loanDTO, Authentication authentication) {
+
+        Client clientAuth = clientService.findByEmail(authentication.getName());
+        if (clientAuth == null) {
+            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
+        }
+
+        Loan loan = loanService.findByName(loanDTO.getName());
+        if(loan != null){
+            return new ResponseEntity<>("Loan already exists", HttpStatus.FORBIDDEN);
+        }
+        if(loanDTO.getName() == null || loanDTO.getName().isBlank()){
+            return new ResponseEntity<>("Please enter a name", HttpStatus.FORBIDDEN);
+        }
+        if(loanDTO.getMaxAmount() <= 1000){
+            return new ResponseEntity<>("You cannot enter an amount less than or equal to 1000", HttpStatus.FORBIDDEN);
+        }
+        if (loanDTO.getPayments() == null || loanDTO.getPayments().toString().isBlank()) {
+            return new ResponseEntity<>("The selected quota is not valid", HttpStatus.FORBIDDEN);
+        }
+        if(loanDTO.getInterest() <= 0){
+            return new ResponseEntity<>("You must select an initial interest", HttpStatus.FORBIDDEN);
+        }
+        Loan newLoan = new Loan(loanDTO.getName(), loanDTO.getMaxAmount(), loanDTO.getPayments(), loanDTO.getInterest());
+        loanService.save(newLoan);
+
+        return new ResponseEntity<>("Loan created successfully",HttpStatus.CREATED);
+    }
 }

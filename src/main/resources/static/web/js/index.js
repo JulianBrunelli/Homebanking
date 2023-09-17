@@ -29,7 +29,7 @@ createApp({
                 { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
                 .then(response => {
                     if (this.email == "julianbrunelli@outlook.com") {
-                        location.href = "../../admin/manager.html"
+                        location.href = "../../admin/pages/manager.html"
                     } else {
                         location.href = "./accounts.html"
                     }

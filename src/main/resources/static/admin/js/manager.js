@@ -16,7 +16,7 @@ createApp({
     },
     methods: {
         loadData() {
-            axios.get("http://localhost:8080/rest/clients")
+            axios.get("/rest/clients")
                 .then(response => {
                     this.clients = response.data._embedded.clients
                     this.json = JSON.stringify(response.data, null, 1);
@@ -33,7 +33,7 @@ createApp({
         },
         addClient() {
             let newClient = { firstName: this.firstName, lastName: this.lastName, email: this.email }
-            axios.post("http://localhost:8080/rest/clients", newClient)
+            axios.post("/rest/clients", newClient)
                 .then(response => {
                     this.clients.push(response.data)
                     this.firstName = "",

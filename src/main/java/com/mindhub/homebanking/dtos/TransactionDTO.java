@@ -11,9 +11,7 @@ public class TransactionDTO {
     private double amount;
     private String description;
     private LocalDateTime date;
-
     private double balance;
-
     private boolean isActive;
 
     public TransactionDTO(){

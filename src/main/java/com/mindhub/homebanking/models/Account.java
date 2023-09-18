@@ -1,8 +1,10 @@
 package com.mindhub.homebanking.models;
+import com.mindhub.homebanking.dtos.AccountDTO;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -36,6 +38,9 @@ public class Account {
         this.balance = balance;
         this.isActive = isActive;
         this.type = type;
+    }
+
+    public Account(AccountDTO accountSelect) {
     }
 
     public Set<Transaction> getTransaction() {
@@ -110,4 +115,5 @@ public class Account {
                 ", balance=" + balance +
                 '}';
     }
+
 }

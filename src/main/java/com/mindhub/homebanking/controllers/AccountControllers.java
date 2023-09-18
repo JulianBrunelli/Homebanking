@@ -87,7 +87,7 @@ public class AccountControllers {
             return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
         }
 
-        Account account = accountService.findById(id);
+        Account account = client.getAccounts().stream().filter(account1 -> account1.getId() == id).findFirst().orElse(null);
         Set<Account> accounts = client.getAccounts();
         long accountActive = accounts.stream().filter(account1 -> account1.isActive()).count();
 

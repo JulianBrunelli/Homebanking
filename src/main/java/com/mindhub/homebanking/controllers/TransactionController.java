@@ -1,5 +1,9 @@
 package com.mindhub.homebanking.controllers;
 
+import com.mindhub.homebanking.dtos.AccountDTO;
+import com.mindhub.homebanking.dtos.CardDTO;
+import com.mindhub.homebanking.dtos.CardTransactionDTO;
+import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.service.AccountService;
 import com.mindhub.homebanking.service.ClientService;
@@ -12,6 +16,8 @@ import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.time.chrono.ChronoLocalDate;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -30,40 +36,41 @@ public class TransactionController {
     @PostMapping("/transactions")
     public ResponseEntity<Object> createTransaction(
             Authentication authentication, @RequestParam double amount, @RequestParam String description,
-            @RequestParam String originAccountNumber, @RequestParam String destinationAccountNumber){
+            @RequestParam String originAccountNumber, @RequestParam String destinationAccountNumber) {
 
         Client client = clientService.findByEmail(authentication.getName());
-        Account originAccount = client.getAccounts().stream().filter(account -> account.getNumber().equals(originAccountNumber)).findFirst().orElse(null);
-        Account destinationAccount = accountService.findByNumber(destinationAccountNumber);
-
-        if (client == null){
+        if (client == null) {
             return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
         }
-        if(originAccount == null){
+
+        Account originAccount = client.getAccounts().stream().filter(account -> account.getNumber().equals(originAccountNumber)).findFirst().orElse(null);
+        if (originAccount == null) {
             return new ResponseEntity<>("Origin account not found", HttpStatus.FORBIDDEN);
         }
-        if(destinationAccount == null){
+
+        Account destinationAccount = accountService.findByNumber(destinationAccountNumber);
+        if (destinationAccount == null) {
             return new ResponseEntity<>("Destination account not found", HttpStatus.FORBIDDEN);
         }
-        if (originAccount.getNumber().equals(destinationAccount.getNumber())){
+        if (originAccount.getNumber().equals(destinationAccount.getNumber())) {
             return new ResponseEntity<>("Source and destination accounts can't be the same", HttpStatus.FORBIDDEN);
         }
-        if(amount <= 0){
+        if (amount <= 0) {
             return new ResponseEntity<>("Please enter an amount greater than 0", HttpStatus.FORBIDDEN);
         }
-        if(description.isBlank()){
+        if (description.isBlank()) {
             return new ResponseEntity<>("Please enter a description", HttpStatus.FORBIDDEN);
         }
-        if(description.length() > 15){
+        if (description.length() > 15) {
             return new ResponseEntity<>("Description can't be longer than 15 characters", HttpStatus.FORBIDDEN);
         }
-        if (originAccount.getBalance() < amount){
+        if (originAccount.getBalance() < amount) {
             return new ResponseEntity<>("Not enough money in the account", HttpStatus.FORBIDDEN);
         } else {
             originAccount.setBalance(originAccount.getBalance() - amount);
             destinationAccount.setBalance(destinationAccount.getBalance() + amount);
-            Transaction transactionDebit = new Transaction(amount * - 1, description, LocalDateTime.now(), TransactionType.DEBIT,originAccount.getBalance());
-            Transaction transactionCredit = new Transaction(amount, description, LocalDateTime.now(), TransactionType.CREDIT,destinationAccount.getBalance());
+            Transaction transactionDebit = new Transaction(amount * -1, description, LocalDateTime.now(), TransactionType.DEBIT, originAccount.getBalance());
+            Transaction transactionCredit = new Transaction(amount, description, LocalDateTime.now(), TransactionType.CREDIT, destinationAccount.getBalance());
             originAccount.addTransaction(transactionDebit);
             destinationAccount.addTransaction(transactionCredit);
             transactionService.saveTransaction(transactionDebit);
@@ -72,4 +79,51 @@ public class TransactionController {
         }
     }
 
+    @Transactional
+    @PostMapping("/transactions/cards")
+    public ResponseEntity<Object> createCardsTransaction(@RequestParam Long id, @RequestBody CardTransactionDTO cardTransactionDTO) {
+
+        ClientDTO client = clientService.findById(id);
+        if(client == null){
+            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
+        }
+        CardDTO cardDTO = client.getCards().stream().filter(card1 -> card1.getNumber().equals(cardTransactionDTO.getNumber())).findFirst().orElse(null);
+        if(cardDTO == null){
+            return new ResponseEntity<>("Card not found", HttpStatus.FORBIDDEN);
+        }
+        if(!cardDTO.isActive()){
+            return new ResponseEntity<>("Card not active", HttpStatus.FORBIDDEN);
+        }
+        if(cardDTO.getFromDate().isBefore(ChronoLocalDate.from(LocalDateTime.now()))){
+            return new ResponseEntity<>("Card is not active", HttpStatus.FORBIDDEN);
+        }
+        if(cardDTO.getCvv() != cardTransactionDTO.getCvv()){
+            return new ResponseEntity<>("CVV does not match", HttpStatus.FORBIDDEN);
+        }
+
+        Set<AccountDTO> account = client.getAccounts();
+        AccountDTO accountSelect = account.stream().filter(account1 -> account1.getBalance() >= cardTransactionDTO.getAmount()).findFirst().orElse(null);
+        if(accountSelect == null){
+            return new ResponseEntity<>("Insufficient balance", HttpStatus.FORBIDDEN);
+        }
+        Account accountPay = new Account(accountSelect);
+
+        if(cardTransactionDTO.getAmount() <= 0){
+            return new ResponseEntity<>("Please enter an amount greater than 0", HttpStatus.FORBIDDEN);
+        }
+
+        if(cardTransactionDTO.getDescription().isBlank()){
+            return new ResponseEntity<>("Please enter a description", HttpStatus.FORBIDDEN);
+        }
+        if(cardTransactionDTO.getDescription().length() > 15){
+            return new ResponseEntity<>("Description can't be longer than 15 characters", HttpStatus.FORBIDDEN);
+
+        }
+
+        Transaction transaction = new Transaction(cardTransactionDTO.getAmount(), cardTransactionDTO.getDescription(), LocalDateTime.now(), TransactionType.DEBIT, accountPay.getBalance());
+        accountPay.addTransaction(transaction);
+        accountPay.setBalance(accountPay.getBalance() - cardTransactionDTO.getAmount());
+        transactionService.saveTransaction(transaction);
+        return new ResponseEntity<>("Transaction created", HttpStatus.CREATED);
+    }
 }

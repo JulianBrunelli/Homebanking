@@ -1,5 +1,6 @@
 package com.mindhub.homebanking.models;
 
+import com.mindhub.homebanking.dtos.AccountDTO;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
@@ -11,10 +12,10 @@ public class Transaction {
     @GeneratedValue(strategy = GenerationType.AUTO, generator = "native")
     @GenericGenerator(name = "native", strategy = "native")
     private long id;
-    private TransactionType type;
     private double amount;
     private String description;
     private LocalDateTime date;
+    private TransactionType type;
     private double balance;
     private boolean isActive;
 
@@ -91,4 +92,5 @@ public class Transaction {
     public void setActive(boolean active) {
         isActive = active;
     }
+
 }

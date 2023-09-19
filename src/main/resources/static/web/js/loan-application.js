@@ -9,7 +9,7 @@ createApp({
             originAccounts: [],
             selectOriginAccount: "",
             selectPayment: "",
-            amount: 0,
+            amount: null,
             payments: [],
             finalAmount: 0,
         };
@@ -81,27 +81,27 @@ createApp({
         },
         calculoInteres() {
             if (this.selectPayment == 6) {
-                this.finalAmount = this.amount + (this.amount * 0.05)
+                this.finalAmount = this.amount + (this.amount * 0.075)
                 return this.finalAmount;
             }
             else if (this.selectPayment == 12) {
-                this.finalAmount = this.amount + (this.amount * 0.1)
+                this.finalAmount = this.amount + (this.amount * 0.105)
                 return this.finalAmount;
             }
             else if (this.selectPayment == 24) {
-                this.finalAmount = this.amount + (this.amount * 0.15)
+                this.finalAmount = this.amount + (this.amount * 0.165)
                 return this.finalAmount;
             }
             else if (this.selectPayment == 36) {
-                this.finalAmount = this.amount + (this.amount * 0.20)
+                this.finalAmount = this.amount + (this.amount * 0.225)
                 return this.finalAmount;
             }
             else if (this.selectPayment == 48) {
-                this.finalAmount = this.amount + (this.amount * 0.25)
+                this.finalAmount = this.amount + (this.amount * 0.335)
                 return this.finalAmount;
             }
             else if (this.selectPayment == 60) {
-                this.finalAmount = this.amount + (this.amount * 0.30)
+                this.finalAmount = this.amount + (this.amount * 0.395)
                 return this.finalAmount;
             } else { return 0 };
         }

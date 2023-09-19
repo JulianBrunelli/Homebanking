@@ -6,6 +6,7 @@ import com.mindhub.homebanking.dtos.CardTransactionDTO;
 import com.mindhub.homebanking.dtos.ClientDTO;
 import com.mindhub.homebanking.models.*;
 import com.mindhub.homebanking.service.AccountService;
+import com.mindhub.homebanking.service.CardService;
 import com.mindhub.homebanking.service.ClientService;
 import com.mindhub.homebanking.service.TransactionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.time.chrono.ChronoLocalDate;
+import java.util.List;
 import java.util.Set;
 
 @RestController
@@ -31,6 +33,9 @@ public class TransactionController {
 
     @Autowired
     private TransactionService transactionService;
+
+    @Autowired
+    private CardService cardService;
 
     @Transactional
     @PostMapping("/transactions")
@@ -81,32 +86,30 @@ public class TransactionController {
 
     @Transactional
     @PostMapping("/transactions/cards")
-    public ResponseEntity<Object> createCardsTransaction(@RequestParam Long id, @RequestBody CardTransactionDTO cardTransactionDTO) {
+    public ResponseEntity<Object> createCardsTransaction(@RequestParam long id, @RequestBody CardTransactionDTO cardTransactionDTO) {
 
-        ClientDTO client = clientService.findById(id);
-        if(client == null){
-            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
-        }
-        CardDTO cardDTO = client.getCards().stream().filter(card1 -> card1.getNumber().equals(cardTransactionDTO.getNumber())).findFirst().orElse(null);
-        if(cardDTO == null){
+        Card card = cardService.findByNumber(cardTransactionDTO.getNumber());
+        if(card == null){
             return new ResponseEntity<>("Card not found", HttpStatus.FORBIDDEN);
         }
-        if(!cardDTO.isActive()){
+        if(!card.isActive()){
             return new ResponseEntity<>("Card not active", HttpStatus.FORBIDDEN);
         }
-        if(cardDTO.getFromDate().isBefore(ChronoLocalDate.from(LocalDateTime.now()))){
+        if(card.getFromDate().isBefore(ChronoLocalDate.from(LocalDateTime.now()))){
             return new ResponseEntity<>("Card is not active", HttpStatus.FORBIDDEN);
         }
-        if(cardDTO.getCvv() != cardTransactionDTO.getCvv()){
+        if(card.getCvv() != cardTransactionDTO.getCvv()){
             return new ResponseEntity<>("CVV does not match", HttpStatus.FORBIDDEN);
         }
 
-        Set<AccountDTO> account = client.getAccounts();
+        ClientDTO clientDTO = clientService.findById(id);
+        Set<AccountDTO> account = clientDTO.getAccounts();
         AccountDTO accountSelect = account.stream().filter(account1 -> account1.getBalance() >= cardTransactionDTO.getAmount()).findFirst().orElse(null);
+        Account accountPayment = new Account(accountSelect);
+
         if(accountSelect == null){
             return new ResponseEntity<>("Insufficient balance", HttpStatus.FORBIDDEN);
         }
-        Account accountPay = new Account(accountSelect);
 
         if(cardTransactionDTO.getAmount() <= 0){
             return new ResponseEntity<>("Please enter an amount greater than 0", HttpStatus.FORBIDDEN);
@@ -120,10 +123,11 @@ public class TransactionController {
 
         }
 
-        Transaction transaction = new Transaction(cardTransactionDTO.getAmount(), cardTransactionDTO.getDescription(), LocalDateTime.now(), TransactionType.DEBIT, accountPay.getBalance());
-        accountPay.addTransaction(transaction);
-        accountPay.setBalance(accountPay.getBalance() - cardTransactionDTO.getAmount());
+        Transaction transaction = new Transaction(cardTransactionDTO.getAmount(), cardTransactionDTO.getDescription(), LocalDateTime.now(), TransactionType.DEBIT, accountSelect.getBalance());
+        accountPayment.addTransaction(transaction);
+        accountPayment.setBalance(accountPayment.getBalance() - cardTransactionDTO.getAmount());
         transactionService.saveTransaction(transaction);
+        accountService.saveAccount(accountPayment);
         return new ResponseEntity<>("Transaction created", HttpStatus.CREATED);
     }
 }

@@ -8,6 +8,8 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,16 +19,29 @@ import java.util.List;
 public class HomebankingApplication {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
-	private LocalDate localDate = LocalDate.now();
-	private LocalDate localDateExpires = LocalDate.now().plusYears(5);
-	private LocalDate localDateOneDay = LocalDate.now().plusDays(1);
-	private LocalDateTime localDateTime = LocalDateTime.now();
-	private List<Integer> mortgageLoan = List.of(12,24,36,48,60);
-	private List<Integer> carLoan = List.of(6,12,24,36);
-	private List<Integer> personalLoan = List.of(6,12,24);
+	private final LocalDate localDate = LocalDate.now();
+	private final LocalDate localDateExpires = LocalDate.now().plusYears(5);
+	private final LocalDate localDateOneDay = LocalDate.now().plusDays(1);
+	private final LocalDateTime localDateTime = LocalDateTime.now();
+	private final List<Integer> mortgageLoan = List.of(12,24,36,48,60);
+	private final List<Integer> carLoan = List.of(6,12,24,36);
+	private final List<Integer> personalLoan = List.of(6,12,24);
 
 	public static void main(String[] args) {
 		SpringApplication.run(HomebankingApplication.class);
+	}
+	@Bean
+	public WebMvcConfigurer corsConfigurer() {
+		return new WebMvcConfigurer() {
+			@Override
+			public void addCorsMappings(CorsRegistry registry) {
+				registry.addMapping("/**")
+						.allowCredentials(true)
+						.allowedHeaders("*")
+						.allowedMethods("*")
+						.allowedOrigins("**");
+			}
+		};
 	}
 	@Bean
 	public CommandLineRunner initData(ClientRepository repositoryClient, AccountRepository repositoryAccount, TransactionRepository repositoryTransaction,

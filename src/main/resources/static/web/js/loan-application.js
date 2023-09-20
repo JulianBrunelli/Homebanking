@@ -55,7 +55,7 @@ createApp({
                         }
                         axios.post("/api/loans", object)
                             .then(response => {
-                                Swal.fire('Saved!', '', 'success')
+                                Swal.fire('Saved loan!', '', 'success')
                                     .then(response => {
                                         location.href = '../pages/accounts.html'
                                     })

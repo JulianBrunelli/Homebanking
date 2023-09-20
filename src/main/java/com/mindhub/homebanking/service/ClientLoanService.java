@@ -9,4 +9,5 @@ public interface ClientLoanService {
 
     void save(ClientLoan clientLoan);
 
+    ClientLoan findById(long id);
 }

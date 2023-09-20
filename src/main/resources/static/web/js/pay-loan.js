@@ -3,13 +3,12 @@ const { createApp } = Vue;
 createApp({
     data() {
         return {
-            sourceAccount: [],
-            destinationAccount: "",
-            originAccount: "",
-            description: "",
-            amount: null,
-            destination: null,
-            loader: true,
+            loans: [],
+            selectLoan: "",
+            originAccounts: [],
+            selectOriginAccount: "",
+            amounts: [],
+            amount: 0,
         };
     },
     created() {
@@ -17,25 +16,29 @@ createApp({
     },
     methods: {
         loadData() {
-            axios.get("/api/clients/current")
+            axios.get('/api/clients/current')
                 .then(response => {
-                    this.sourceAccount = response.data.accounts.sort((a, b) => b.balance - a.balance).filter(account => account.active)
-                    this.numberAccounts = this.sourceAccount.map(account => account.number)
-                    this.loader = false
-                })
+                    this.originAccounts = response.data.accounts
+                    this.loans = response.data.loans
+                    this.amounts = this.selectLoan.amount
+                    console.log(this.selectOriginAccount);
+                    console.log(this.loans);
+                }).catch(error => console.error(error))
         },
-        addTransaction() {
+        payLoan() {
+            console.log(this.selectOriginAccount);
+            console.log(this.amount);
             Swal.fire({
-                title: 'Are you sure you want to make the transaction?',
+                title: 'Do you want to pay a fee?',
                 showDenyButton: true,
                 confirmButtonText: 'Carry out',
                 denyButtonText: 'Cancel',
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        axios.post("/api/transactions", `amount=${this.amount}&description=${this.description}&originAccountNumber=${this.originAccount}&destinationAccountNumber=${this.destinationAccount}`)
+                        axios.patch("/api/transactions/loans/current/pay", `idClientLoan=${this.selectLoan.id}&idAccount=${this.selectOriginAccount}&amount=${this.amount}`)
                             .then(response => {
-                                Swal.fire('Transaction made!', '', 'success').then(response => {
+                                Swal.fire('A fee has been paid!', '', 'success').then(response => {
                                     location.href = './accounts.html'
                                 })
                             })
@@ -59,4 +62,6 @@ createApp({
                 .catch((error) => console.error(error.message));
         },
     },
+    computed: {
+    }
 }).mount("#app");

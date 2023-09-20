@@ -34,6 +34,7 @@ public class LoanControllers {
     public List<LoanDTO> getLoansDTO() {
         return loanService.getLoansDTO();
     }
+
     @Transactional
     @PostMapping("/loans")
     public ResponseEntity<Object> createLoan(@RequestBody LoanApplicationDTO loanAppDTO, Authentication authentication) {
@@ -50,13 +51,13 @@ public class LoanControllers {
         if (loan == null) {
             return new ResponseEntity<>("Loan not found", HttpStatus.FORBIDDEN);
         }
-        if(loanAppDTO.getAmount() <= 0){
+        if (loanAppDTO.getAmount() <= 0) {
             return new ResponseEntity<>("You cannot enter an amount less than or equal to 0", HttpStatus.FORBIDDEN);
         }
         if (loanAppDTO.getPayments() == null) {
             return new ResponseEntity<>("The selected quota is not valid", HttpStatus.FORBIDDEN);
         }
-        if(loanAppDTO.getAmount() > loan.getMaxAmount()){
+        if (loanAppDTO.getAmount() > loan.getMaxAmount()) {
             return new ResponseEntity<>("Amount must be less than or equal to " + loan.getMaxAmount(), HttpStatus.FORBIDDEN);
         }
         if (!loan.getPayments().contains(loanAppDTO.getPayments())) {
@@ -65,13 +66,13 @@ public class LoanControllers {
 
         Account account = accountService.findByNumber(loanAppDTO.getNumberAccountDestination());
 
-        if(loanAppDTO.getNumberAccountDestination().isBlank()){
+        if (loanAppDTO.getNumberAccountDestination().isBlank()) {
             return new ResponseEntity<>("Please enter an account number", HttpStatus.FORBIDDEN);
         }
         if (account == null) {
             return new ResponseEntity<>("No similar account was found in our records.", HttpStatus.FORBIDDEN);
         }
-        if(!clientAuth.getAccounts().contains(account)){
+        if (!clientAuth.getAccounts().contains(account)) {
             return new ResponseEntity<>("The provided account does not belong to the authenticated client", HttpStatus.FORBIDDEN);
         }
         if (clientLoanService.existsByClientAndLoan(clientAuth, loan)) {
@@ -81,7 +82,7 @@ public class LoanControllers {
         double interest = calculateInterest(loan, loanAppDTO);
 
         double totalAmount = loanAppDTO.getAmount() + (loanAppDTO.getAmount() * (interest / 100));
-        ClientLoan clientLoan = new ClientLoan(totalAmount, loanAppDTO.getPayments());
+        ClientLoan clientLoan = new ClientLoan(totalAmount, loanAppDTO.getPayments(), true);
 
         account.setBalance(account.getBalance() + loanAppDTO.getAmount());
         clientLoan.setClient(clientAuth);
@@ -106,24 +107,77 @@ public class LoanControllers {
         }
 
         Loan loan = loanService.findByName(loanDTO.getName());
-        if(loan != null){
+        if (loan != null) {
             return new ResponseEntity<>("Loan already exists", HttpStatus.FORBIDDEN);
         }
-        if(loanDTO.getName() == null || loanDTO.getName().isBlank()){
+        if (loanDTO.getName() == null || loanDTO.getName().isBlank()) {
             return new ResponseEntity<>("Please enter a name", HttpStatus.FORBIDDEN);
         }
-        if(loanDTO.getMaxAmount() <= 1000){
+        if (loanDTO.getMaxAmount() <= 1000) {
             return new ResponseEntity<>("You cannot enter an amount less than or equal to 1000", HttpStatus.FORBIDDEN);
         }
         if (loanDTO.getPayments() == null || loanDTO.getPayments().toString().isBlank()) {
             return new ResponseEntity<>("The selected quota is not valid", HttpStatus.FORBIDDEN);
         }
-        if(loanDTO.getInterest() <= 0){
+        if (loanDTO.getInterest() <= 0) {
             return new ResponseEntity<>("You must select an initial interest", HttpStatus.FORBIDDEN);
         }
         Loan newLoan = new Loan(loanDTO.getName(), loanDTO.getMaxAmount(), loanDTO.getPayments(), loanDTO.getInterest());
         loanService.save(newLoan);
 
-        return new ResponseEntity<>("Loan created successfully",HttpStatus.CREATED);
+        return new ResponseEntity<>("Loan created successfully", HttpStatus.CREATED);
+    }
+
+    @Transactional
+    @PatchMapping("/loans/current/pay")
+    public ResponseEntity<Object> payLoan(
+            @RequestParam long idClientLoan, @RequestParam long idAccount, @RequestParam double amount, Authentication authentication) {
+
+        Client clientAuth = clientService.findByEmail(authentication.getName());
+        if (clientAuth == null) {
+            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
+        }
+
+        ClientLoan clientLoan = clientLoanService.findById(idClientLoan);
+        if (clientLoan == null) {
+            return new ResponseEntity<>("Client loan not found", HttpStatus.FORBIDDEN);
+        }
+        if (!clientAuth.getClientLoans().contains(clientLoan)) {
+            return new ResponseEntity<>("This loan does not belong to this client", HttpStatus.FORBIDDEN);
+        }
+
+        Account account = accountService.findById(idAccount);
+        if (account == null) {
+            return new ResponseEntity<>("Account not found", HttpStatus.FORBIDDEN);
+        }
+        if (!clientAuth.getAccounts().contains(account)) {
+            return new ResponseEntity<>("The selected account does not belong to this client", HttpStatus.FORBIDDEN);
+        }
+        if (account.getBalance() < amount) {
+            return new ResponseEntity<>("Insufficient balance", HttpStatus.FORBIDDEN);
+        }
+        if (clientLoan.getAmount() == 0) {
+            return new ResponseEntity<>("This loan is already paid off", HttpStatus.FORBIDDEN);
+        }
+        if (clientLoan.getAmount() < amount) {
+            return new ResponseEntity<>("Payment amount exceeds loan balance", HttpStatus.FORBIDDEN);
+        }
+        if (clientLoan.getPayments() == 0) {
+            return new ResponseEntity<>("All installments have been paid", HttpStatus.FORBIDDEN);
+        }
+
+        account.setBalance(account.getBalance() - amount);
+        Transaction transaction = new Transaction(amount,"Loan Installment - " + clientLoan.getLoan().getName(),LocalDateTime.now(),TransactionType.DEBIT, account.getBalance());
+        clientLoan.setPayments(clientLoan.getPayments() - 1);
+        clientLoan.setAmount((int) (clientLoan.getAmount() - amount));
+        clientLoanService.save(clientLoan);
+        account.addTransaction(transaction);
+        transactionService.saveTransaction(transaction);
+
+        if (clientLoan.getAmount() == 0) {
+            clientLoan.setActive(false);
+            clientLoanService.save(clientLoan);
+        }
+        return new ResponseEntity<>("payment successful", HttpStatus.CREATED);
     }
 }

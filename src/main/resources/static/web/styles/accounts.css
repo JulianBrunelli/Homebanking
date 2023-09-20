@@ -526,6 +526,13 @@ a {
 /* CARDS */
 
 /* container-button-create */
+
+.container-btns-accounts {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .container-create {
     min-height: 30vh;
 }
@@ -676,6 +683,20 @@ a {
     background-repeat: no-repeat;
 }
 
+.container-pay-loans {
+    min-height: 50vh;
+    width: 20rem;
+    border: 2px solid #044d5a;
+    border-radius: 8px;
+    margin-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+}
+
+
 /* LOANS */
 
 /* FOOTER */
@@ -774,7 +795,7 @@ footer {
 /* TABLE */
 .table-container {
     width: 100%;
-    height: 30vh;
+    height: 16vh;
     display: flex;
     align-items: start;
     justify-content: start;
@@ -963,6 +984,7 @@ th {
 
     .table-container {
         width: 70%;
+        height: 20vh;
     }
 
     .investHome img {

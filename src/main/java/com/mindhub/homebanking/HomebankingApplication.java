@@ -8,9 +8,6 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.cors.CorsConfiguration;
-import org.springframework.web.servlet.config.annotation.CorsRegistry;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -56,8 +53,8 @@ public class HomebankingApplication {
 			Transaction firstTransaction = new Transaction(7000, "Supplies",this.localDateTime, TransactionType.CREDIT, 0);
 			Transaction secondTransaction = new Transaction(-8000, "Supplies",this.localDateTime, TransactionType.DEBIT, 0);
 
-			ClientLoan melbaMortageLoan = new ClientLoan(400000, 60);
-			ClientLoan melbaPersonalLoan = new ClientLoan(50000, 12);
+			ClientLoan melbaMortageLoan = new ClientLoan(400000, 60,true);
+			ClientLoan melbaPersonalLoan = new ClientLoan(50000, 12,true);
 
 			Card melbaMorelFirstCard = new Card(melbaMorel.getFirstName()+" "+melbaMorel.getLastName(), CardType.DEBIT, CardColor.GOLD,
 					"4325-5667-4253-9896", 444, this.localDate, this.localDateExpires, true);
@@ -104,8 +101,8 @@ public class HomebankingApplication {
 			Transaction thirdTransaction = new Transaction(5000, "Supplies",this.localDateTime, TransactionType.CREDIT, 0);
 			Transaction fourthTransaction = new Transaction(-10000, "Supplies",this.localDateTime, TransactionType.DEBIT, 0);
 
-			ClientLoan chloePersonalLoan = new ClientLoan(100000, 24);
-			ClientLoan chloeCarlLoan = new ClientLoan(200000, 36);
+			ClientLoan chloePersonalLoan = new ClientLoan(100000, 24,true);
+			ClientLoan chloeCarlLoan = new ClientLoan(200000, 36,true);
 
 			Card chloeOBrianFirstCard = new Card(chloeOBrian.getFirstName()+" "+chloeOBrian.getLastName(), CardType.DEBIT, CardColor.GOLD,
 					"4004-8646-4663-2424", 123, this.localDate, this.localDateExpires, true);
@@ -120,8 +117,8 @@ public class HomebankingApplication {
 			repositoryAccount.save(thirdAccount);
 			repositoryAccount.save(fourthAccount);
 
-			secondAccount.addTransaction(thirdTransaction);
-			secondAccount.addTransaction(fourthTransaction);
+			thirdAccount.addTransaction(thirdTransaction);
+			fourthAccount.addTransaction(fourthTransaction);
 
 			repositoryTransaction.save(thirdTransaction);
 			repositoryTransaction.save(fourthTransaction);

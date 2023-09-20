@@ -5,9 +5,12 @@ createApp({
         return {
             nameClient: "",
             clientsAccounts: [],
+            originAccount: "",
+            clientLoans: [],
             loans: [],
             accountType: "",
             loader: true,
+            loanId: null,
         };
     },
     created() {
@@ -21,13 +24,6 @@ createApp({
                     this.clientsAccounts = response.data.accounts.sort((a, b) => a.id - b.id).filter(account => account.active)
                     this.loans = response.data.loans
                     this.loader = false
-                })
-                .catch((error) => console.error(error.message));
-        },
-        signOut() {
-            axios.post('/api/logout')
-                .then(response => {
-                    location.href = "../pages/index.html"
                 })
                 .catch((error) => console.error(error.message));
         },

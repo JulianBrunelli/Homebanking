@@ -37,7 +37,7 @@ public class LoanControllers {
 
     @Transactional
     @PostMapping("/loans")
-    public ResponseEntity<Object> createLoan(@RequestBody LoanApplicationDTO loanAppDTO, Authentication authentication) {
+    public ResponseEntity<Object> askForALoan(@RequestBody LoanApplicationDTO loanAppDTO, Authentication authentication) {
 
         String userName = authentication.getName();
         Client clientAuth = clientService.findByEmail(userName);
@@ -47,7 +47,6 @@ public class LoanControllers {
         }
 
         Loan loan = loanService.findById(loanAppDTO.getId());
-
         if (loan == null) {
             return new ResponseEntity<>("Loan not found", HttpStatus.FORBIDDEN);
         }

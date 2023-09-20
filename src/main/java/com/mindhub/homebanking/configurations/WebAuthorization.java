@@ -22,7 +22,6 @@ import javax.servlet.http.HttpSession;
 public class WebAuthorization {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
-        http.cors();
         http.authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/clients", "/api/login", "/api/logout","/api/transactions/cards").permitAll()
                 .antMatchers(HttpMethod.GET, "/web/pages/index.html", "/web/styles/**", "/web/js/**", "/web/images/**", "/api/loans").permitAll()
@@ -31,7 +30,7 @@ public class WebAuthorization {
                 .antMatchers(HttpMethod.POST, "/api/loans/create").hasAuthority("ADMIN")
 
                 .antMatchers(HttpMethod.GET, "/web/**", "/api/clients/current/**", "/api/clients/accounts/{id}", "/api/clients/cards/{id}").hasAuthority("CLIENT")
-                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans").hasAuthority("CLIENT")
+                .antMatchers(HttpMethod.POST, "/api/clients/current/accounts", "/api/clients/current/cards", "/api/transactions", "/api/loans","/api/transactions/pdf").hasAuthority("CLIENT")
                 .antMatchers(HttpMethod.PATCH, "/api/clients/current/cards/deactivate", "/api/clients/current/accounts/deactivate","/api/loans/current/pay").hasAuthority("CLIENT")
                 .anyRequest().denyAll();
         http.formLogin()
@@ -41,6 +40,7 @@ public class WebAuthorization {
 
         http.logout().logoutUrl("/api/logout").deleteCookies("JSESSIONID");
         http.csrf().disable();
+        http.cors();
         http.headers().frameOptions().disable();
         http.exceptionHandling().authenticationEntryPoint((req, res, exc) -> res.sendError(HttpServletResponse.SC_FORBIDDEN));
         http.formLogin().successHandler((req, res, auth) -> clearAuthenticationAttributes(req));

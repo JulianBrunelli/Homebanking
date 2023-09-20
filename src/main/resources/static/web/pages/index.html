@@ -51,23 +51,25 @@
                             <div class="login">
                                 <form class="form">
                                     <label for="chk" aria-hidden="true">Login</label>
-                                    <input class="input" type="email" v-model="email" name="email" placeholder="Email">
+                                    <input class="input" type="email" v-model="email" name="email" placeholder="Email"
+                                        required>
                                     <input class="input" type="password" v-model="password" name="pswd"
-                                        placeholder="Password">
-                                    <button type="button" @click="checkLogIn">Log in</button>
+                                        placeholder="Password" required>
+                                    <button type="submit" @click.prevent="logIn">Log in</button>
                                 </form>
                             </div>
                             <div class="register">
                                 <form class="form">
                                     <label for="chk" aria-hidden="true">Sign up</label>
                                     <input class="input" type="text" v-model="firstName" name="txt"
-                                        placeholder="First Name">
+                                        placeholder="First Name" required>
                                     <input class="input" type="text" v-model="lastName" name="txt"
-                                        placeholder="Last Name">
-                                    <input class="input" type="email" v-model="email" name="email" placeholder="Email">
+                                        placeholder="Last Name" required>
+                                    <input class="input" type="email" v-model="email" name="email" placeholder="Email"
+                                        required>
                                     <input class="input" type="password" v-model="password" name="pswd"
-                                        placeholder="Password">
-                                    <button type="button" @click.prevent="checkSingUp">Register</button>
+                                        placeholder="Password" required>
+                                    <button type="submit" @click.prevent="addClient">Register</button>
                                 </form>
                             </div>
                         </div>

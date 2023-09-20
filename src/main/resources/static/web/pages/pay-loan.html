@@ -70,31 +70,32 @@
                 </div>
             </nav>
         </header>
-        <main>
+        <main class="main-pay-loan">
             <div class="container-pay-loans d-flex flex-column align-items-center">
                 <div class="input-group mb-1 d-flex flex-column align-items-center">
-                    <label class="label-transfer" for="source">Select account</label>
-                    <select name="source" id="source" v-model="selectOriginAccount"
-                        class="form-select form-control w-75">
-                        <option class="option-transfer" value="" disabled>select an account</option>
+                    <label class="label-pay-loan" for="source">Select account</label>
+                    <select name="source" id="source" v-model="selectOriginAccount" class="input-pay-loan">
+                        <option class="option-transfer" value="" disabled></option>
                         <template v-for="account of originAccounts">
                             <option class="option-transfer" :value="account.id">{{account.number}} &#160 $
-                                {{account.balance}}</option>
+                                {{account.balance.toFixed(2)}}</option>
                         </template>
                     </select>
                 </div>
                 <div class="input-group mb-1 d-flex flex-column align-items-center">
-                    <label class="label-transfer" for="loan">Loan</label>
-                    <select name="loan" id="loan" v-model="selectLoan" class="form-select form-control w-75">
-                        <option class="option-transfer" value="" disabled>select loan</option>
+                    <label class="label-pay-loan" for="loan">Select loan</label>
+                    <select name="loan" id="loan" v-model="selectLoan" class="input-pay-loan">
+                        <option class="option-transfer" value="" disabled></option>
                         <template v-for="loan of loans">
-                            <option class="option-transfer" :value="loan.id">
+                            <option class="option-transfer" :value="loan">
                                 {{loan.loanName}}
                             </option>
                         </template>
                     </select>
                 </div>
-                <p>Pay amount: </p>
+                <div class="input-group mb-1 d-flex flex-column align-items-center">
+                    <p class="label-pay-loan">Final amount: ${{finalAmount.toFixed(2)}}</p>
+                </div>
                 <div class="container-btns-accounts gap-5">
                     <button type="submit" @click.prevent="payLoan" class="btn-create-acc mb-4 text-dark">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"

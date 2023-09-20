@@ -4,10 +4,9 @@ createApp({
     data() {
         return {
             loans: [],
-            selectLoan: "",
+            selectLoan: {},
             originAccounts: [],
             selectOriginAccount: "",
-            amounts: [],
             amount: 0,
         };
     },
@@ -20,14 +19,10 @@ createApp({
                 .then(response => {
                     this.originAccounts = response.data.accounts
                     this.loans = response.data.loans
-                    this.amounts = this.selectLoan.amount
-                    console.log(this.selectOriginAccount);
-                    console.log(this.loans);
                 }).catch(error => console.error(error))
         },
         payLoan() {
-            console.log(this.selectOriginAccount);
-            console.log(this.amount);
+            let finalAmount = parseFloat(this.amount.toFixed(2));
             Swal.fire({
                 title: 'Do you want to pay a fee?',
                 showDenyButton: true,
@@ -36,7 +31,7 @@ createApp({
             })
                 .then((result) => {
                     if (result.isConfirmed) {
-                        axios.patch("/api/transactions/loans/current/pay", `idClientLoan=${this.selectLoan.id}&idAccount=${this.selectOriginAccount}&amount=${this.amount}`)
+                        axios.patch("/api/loans/current/pay", `idClientLoan=${this.selectLoan.id}&idAccount=${this.selectOriginAccount}&amount=${finalAmount}`)
                             .then(response => {
                                 Swal.fire('A fee has been paid!', '', 'success').then(response => {
                                     location.href = './accounts.html'
@@ -45,8 +40,8 @@ createApp({
                             .catch((error) => {
                                 Swal.fire({
                                     icon: 'error',
-                                    title: 'Oops...',
-                                    text: error.response.data,
+                                    title: 'Please try again later...',
+                                    text: error.response.data || 'Something went wrong',
                                 })
                             })
                     } else {
@@ -63,5 +58,8 @@ createApp({
         },
     },
     computed: {
+        finalAmount() {
+            return this.amount = (this.selectLoan.amount / this.selectLoan.payments) || 0
+        }
     }
 }).mount("#app");

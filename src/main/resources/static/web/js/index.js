@@ -12,18 +12,6 @@ createApp({
     created() {
     },
     methods: {
-        checkLogIn(event) {
-            event.preventDefault();
-            if (this.email && this.password) {
-                this.logIn()
-            } else {
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: error.response.data,
-                })
-            }
-        },
         logIn() {
             axios.post('/api/login', `email=${this.email}&password=${this.password}`,
                 { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
@@ -35,12 +23,35 @@ createApp({
                     }
                 })
                 .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: error.response.data,
-                    })
                 })
+        },
+        addClient() {
+            Swal.fire({
+                title: 'Do you want to create a user?',
+                showDenyButton: true,
+                confirmButtonText: 'Confirm',
+                denyButtonText: 'Cancel',
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,
+                        { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+                        .then(response => {
+                            Swal.fire('success')
+                                .then(response => {
+                                    this.logIn()
+                                })
+                        })
+                        .catch((error) => {
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Oops...',
+                                text: error.response.data,
+                            })
+                        })
+                } else {
+                    Swal.fire('Changes are not saved', '', 'info')
+                }
+            })
         },
         signOut() {
             axios.post('/api/logout')
@@ -48,33 +59,6 @@ createApp({
                     location.href = "../pages/index.html"
                 })
                 .catch((error) => console.error(error.message));
-        },
-        checkSingUp(event) {
-            event.preventDefault();
-            if (this.firstName && this.lastName && this.email && this.password) {
-                this.addClient()
-            } else {
-                if (this.firstName == "") {
-                    alert("Please provide a first name")
-                }
-                if (this.lastName == "") {
-                    alert("Please provide a last name")
-                }
-                if (this.email == "") {
-                    alert("Please provide an email")
-                }
-                if (this.password == "") {
-                    alert("Please provide a password")
-                }
-            }
-        },
-        addClient() {
-            axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,
-                { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
-                .then(response => {
-                    this.logIn()
-                })
-                .catch((error) => alert(error.response.data));
         },
     },
 }).mount("#app");

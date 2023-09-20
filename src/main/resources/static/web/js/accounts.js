@@ -70,5 +70,12 @@ createApp({
                     }
                 }).catch((error) => error.response.data)
         },
+        signOut() {
+            axios.post('/api/logout')
+                .then(response => {
+                    location.href = "../pages/index.html"
+                })
+                .catch((error) => console.error(error.message));
+        },
     },
 }).mount("#app");

@@ -13,8 +13,7 @@ createApp({
     },
     methods: {
         logIn() {
-            axios.post('/api/login', `email=${this.email}&password=${this.password}`,
-                { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+            axios.post('/api/login', `email=${this.email}&password=${this.password}`)
                 .then(response => {
                     if (this.email == "julianbrunelli@outlook.com") {
                         location.href = "../../admin/pages/manager.html"
@@ -23,6 +22,11 @@ createApp({
                     }
                 })
                 .catch((error) => {
+                    Swal.fire({
+                        icon: 'error',
+                        title: 'Oops...',
+                        text: error.response.data,
+                    })
                 })
         },
         addClient() {
@@ -33,10 +37,9 @@ createApp({
                 denyButtonText: 'Cancel',
             }).then((result) => {
                 if (result.isConfirmed) {
-                    axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`,
-                        { headers: { 'content-type': 'application/x-www-form-urlencoded' } })
+                    axios.post('/api/clients', `firstName=${this.firstName}&lastName=${this.lastName}&email=${this.email}&password=${this.password}`)
                         .then(response => {
-                            Swal.fire('success')
+                            Swal.fire(type = 'success', '', 'success')
                                 .then(response => {
                                     this.logIn()
                                 })

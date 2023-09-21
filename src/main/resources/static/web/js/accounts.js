@@ -43,10 +43,10 @@ createApp({
                             html: `<section class="container-type">
                             <h2 class="mb-4 w-100">Account type</h2>
                             <div class="form-check">
-                                <input class="form-check-input" type="radio" name="accountType" id="SAVING"
-                                    value="SAVING">
-                                <label class="form-check-label mb-2" for="SAVING">
-                                    SAVING
+                                <input class="form-check-input" type="radio" name="accountType" id="SAVINGS"
+                                    value="SAVINGS">
+                                <label class="form-check-label mb-2" for="SAVINGS">
+                                    SAVINGS
                                 </label>
                             </div>
                             <div class="form-check">

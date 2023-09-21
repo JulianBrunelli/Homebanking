@@ -5,6 +5,7 @@ createApp({
         return {
             nameClient: "",
             clientsAccounts: [],
+            clientAccountsAll: [],
             originAccount: "",
             clientLoans: [],
             loans: [],
@@ -22,6 +23,7 @@ createApp({
                 .then(response => {
                     this.nameClient = response.data.firstName + " " + response.data.lastName
                     this.clientsAccounts = response.data.accounts.sort((a, b) => a.id - b.id).filter(account => account.active)
+                    this.clientAccountsAll = response.data.accounts.sort((a, b) => b.id - a.id)
                     this.loans = response.data.loans
                     this.loader = false
                 })

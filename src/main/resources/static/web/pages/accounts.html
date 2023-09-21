@@ -129,7 +129,8 @@
                     class="container-create-text w-100 d-flex flex-column align-items-center">
                     <h2 class="text-center fw-bold">Creat your <br><span class="text-rgb">accounts</span></h2>
                     <p class="fw-medium">Open a free account and keep it free</p>
-                    <button v-if="clientsAccounts.length < 3" type="submit" @click="addAccount" class="btn-create-acc">
+                    <button v-if="clientAccountsAll.length < 3" type="submit" @click="addAccount"
+                        class="btn-create-acc">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"

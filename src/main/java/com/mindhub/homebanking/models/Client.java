@@ -24,7 +24,7 @@ public class Client {
     @OneToMany(mappedBy = "client", fetch = FetchType.EAGER)
     private Set<Card> cards = new HashSet<>();
 
-    public Client() {
+    public Client(){
     }
     public Client(String firstName, String lastName, String email, String password) {
         this.firstName = firstName;

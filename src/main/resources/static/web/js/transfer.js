@@ -28,7 +28,7 @@ createApp({
             Swal.fire({
                 title: 'Are you sure you want to make the transaction?',
                 showDenyButton: true,
-                confirmButtonText: 'Carry out',
+                confirmButtonText: 'Confirm',
                 denyButtonText: 'Cancel',
             })
                 .then((result) => {

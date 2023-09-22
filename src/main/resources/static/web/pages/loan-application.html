@@ -111,8 +111,7 @@
                             </select>
                         </div>
                         <div class="input-group mb-1 d-flex flex-column align-items-center">
-                            <label class="label-transfer" for="amount"><i
-                                    class="bi bi-currency-dollar"></i>Amount</label>
+                            <label class="label-transfer" for="amount">Maximum amount: ${{maxAmount}}</label>
                             <input type="number" name="amount" placeholder="$0" id="amount" v-model="amount"
                                 class="form-control w-75" aria-label="Dollar amount (with dot and two decimal places)">
                         </div>
@@ -130,7 +129,7 @@
                                 d="M17.593 3.322c1.1.128 1.907 1.077 1.907 2.185V21L12 17.25 4.5 21V5.507c0-1.108.806-2.057 1.907-2.185a48.507 48.507 0 0111.186 0z">
                             </path>
                         </svg>
-                        Create transfer
+                        Ask for a loan
                     </button>
                 </div>
             </section>
@@ -143,19 +142,20 @@
                 </section>
                 <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
                     <a href="#" class="moreInfo">Privacy Policy</a>
-                    <a href="#" class="moreInfo">ATMs for the blind</a>
+                    <a href="#" class="moreInfo">ATMs accessible</a>
                     <a href="#" class="moreInfo">Security</a>
                     <a href="#" class="moreInfo">Regulatory information</a>
-                    <h6 class="text-light fw-normal m-0">More Info:</h6>
                 </div>
-                <div class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
+                <section
+                    class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
+                    <h6 class="text-light fw-normal m-0">More Info:</h6>
                     <a href="http://www.facebook.com"><i
                             class="bi bi-facebook social d-flex align-items-center"></i></a>
                     <a href="https://web.whatsapp.com"><i
                             class="bi bi-whatsapp social d-flex align-items-center"></i></a>
                     <a href="https://www.instagram.com"><i
                             class="bi bi-instagram social d-flex align-items-center"></i></a>
-                </div>
+                </section>>
             </div>
         </footer>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.1/dist/js/bootstrap.bundle.min.js"

@@ -21,13 +21,7 @@ createApp({
                         location.href = "./accounts.html"
                     }
                 })
-                .catch((error) => {
-                    Swal.fire({
-                        icon: 'error',
-                        title: 'Oops...',
-                        text: error.response.data,
-                    })
-                })
+                .catch((error) => console.error(error.message));
         },
         addClient() {
             Swal.fire({

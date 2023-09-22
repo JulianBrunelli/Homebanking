@@ -115,12 +115,15 @@ createApp({
                 case 'Car':
                     this.selectImage = "../images/loan-car.jpg"
                     break;
-                case 'Companies':
+                case 'Personal':
                     this.selectImage = "../images/loan-companies.jpg"
                     break;
                 default: this.selectImage = "../images/panas.jpg"
                     break;
             }
         },
+        maxAmount() {
+            return this.selectLoan.maxAmount
+        }
     }
 }).mount("#app");

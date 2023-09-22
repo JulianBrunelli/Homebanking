@@ -88,7 +88,7 @@ header {
 
 .container-form {
     width: 100%;
-    height: 30rem;
+    height: 32rem;
     display: flex;
     justify-content: center;
     margin-top: 7rem;
@@ -101,7 +101,7 @@ header {
     flex-direction: column;
     background-color: var(--log-color);
     width: 23rem;
-    max-height: 30rem;
+    max-height: 32rem;
     overflow: hidden;
     border-radius: 12px;
     box-shadow: 7px 7px 10px 3px #24004628;
@@ -164,7 +164,7 @@ label {
 }
 
 #chk:checked~.register {
-    transform: translateY(-60%);
+    transform: translateY(-55%);
 }
 
 #chk:checked~.register label {
@@ -502,7 +502,7 @@ footer {
         width: 60%;
         justify-content: center;
         align-items: center;
-
+        margin-top: 2.3rem;
     }
 
     .text-trusted-bank {
@@ -511,5 +511,26 @@ footer {
 
     .BNI-footer {
         margin-right: 5rem;
+    }
+
+    .container-form {
+        height: 30;
+    }
+
+    .main-login {
+        max-height: 30rem;
+    }
+
+    #chk:checked~.register {
+        transform: translateY(-57%);
+    }
+
+    .footer-moreInfo {
+        justify-content: space-around !important;
+    }
+
+    footer {
+        flex-direction: row;
+        min-height: 11vh;
     }
 }

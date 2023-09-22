@@ -45,12 +45,9 @@ public class TransactionController {
     @PostMapping("/transactions")
     public ResponseEntity<Object> createTransaction(
             Authentication authentication, @RequestParam double amount, @RequestParam String description,
-            @RequestParam String originAccountNumber, @RequestParam String destinationAccountNumber) {
+            @RequestParam String originAccountNumber, @RequestParam String destinationAccountNumber){
 
         Client client = clientService.findByEmail(authentication.getName());
-        if (client == null) {
-            return new ResponseEntity<>("Client not found", HttpStatus.FORBIDDEN);
-        }
 
         Account originAccount = client.getAccounts().stream().filter(account -> account.getNumber().equals(originAccountNumber)).findFirst().orElse(null);
         if (originAccount == null) {

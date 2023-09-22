@@ -17,7 +17,7 @@ createApp({
         loadData() {
             axios.get('/api/clients/current')
                 .then(response => {
-                    this.originAccounts = response.data.accounts
+                    this.originAccounts = response.data.accounts.filter(account => account.balance > 0)
                     this.loans = response.data.loans
                 }).catch(error => console.error(error))
         },

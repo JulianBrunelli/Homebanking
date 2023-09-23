@@ -17,13 +17,14 @@ import org.springframework.security.core.Authentication;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
-import javax.swing.text.Document;
 import java.io.ByteArrayOutputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Set;
 
 @RestController
 @RequestMapping(path = "/api")
@@ -45,7 +46,7 @@ public class TransactionController {
     @PostMapping("/transactions")
     public ResponseEntity<Object> createTransaction(
             Authentication authentication, @RequestParam double amount, @RequestParam String description,
-            @RequestParam String originAccountNumber, @RequestParam String destinationAccountNumber){
+            @RequestParam String originAccountNumber, @RequestParam String destinationAccountNumber) {
 
         Client client = clientService.findByEmail(authentication.getName());
 
@@ -85,86 +86,59 @@ public class TransactionController {
         }
     }
 
-//    @GetMapping("/transactions/pdf")
-//    public ResponseEntity<Object> createPdf(@RequestParam String startDate, @RequestParam String endDate, @RequestParam String accountNumber,
-//                                             Authentication authentication) throws DocumentException, IOException {
-//        Client current = clientService.findByEmail(authentication.getName());
-//        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
-//
-//
-//        if (current == null) {
-//            return new ResponseEntity<>("you are not allowed to see this", HttpStatus.FORBIDDEN);
-//        }
-//        if (accountService.findByNumber(accountNumber) == null) {
-//            return new ResponseEntity<>("this account don't exist", HttpStatus.BAD_REQUEST);
-//        }
-//        if (startDate.isBlank()) {
-//            return new ResponseEntity<>("Please, fill the date requeriment", HttpStatus.BAD_REQUEST);
-//        }
-//        if (endDate.isBlank()) {
-//            return new ResponseEntity<>("Please, fill the date end requeriment",HttpStatus.BAD_REQUEST);
-//        }
-//        if (startDate.equals(endDate)) {
-//            return new ResponseEntity<>("You cant use the same date", HttpStatus.BAD_REQUEST);
-//        }
-//        LocalDate localDateStart = LocalDate.parse(startDate, formatter);
-//        LocalDate localDateEnd = LocalDate.parse(endDate, formatter);
-//        List<Transaction> transfer = transactionService.findByDateBetweenAndAccountNumber(localDateStart, localDateEnd, accountNumber);
-//        if (transfer.size() <= 0){
-//            return new ResponseEntity<>("No transactions finded.",HttpStatus.NOT_FOUND);
-//        }
-//
-//        com.lowagie.text.Document document = new com.lowagie.text.Document();
-//        ByteArrayOutputStream out = new ByteArrayOutputStream();
-//        PdfWriter.getInstance(document, out);
-//        document.open();
-//        PdfPTable tableTitle = new PdfPTable(1);
-//        PdfPCell cell = new PdfPCell();
-//        cell.setBorder(PdfPCell.NO_BORDER);
-//        cell.setHorizontalAlignment(Element.ALIGN_CENTER);
-//        cell.setPadding(10);
-//        cell.addElement(new Paragraph("Your transactions", new Font(Font.HELVETICA, 24)));
-//        tableTitle.addCell(cell);
-//        document.add(tableTitle);
-//
-//        PdfPTable table = new PdfPTable(4);
-//        table.addCell("Type");
-//        table.addCell("Description");
-//        table.addCell("Amount");
-//        table.addCell("Date");
-//
-//        for (Transaction transaction : transfer) {
-//            table.addCell(transaction.getTransactionType().toString());
-//            table.addCell(transaction.getDescription());
-//            table.addCell(String.valueOf(transaction.getAmount()));
-//            table.addCell(transaction.getDate().format(formatter));
-//        }
-//        document.add(table);
-//        PdfPCell spacerCell = new PdfPCell();
-//        spacerCell.setFixedHeight(50);
-//        spacerCell.setBorder(PdfPCell.NO_BORDER);
-//        spacerCell.setColspan(4);
-//        document.add(spacerCell);
-//        PdfPTable logo = new PdfPTable(2);
-//        logo.setWidthPercentage(100);
-//        Image img = Image.getInstance("C:\\Users\\User\\Desktop\\home banking\\src\\main \\resources\\static\\web\\images\\bank.icon.png");
-//        img.scaleToFit(50, 50);
-//        img.setAbsolutePosition(50, 50);
-//        img.setAlignment(Image.ALIGN_BASELINE);
-//        PdfPCell imageCell = new PdfPCell(img);
-//        imageCell.setBorder(PdfPCell.NO_BORDER);
-//        logo.addCell(imageCell);
-//        PdfPCell textCell = new PdfPCell();
-//        textCell.setBorder(PdfPCell.NO_BORDER);
-//        textCell.addElement(new Phrase("MindHub Brothers, pa"));
-//        logo.addCell(textCell);
-//
-//        document.add(logo);
-//        document.close();
-//        HttpHeaders headers = new HttpHeaders();
-//        headers.add(HttpHeaders.CONTENT_TYPE, "application/pdf");
-//        headers.add(HttpHeaders.CONTENT_DISPOSITION, "inline; filename=transactions-Table.pdf");
-//        byte[] pdf = out.toByteArray();
-//        return new ResponseEntity<>(pdf,headers, HttpStatus.CREATED);
-//    }
+    @PostMapping("/transactions/pdf")
+    public ResponseEntity<Object> createPdf(@RequestParam String startDate, @RequestParam String endDate, @RequestParam String accountNumber,
+                                            Authentication authentication) throws DocumentException, IOException {
+
+        if (authentication == null) {
+            return new ResponseEntity<>("Authentication not found", HttpStatus.FORBIDDEN);
+        }
+        Client client = clientService.findByEmail(authentication.getName());
+
+        Account account = client.getAccounts().stream().filter(account1 -> account1.getNumber().equals(accountNumber)).findFirst().orElse(null);
+        if (account == null) {
+            return new ResponseEntity<>("Account not found", HttpStatus.NOT_FOUND);
+        }
+        if (endDate == null) {
+            return new ResponseEntity<>("Please enter an end date", HttpStatus.NOT_FOUND);
+        }
+        if (startDate == null) {
+            return new ResponseEntity<>("Please enter a start date", HttpStatus.NOT_FOUND);
+
+        }
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ss");
+        LocalDateTime startDateLocalDate = LocalDateTime.parse(startDate,formatter);
+        LocalDateTime endDateLocalDate = LocalDateTime.parse(endDate,formatter);
+        List<Transaction> transactions = transactionService.findByDateBetweenAndAccountNumber(startDateLocalDate, endDateLocalDate, accountNumber);
+        if (transactions.isEmpty()) {
+            return new ResponseEntity<>("Transactions not found", HttpStatus.NOT_FOUND);
+        }
+        com.lowagie.text.Document document = new Document() {
+        };
+        try {
+            PdfWriter.getInstance(document, new FileOutputStream("Paragraphs.pdf"));
+            document.open();
+            Paragraph p1 = new Paragraph(new Chunk("Details Account Selected", FontFactory.getFont(FontFactory.HELVETICA, 10)));
+            p1.add("The leading of this paragraph is calculated automagically. ");
+            p1.add("The default leading is 1.5 times the fontsize. ");
+            p1.add(new Chunk("You can add chunks "));
+            p1.add(new Phrase("or you can add phrases. "));
+            p1.add(new Phrase(
+                    "Unless you change the leading with the method setLeading, the leading doesn't change if you add text with another leading. This can lead to some problems.",
+                    FontFactory.getFont(FontFactory.HELVETICA, 18)));
+            document.add(p1);
+            Paragraph p2 = new Paragraph(new Phrase(
+                    "This is my second paragraph. ", FontFactory.getFont(
+                    FontFactory.HELVETICA, 12)));
+            p2.add("As you can see, it started on a new line.");
+            document.add(p2);
+            Paragraph p3 = new Paragraph("This is my third paragraph.",
+                    FontFactory.getFont(FontFactory.HELVETICA, 12));
+            document.add(p3);
+        } catch (DocumentException | IOException de) {
+            System.err.println(de.getMessage());
+        }
+        document.close();
+        return new ResponseEntity<>("PDF created", HttpStatus.CREATED);
+    }
 }

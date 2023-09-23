@@ -15,5 +15,5 @@ public interface TransactionService {
 
     void saveTransactions(Set<Transaction> transactions);
 
-    List<Transaction> findByDateBetweenAndAccountNumber(LocalDate startDate, LocalDate endDate, String accountNumber);
+    List<Transaction> findByDateBetweenAndAccountNumber(LocalDateTime startDate, LocalDateTime endDate, String accountNumber);
 }

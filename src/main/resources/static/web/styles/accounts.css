@@ -362,7 +362,11 @@ h4 {
 
 .container-social {
     min-width: 10vw;
-    margin-right: 2rem;
+    margin-top: 1rem;
+    margin-bottom: 2rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .bi-facebook:hover {
@@ -532,10 +536,19 @@ a {
 .container-btns-accounts {
     width: 100%;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 5rem;
 }
+
+.btn-loan {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 6rem;
+    margin-bottom: 2rem;
+}
+
 
 .container-create {
     min-height: 80vh;
@@ -730,6 +743,18 @@ a {
     align-items: center;
 }
 
+.footer-moreInfo {
+    width: 100%;
+}
+
+.container-moreInfo {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+}
+
 footer {
     min-height: 10vh;
     background-color: var(--primary-color);
@@ -764,12 +789,17 @@ footer {
 }
 
 .BNI-footer {
-    margin-top: .5rem;
-    margin-right: 1rem;
-    font-size: 1.5rem;
-    color: #1c1c1f;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 3rem;
+}
+
+.BNI-footer h4 {
     font-weight: bold;
     font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+    font-size: 1.3rem;
+    color: rgb(20, 20, 20);
 }
 
 /* BUTTON APP */
@@ -908,6 +938,10 @@ th {
     margin-top: 1rem;
 }
 
+.svg-account-create {
+    width: 25rem;
+}
+
 /* CONTAINER PHONE */
 
 /* SWEET ALERT ACCOUNTS */
@@ -989,7 +1023,7 @@ th {
     }
 
     .table-container {
-        width: 70%;
+        width: 90%;
     }
 
     .card {
@@ -1000,6 +1034,11 @@ th {
     .btn-account-dis {
         right: 3rem;
         top: 3rem;
+    }
+
+    .container-btns-accounts {
+        flex-direction: row;
+        gap: 4rem;
     }
 }
 
@@ -1031,7 +1070,7 @@ th {
     }
 
     .table-container {
-        width: 70%;
+        width: 80%;
         height: 20vh;
     }
 
@@ -1088,16 +1127,47 @@ th {
         height: fit-content;
     }
 
-    .BNI-footer {
-        margin-right: 3rem;
-    }
-
     .btn-account-dis {
         right: 7rem;
         top: 4rem;
     }
 
+    .container-cards-wrap {
+        width: 45%;
+    }
+
+    .cards-container-accounts {
+        flex-wrap: wrap !important;
+        flex-direction: row !important;
+        justify-content: center;
+        gap: 3rem;
+    }
+
+    .container-btns-accounts {
+        flex-direction: row;
+        gap: 4rem;
+    }
+
     .footer-moreInfo {
+        flex-direction: row !important;
         justify-content: space-around !important;
+        align-items: center;
+        width: 100%;
+    }
+
+    .container-moreInfo {
+        flex-direction: row;
+        gap: 2.5rem;
+    }
+
+    .container-social {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .BNI-footer {
+        margin-right: 0;
     }
 }

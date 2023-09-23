@@ -96,10 +96,10 @@
             </div>
             <section class="w-100 d-flex flex-column align-items-center">
                 <h2 class="title-main d-none d-md-block mt-5 fw-semibold text-center">Welcome {{nameClient}}</h2>
-                <div class="cards-container-accounts d-flex flex-column flex-lg-wrap">
+                <div class="cards-container-accounts d-flex flex-column">
                     <template v-if="clientsAccounts.length > 0" v-for="account of clientsAccounts">
                         <div data-aos="zoom-out-up"
-                            class="w-100 d-flex flex-column justify-content-center align-items-center">
+                            class="container-cards-wrap d-flex flex-column justify-content-center align-items-center">
                             <div class="card">
                                 <div class="card-overlay"></div>
                                 <div class="card-inner">
@@ -125,12 +125,11 @@
                 </div>
             </section>
             <div class="container-create d-flex flex-column align-items-center flex-lg-row-reverse gap-4 mb-5">
-                <section data-aos="zoom-out-left"
+                <section v-if="clientsAccounts.length < 3" data-aos="zoom-out-left"
                     class="container-create-text w-100 d-flex flex-column align-items-center">
                     <h2 class="text-center fw-bold">Creat your <br><span class="text-rgb">accounts</span></h2>
                     <p class="fw-medium">Open a free account and keep it free</p>
-                    <button v-if="clientAccountsAll.length < 3" type="submit" @click="addAccount"
-                        class="btn-create-acc text-dark">
+                    <button type="submit" @click="addAccount" class="btn-create-acc text-dark">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2"
                             stroke="currentColor" aria-hidden="true">
                             <path stroke-linecap="round" stroke-linejoin="round"
@@ -140,6 +139,10 @@
                         Create Account
                     </button>
                 </section>
+                <div v-else class="w-100 d-flex flex-column align-items-center justify-content-center">
+                    <h2 class="text-center fw-semibold">we help you grow financially</h2>
+                    <img class="svg-account-create" src="../images/Finance.svg" alt="economic-growth">
+                </div>
                 <section data-aos="zoom-out-right" class="w-100 d-flex flex-column align-items-center ">
                     <img class="image-create" src="../images/planta-dinero.jpg" alt="">
                     <h2 class="text-center fw-semibold">Grow your income</h2>
@@ -171,7 +174,7 @@
                     <h2>You currently have no loans</h2>
                 </template>
                 <div class="container-btns-accounts">
-                    <a href="./pay-loan.html" class="mb-4 d-flex align-items-center justify-content-center">
+                    <a href="./pay-loan.html" class="btn-loan">
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
@@ -179,7 +182,7 @@
                             <span class="button-text text-light">Pay loan</span>
                         </button>
                     </a>
-                    <a href="./loan-application.html" class="mb-4 d-flex align-items-center justify-content-center">
+                    <a href="./loan-application.html" class="btn-loan">
                         <button class="learn-more">
                             <span class="circle" aria-hidden="true">
                                 <span class="icon arrow"></span>
@@ -218,20 +221,18 @@
                     <img src="../images/tecnology.png" alt="invest-from-your-home">
                 </div>
             </div>
-            <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center flex-lg-row w-100">
-                <section class="d-flex align-items-center">
-                    <i class="bi bi-bank2 me-2"></i>
-                    <h4 class="BNI-footer">BANK NORDIC INC</h4>
+            <div class="footer-moreInfo d-flex flex-column align-items-center justify-content-center">
+                <section class="BNI-footer">
+                    <h4><i class="bi bi-bank2"></i> BANK NORDIC INC</h4>
                 </section>
-                <div class="container-moreInfo flex-lg-row gap-3 gap-lg-5">
+                <div class="container-moreInfo">
+                    <a href="#" class="moreInfo">Security</a>
                     <a href="#" class="moreInfo">Privacy Policy</a>
                     <a href="#" class="moreInfo">ATMs accessible</a>
-                    <a href="#" class="moreInfo">Security</a>
                     <a href="#" class="moreInfo">Regulatory information</a>
                 </div>
-                <section
-                    class="container-social d-flex align-items-center justify-content-center mt-2 me-3 mb-4 m-lg-0">
-                    <h6 class="text-light fw-normal m-0">More Info:</h6>
+                <section class="container-social">
+                    <h6 class="text-light fw-normal mt-2">More Info:</h6>
                     <a href="http://www.facebook.com"><i
                             class="bi bi-facebook social d-flex align-items-center"></i></a>
                     <a href="https://web.whatsapp.com"><i

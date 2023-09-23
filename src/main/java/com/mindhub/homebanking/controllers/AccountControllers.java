@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.*;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Set;
+import java.util.stream.Collectors;
 
 import static com.mindhub.homebanking.utils.CardUtils.getAccountNumber;
 
@@ -68,7 +69,8 @@ public class AccountControllers {
         if( !type.equals("CURRENT") && !type.equals("SAVINGS") ){
             return new ResponseEntity<>("Select a valid type", HttpStatus.FORBIDDEN);
         }
-        if(clientAuth.getAccounts().size() >= 3){
+        Set<Account> accountsActive = clientAuth.getAccounts().stream().filter(account -> account.isActive()).collect(Collectors.toSet());
+        if(accountsActive.size() >= 3){
             return new ResponseEntity<>("Failed to create account because the maximum number of accounts is 3", HttpStatus.FORBIDDEN);
         }
         String accountNumber = randomNumber();
